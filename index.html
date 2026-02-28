@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FalaBrasil 🇧🇷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0F1A14;--bg2:#162010;--surf:rgba(240,235,224,.05);
+  --brd:rgba(240,235,224,.09);--brd2:rgba(240,235,224,.18);
+  --txt:#F0EBE0;--muted:rgba(240,235,224,.45);--dim:rgba(240,235,224,.22);
+  --gold:#E8A838;--red:#D4522A;--green:#2A7D4F;--gbright:#4DB87A;
+  --blue:#1A6B9A;--bbright:#5AB2E0;--danger:#FF6B35;
+  --r:14px;--rl:20px;
+  --fd:'Fraunces',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;
+}
+html,body,#app{height:100%}
+body{font-family:var(--fb);background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased}
+button{font-family:var(--fb);cursor:pointer}
+input{font-family:var(--fb)}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
+
+/* ── Layout ── */
+#app{max-width:480px;min-height:100dvh;margin:0 auto;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+#app::before{content:'';position:fixed;top:-150px;right:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(232,168,56,.10) 0%,transparent 70%);pointer-events:none;z-index:0}
+#content{flex:1;padding:0 18px 110px;position:relative;z-index:1;overflow-y:auto}
+
+/* ── Header ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;background:rgba(15,26,20,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:50}
+.logo{font-family:var(--fd);font-size:20px;font-weight:900;letter-spacing:-.5px}
+.logo span{color:var(--gold)}
+.pills{display:flex;gap:8px}
+.pill{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--surf);border:1px solid var(--brd);border-radius:20px;font-size:12px;font-weight:600}
+.pill-fire{color:var(--danger)}.pill-xp{color:var(--gold)}
+
+/* ── Nav ── */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:rgba(15,26,20,.95);backdrop-filter:blur(16px);border-top:1px solid var(--brd);z-index:50}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px 12px;border:none;background:none;color:var(--muted);font-size:10px;font-weight:500;transition:color .15s;position:relative}
+.nav-btn.active{color:var(--gold)}
+.nav-btn svg{width:22px;height:22px}
+.nav-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--red);color:#fff;border-radius:8px;font-size:9px;font-weight:700;padding:1px 5px}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:var(--r);font-weight:600;transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer}
+.btn-p{background:linear-gradient(135deg,var(--gold) 0%,var(--red) 100%);color:#fff;padding:15px 24px;font-size:15px;box-shadow:0 4px 20px rgba(232,168,56,.28)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(232,168,56,.38)}
+.btn-p:active{transform:translateY(0)}
+.btn-s{background:var(--surf);border:1px solid var(--brd);color:var(--txt);padding:13px 24px;font-size:14px}
+.btn-s:hover{background:rgba(240,235,224,.10)}
+.btn-full{width:100%}
+
+/* ── Section label ── */
+.lbl{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;margin-top:26px}
+
+/* ── Stat cards ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.scard{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 10px;text-align:center}
+.scard-n{font-family:var(--fd);font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px}
+.scard-l{font-size:10px;color:var(--muted)}
+
+/* ── Progress bar ── */
+.pbar{height:4px;background:rgba(240,235,224,.08);border-radius:3px;overflow:hidden}
+.pbar-f{height:100%;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:3px;transition:width .5s ease}
+
+/* ── Science box ── */
+.sci-box{background:rgba(232,168,56,.05);border:1px solid rgba(232,168,56,.2);border-radius:var(--rl);padding:16px 18px;margin-bottom:10px}
+.sci-title{font-family:var(--fd);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:10px}
+.sci-item{display:flex;gap:10px;margin-bottom:8px}
+.sci-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:5px;flex-shrink:0}
+.sci-text{font-size:12px;color:rgba(240,235,224,.65);line-height:1.6}
+.sci-text strong{color:var(--gold)}
+
+/* ── Home ── */
+.hero{text-align:center;padding:24px 0 16px}
+.hero-flag{font-size:44px;margin-bottom:14px}
+.hero-title{font-family:var(--fd);font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:12px;color:var(--muted)}
+.home-cta{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.cats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cat-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:16px;cursor:pointer;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cc,#E8A838) 0%,transparent 60%);opacity:.05;transition:opacity .2s}
+.cat-card:hover{border-color:var(--brd2);transform:translateY(-2px)}
+.cat-card:hover::before{opacity:.10}
+.cat-icon{font-size:26px;margin-bottom:8px}
+.cat-name{font-family:var(--fd);font-weight:700;font-size:14px;margin-bottom:2px}
+.cat-count{font-size:11px;color:var(--muted);margin-bottom:8px}
+.cat-bar{height:3px;background:rgba(240,235,224,.08);border-radius:2px;overflow:hidden}
+.cat-bar-f{height:100%;border-radius:2px;transition:width .6s ease}
+
+/* ── Exercise screen ── */
+.ex-screen{padding-top:14px}
+.ex-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ex-quit{background:none;border:none;color:var(--muted);font-size:13px;padding:4px 0;transition:color .15s}
+.ex-quit:hover{color:var(--txt)}
+.ex-ctr{font-size:12px;color:var(--muted)}
+.type-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surf);border:1px solid var(--brd);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:16px}
+.ex-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:28px 22px;margin-bottom:16px;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.ex-card::after{content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(232,168,56,.07) 0%,transparent 70%);pointer-events:none}
+.ex-word{font-family:var(--fd);font-size:44px;font-weight:900;line-height:1.05;margin-bottom:10px}
+.ex-phon{font-size:13px;color:var(--gold);font-style:italic;letter-spacing:.4px;margin-bottom:6px}
+.ex-hint{font-size:12px;color:var(--dim)}
+.ex-sent{font-size:14px;color:rgba(240,235,224,.72);line-height:1.65;font-style:italic;margin-top:10px}
+.ex-fr{font-family:var(--fd);font-size:28px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.ex-trans{font-size:12px;color:var(--muted);font-style:italic;margin-top:6px}
+
+/* ── Flashcard ── */
+.fc-wrap{cursor:pointer;perspective:1000px}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fc-back{position:absolute;inset:0;transform:rotateY(180deg);background:rgba(232,168,56,.07);border:1px solid rgba(232,168,56,.22);border-radius:var(--rl)}
+
+/* ── Rating ── */
+.rating-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.r-btn{display:flex;flex-direction:column;align-items:center;gap:4px;border:1px solid transparent;border-radius:var(--r);padding:11px 6px;font-size:11px;font-weight:600;transition:transform .12s,filter .12s}
+.r-btn:hover{transform:translateY(-1px);filter:brightness(1.2)}
+.r-btn span{font-size:18px}
+.r-fail{background:rgba(212,82,42,.14);color:#FF7A5A;border-color:rgba(212,82,42,.28)}
+.r-hard{background:var(--surf);color:var(--muted);border-color:var(--brd)}
+.r-ok{background:rgba(26,107,154,.14);color:var(--bbright);border-color:rgba(26,107,154,.28)}
+.r-easy{background:rgba(42,125,79,.14);color:var(--gbright);border-color:rgba(42,125,79,.28)}
+
+/* ── Multiple choice ── */
+.mc-opts{display:flex;flex-direction:column;gap:10px}
+.mc-opt{background:rgba(240,235,224,.06);border:1.5px solid var(--brd);border-radius:var(--r);padding:14px 18px;font-size:15px;text-align:left;color:var(--txt);transition:background .12s,border-color .12s}
+.mc-opt:hover:not(:disabled){background:rgba(240,235,224,.11);border-color:var(--brd2)}
+.mc-opt:disabled{cursor:default}
+.mc-correct{background:rgba(42,125,79,.18)!important;border-color:var(--green)!important;color:var(--gbright)!important}
+.mc-wrong{background:rgba(212,82,42,.18)!important;border-color:var(--red)!important;color:#FF7A5A!important}
+
+/* ── Typing ── */
+.t-input{width:100%;background:rgba(240,235,224,.07);border:1.5px solid var(--brd2);border-radius:var(--r);padding:15px 18px;font-size:17px;color:var(--txt);outline:none;transition:border-color .2s;margin-bottom:10px}
+.t-input:focus{border-color:rgba(232,168,56,.5)}
+.t-correct{border-color:var(--green)!important;background:rgba(42,125,79,.10)!important}
+.t-wrong{border-color:var(--red)!important;background:rgba(212,82,42,.10)!important}
+.t-fb{font-size:13px;font-weight:600;margin-bottom:10px}
+.t-fb-ok{color:var(--gbright)}.t-fb-no{color:#FF7A5A}
+
+/* ── Finish ── */
+.finish{text-align:center;padding:40px 0}
+.fin-emoji{font-size:64px;margin-bottom:20px}
+.fin-title{font-family:var(--fd);font-size:32px;font-weight:900;margin-bottom:8px}
+.fin-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.fin-stats{display:flex;justify-content:center;gap:28px;margin-bottom:32px}
+.fin-n{font-family:var(--fd);font-size:38px;font-weight:900;color:var(--gold);display:block;line-height:1}
+.fin-l{font-size:12px;color:var(--muted);display:block;margin-top:4px}
+
+/* ── Vocab screen ── */
+.vocab-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.vocab-tabs::-webkit-scrollbar{display:none}
+.v-tab{white-space:nowrap;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;flex-shrink:0;transition:background .15s,color .15s;cursor:pointer}
+.v-search{width:100%;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:11px 16px;font-size:14px;color:var(--txt);outline:none;margin-bottom:14px;transition:border-color .2s}
+.v-search:focus{border-color:rgba(232,168,56,.4)}
+.v-search::placeholder{color:var(--dim)}
+.wcard{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+.wcard:hover{border-color:var(--brd2)}
+.wcard.open{border-color:rgba(232,168,56,.3);background:rgba(232,168,56,.04)}
+.wcard-row{display:flex;align-items:center;justify-content:space-between}
+.wcard-pt{font-family:var(--fd);font-size:19px;font-weight:700}
+.wcard-fr{font-size:13px;color:var(--muted);margin-top:1px}
+.wcard-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.wcard-dot{width:8px;height:8px;border-radius:50%}
+.wcard-expand{margin-top:12px;padding-top:12px;border-top:1px solid var(--brd)}
+.exp-lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.exp-val{font-size:13px;color:rgba(240,235,224,.72);line-height:1.6}
+.exp-phon{font-size:13px;color:var(--gold);font-style:italic}
+.exp-trans{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px}
+
+/* ── Stats screen ── */
+.cat-prog{margin-bottom:14px}
+.cat-prog-top{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
+.cat-prog-bar{height:6px;background:rgba(240,235,224,.08);border-radius:3px;overflow:hidden}
+.cat-prog-f{height:100%;border-radius:3px;transition:width .6s ease}
+
+/* ── XP popup ── */
+.xp-pop{position:fixed;top:76px;right:20px;background:linear-gradient(135deg,var(--gold),var(--red));color:#fff;border-radius:20px;padding:7px 14px;font-weight:700;font-size:13px;z-index:200;pointer-events:none;animation:xpf 1.6s ease forwards}
+@keyframes xpf{0%{opacity:0;transform:translateY(8px) scale(.8)}20%{opacity:1;transform:translateY(0) scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:fadeUp .35s ease}
+
+/* ── Dictionary screen ── */
+.dict-wrap{padding-top:16px}
+.dict-input-row{display:flex;gap:8px;margin-bottom:20px}
+.dict-input{flex:1;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:13px 16px;font-size:15px;color:var(--txt);outline:none;transition:border-color .2s}
+.dict-input:focus{border-color:rgba(232,168,56,.5)}
+.dict-input::placeholder{color:var(--dim)}
+.dict-btn{background:linear-gradient(135deg,var(--gold),var(--red));border:none;border-radius:var(--r);padding:13px 18px;color:#fff;font-size:20px;cursor:pointer;transition:transform .15s;flex-shrink:0}
+.dict-btn:hover{transform:translateY(-1px)}
+.dict-btn:disabled{opacity:.5;cursor:default;transform:none}
+.dict-result{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);overflow:hidden;animation:fadeUp .35s ease}
+.dict-result-header{background:rgba(232,168,56,.07);border-bottom:1px solid var(--brd);padding:20px 20px 16px}
+.dict-pt-word{font-family:var(--fd);font-size:38px;font-weight:900;line-height:1;margin-bottom:6px}
+.dict-phonetic{font-size:13px;color:var(--gold);font-style:italic;margin-bottom:4px}
+.dict-fr-word{font-size:14px;color:var(--muted)}
+.dict-body{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.dict-section-lbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim);margin-bottom:5px;font-weight:700}
+.dict-example{font-size:15px;color:var(--txt);line-height:1.65;font-style:italic}
+.dict-example-trans{font-size:13px;color:var(--muted);margin-top:4px;font-style:italic}
+.dict-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.dict-tag{background:rgba(232,168,56,.1);border:1px solid rgba(232,168,56,.2);color:var(--gold);border-radius:12px;padding:3px 10px;font-size:11px;font-weight:600}
+.dict-history{margin-top:20px}
+.dict-hist-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:6px;cursor:pointer;transition:border-color .15s}
+.dict-hist-item:hover{border-color:var(--brd2)}
+.dict-hist-pt{font-family:var(--fd);font-size:16px;font-weight:700}
+.dict-hist-fr{font-size:12px;color:var(--muted)}
+.dict-spinner{display:flex;align-items:center;justify-content:center;gap:10px;padding:32px;color:var(--muted);font-size:14px}
+.dict-spinner::before{content:'';width:20px;height:20px;border:2px solid var(--brd2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dict-empty{text-align:center;padding:48px 24px;color:var(--muted)}
+.dict-empty-icon{font-size:48px;margin-bottom:16px}
+.dict-empty-title{font-family:var(--fd);font-size:20px;font-weight:700;color:var(--txt);margin-bottom:8px}
+.dict-empty-sub{font-size:13px;line-height:1.6}
+.dict-error{background:rgba(212,82,42,.08);border:1px solid rgba(212,82,42,.25);border-radius:var(--r);padding:14px 16px;color:#FF7A5A;font-size:13px;text-align:center}
+
+/* ── Responsive tweak ── */
+@media(max-width:380px){.ex-word{font-size:36px}.rating-row{gap:5px}.r-btn{padding:9px 4px;font-size:10px}}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="hdr" id="hdr">
+    <div class="logo">Fala<span>Brasil</span></div>
+    <div class="pills">
+      <div class="pill pill-fire" id="pill-streak">🔥 0</div>
+      <div class="pill pill-xp" id="pill-xp">⚡ 0 XP</div>
+    </div>
+  </header>
+  <main id="content"></main>
+  <nav class="nav" id="nav">
+    <button class="nav-btn active" onclick="goTo('home')" id="nb-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      Accueil<span class="nav-badge" id="due-badge" style="display:none"></span>
+    </button>
+    <button class="nav-btn" onclick="goTo('vocab')" id="nb-vocab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Vocab
+    </button>
+    <button class="nav-btn" onclick="goTo('dict')" id="nb-dict">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Dico
+    </button>
+    <button class="nav-btn" onclick="goTo('stats')" id="nb-stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Stats
+    </button>
+  </nav>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   VOCABULAIRE — ~600 mots · 22 catégories
+════════════════════════════════════════════════════════ */
+const VOCAB = {
+  greetings:{label:"Saudações",icon:"👋",color:"#E8A838",words:[
+    {id:"gr01",pt:"Olá",fr:"Bonjour / Salut",ph:"o-LAH",s:"Olá! Como vai você?",t:"Salut ! Comment ça va ?"},
+    {id:"gr02",pt:"Oi",fr:"Salut (informel)",ph:"OY",s:"Oi, tudo bem?",t:"Salut, tout va bien ?"},
+    {id:"gr03",pt:"Bom dia",fr:"Bonjour (matin)",ph:"bong JI-a",s:"Bom dia! Você dormiu bem?",t:"Bonjour ! Vous avez bien dormi ?"},
+    {id:"gr04",pt:"Boa tarde",fr:"Bon après-midi",ph:"boa TAR-dji",s:"Boa tarde! Como foi seu dia?",t:"Bon après-midi ! Comment s'est passée ta journée ?"},
+    {id:"gr05",pt:"Boa noite",fr:"Bonsoir / Bonne nuit",ph:"boa NOY-tchi",s:"Boa noite, durma bem!",t:"Bonsoir, dormez bien !"},
+    {id:"gr06",pt:"Tchau",fr:"Au revoir / Ciao",ph:"CHOW",s:"Tchau! Até mais!",t:"Au revoir ! À plus !"},
+    {id:"gr07",pt:"Até logo",fr:"À tout à l'heure",ph:"a-TE LO-go",s:"Até logo, nos vemos amanhã.",t:"À tout à l'heure, on se voit demain."},
+    {id:"gr08",pt:"Tudo bem?",fr:"Tout va bien ?",ph:"TU-do beng",s:"Tudo bem com você?",t:"Tout va bien pour toi ?"},
+    {id:"gr09",pt:"Prazer",fr:"Enchanté(e)",ph:"pra-ZER",s:"Prazer em te conhecer!",t:"Enchanté de te rencontrer !"},
+    {id:"gr10",pt:"Obrigado/a",fr:"Merci",ph:"o-bri-GA-do",s:"Muito obrigado pela ajuda!",t:"Merci beaucoup pour l'aide !"},
+    {id:"gr11",pt:"De nada",fr:"De rien",ph:"dji NA-da",s:"De nada, foi um prazer!",t:"De rien, c'était un plaisir !"},
+    {id:"gr12",pt:"Por favor",fr:"S'il vous plaît",ph:"por fa-VOR",s:"Uma mesa para dois, por favor.",t:"Une table pour deux, s'il vous plaît."},
+    {id:"gr13",pt:"Desculpa",fr:"Désolé(e) / Pardon",ph:"des-KUL-pa",s:"Desculpa pelo atraso.",t:"Désolé pour le retard."},
+    {id:"gr14",pt:"Com licença",fr:"Excusez-moi",ph:"kong li-SEN-sa",s:"Com licença, pode me ajudar?",t:"Excusez-moi, pouvez-vous m'aider ?"},
+    {id:"gr15",pt:"Claro",fr:"Bien sûr",ph:"KLA-ro",s:"Claro que sim!",t:"Bien sûr que oui !"},
+    {id:"gr16",pt:"Com certeza",fr:"Certainement",ph:"kong ser-TE-za",s:"Com certeza, pode contar comigo.",t:"Bien sûr ! Tu peux compter sur moi."},
+    {id:"gr17",pt:"Meu nome é",fr:"Je m'appelle",ph:"mew NO-mi E",s:"Meu nome é Carlos.",t:"Je m'appelle Carlos."},
+    {id:"gr18",pt:"Como se chama?",fr:"Comment tu t'appelles ?",ph:"KO-mo si SHA-ma",s:"Como você se chama?",t:"Comment tu t'appelles ?"},
+    {id:"gr19",pt:"Sim",fr:"Oui",ph:"SING",s:"Sim, gosto muito!",t:"Oui, j'aime beaucoup !"},
+    {id:"gr20",pt:"Não",fr:"Non",ph:"NAONG",s:"Não, obrigado.",t:"Non, merci."},
+  ]},
+  numbers:{label:"Números",icon:"🔢",color:"#2A7D4F",words:[
+    {id:"nu01",pt:"Zero",fr:"Zéro",ph:"ZE-ro",s:"O resultado é zero.",t:"Le résultat est zéro."},
+    {id:"nu02",pt:"Um / Uma",fr:"Un / Une",ph:"ung / U-ma",s:"Eu tenho um irmão.",t:"J'ai un frère."},
+    {id:"nu03",pt:"Dois / Duas",fr:"Deux",ph:"DOYS / DU-as",s:"Ela tem duas filhas.",t:"Elle a deux filles."},
+    {id:"nu04",pt:"Três",fr:"Trois",ph:"TRESS",s:"Três cafés, por favor!",t:"Trois cafés, s'il vous plaît !"},
+    {id:"nu05",pt:"Quatro",fr:"Quatre",ph:"KWA-tro",s:"A mesa tem quatro lugares.",t:"La table a quatre places."},
+    {id:"nu06",pt:"Cinco",fr:"Cinq",ph:"SING-ko",s:"Cinco reais, obrigado.",t:"Cinq reais, merci."},
+    {id:"nu07",pt:"Seis",fr:"Six",ph:"SEICE",s:"O apartamento tem seis quartos.",t:"L'appartement a six chambres."},
+    {id:"nu08",pt:"Sete",fr:"Sept",ph:"SE-tchi",s:"Sete dias na semana.",t:"Sept jours dans la semaine."},
+    {id:"nu09",pt:"Oito",fr:"Huit",ph:"OY-to",s:"Oito horas da manhã.",t:"Huit heures du matin."},
+    {id:"nu10",pt:"Nove",fr:"Neuf",ph:"NO-vi",s:"Nove meses de gravidez.",t:"Neuf mois de grossesse."},
+    {id:"nu11",pt:"Dez",fr:"Dix",ph:"DESS",s:"São dez horas da manhã.",t:"Il est dix heures du matin."},
+    {id:"nu12",pt:"Onze",fr:"Onze",ph:"ON-zi",s:"Onze jogadores no futebol.",t:"Onze joueurs au football."},
+    {id:"nu13",pt:"Vinte",fr:"Vingt",ph:"VING-tchi",s:"Vinte reais pelo ingresso.",t:"Vingt reais pour le billet."},
+    {id:"nu14",pt:"Trinta",fr:"Trente",ph:"TRING-ta",s:"Trinta graus hoje!",t:"Trente degrés aujourd'hui !"},
+    {id:"nu15",pt:"Cinquenta",fr:"Cinquante",ph:"sing-KWENG-ta",s:"Cinquenta quilômetros daqui.",t:"Cinquante kilomètres d'ici."},
+    {id:"nu16",pt:"Cem",fr:"Cent",ph:"SENG",s:"Isso custa cem reais.",t:"Ça coûte cent reais."},
+    {id:"nu17",pt:"Mil",fr:"Mille",ph:"MEW",s:"Mil pessoas estavam lá.",t:"Mille personnes étaient là."},
+    {id:"nu18",pt:"Primeiro/a",fr:"Premier / Première",ph:"pri-MEY-ro",s:"Ela é a primeira da turma.",t:"Elle est la première de la classe."},
+    {id:"nu19",pt:"Segundo/a",fr:"Deuxième",ph:"se-GUNG-do",s:"O segundo prato foi ótimo.",t:"Le deuxième plat était excellent."},
+    {id:"nu20",pt:"Último/a",fr:"Dernier / Dernière",ph:"UL-ti-mo",s:"É o último ingresso.",t:"C'est le dernier billet."},
+  ]},
+  time:{label:"Tempo",icon:"⏰",color:"#5B5EA6",words:[
+    {id:"tm01",pt:"Hoje",fr:"Aujourd'hui",ph:"O-ji",s:"O que você vai fazer hoje?",t:"Qu'est-ce que tu vas faire aujourd'hui ?"},
+    {id:"tm02",pt:"Amanhã",fr:"Demain",ph:"a-ma-NYANG",s:"Vejo você amanhã.",t:"Je te vois demain."},
+    {id:"tm03",pt:"Ontem",fr:"Hier",ph:"ON-teng",s:"Ontem foi ótimo!",t:"Hier c'était super !"},
+    {id:"tm04",pt:"Agora",fr:"Maintenant",ph:"a-GO-ra",s:"Preciso ir agora.",t:"Je dois partir maintenant."},
+    {id:"tm05",pt:"Mais tarde",fr:"Plus tard",ph:"MICE TAR-dji",s:"Vejo você mais tarde.",t:"Je te vois plus tard."},
+    {id:"tm06",pt:"Cedo",fr:"Tôt",ph:"SE-do",s:"Acordo muito cedo.",t:"Je me réveille très tôt."},
+    {id:"tm07",pt:"A manhã",fr:"Le matin",ph:"a ma-NYANG",s:"De manhã tomo café.",t:"Le matin, je prends un café."},
+    {id:"tm08",pt:"A tarde",fr:"L'après-midi",ph:"a TAR-dji",s:"À tarde fico em casa.",t:"L'après-midi je reste à la maison."},
+    {id:"tm09",pt:"A noite",fr:"La nuit / Le soir",ph:"a NOY-tchi",s:"À noite gosto de ler.",t:"Le soir j'aime lire."},
+    {id:"tm10",pt:"A semana",fr:"La semaine",ph:"a se-MA-na",s:"Essa semana estou ocupado.",t:"Cette semaine je suis occupé."},
+    {id:"tm11",pt:"O mês",fr:"Le mois",ph:"o MESS",s:"No mês que vem vou viajar.",t:"Le mois prochain je vais voyager."},
+    {id:"tm12",pt:"O ano",fr:"L'année",ph:"o A-no",s:"O ano novo está chegando.",t:"La nouvelle année approche."},
+    {id:"tm13",pt:"Segunda-feira",fr:"Lundi",ph:"se-GUNG-da FEY-ra",s:"Na segunda tenho reunião.",t:"Lundi j'ai une réunion."},
+    {id:"tm14",pt:"Terça-feira",fr:"Mardi",ph:"TER-sa FEY-ra",s:"Na terça vou ao dentista.",t:"Mardi je vais chez le dentiste."},
+    {id:"tm15",pt:"Quarta-feira",fr:"Mercredi",ph:"KWAR-ta FEY-ra",s:"Na quarta faço academia.",t:"Mercredi je vais à la salle de sport."},
+    {id:"tm16",pt:"Quinta-feira",fr:"Jeudi",ph:"KING-ta FEY-ra",s:"Na quinta saio mais cedo.",t:"Jeudi je pars plus tôt."},
+    {id:"tm17",pt:"Sexta-feira",fr:"Vendredi",ph:"SES-ta FEY-ra",s:"Sexta-feira à noite é o melhor!",t:"Le vendredi soir c'est le meilleur !"},
+    {id:"tm18",pt:"Sábado",fr:"Samedi",ph:"SA-ba-do",s:"No sábado durmo mais.",t:"Le samedi je dors plus."},
+    {id:"tm19",pt:"Domingo",fr:"Dimanche",ph:"do-MING-go",s:"Domingo é dia de família.",t:"Dimanche c'est le jour de la famille."},
+    {id:"tm20",pt:"Janeiro",fr:"Janvier",ph:"jha-NEY-ro",s:"Janeiro é verão no Brasil.",t:"En janvier c'est l'été au Brésil."},
+    {id:"tm21",pt:"Fevereiro",fr:"Février",ph:"fe-ve-REY-ro",s:"Fevereiro tem carnaval!",t:"Février a le carnaval !"},
+    {id:"tm22",pt:"Março",fr:"Mars",ph:"MAR-so",s:"Em março começa o outono.",t:"En mars commence l'automne."},
+    {id:"tm23",pt:"Abril",fr:"Avril",ph:"a-BRIL",s:"Abril é meu mês favorito.",t:"Avril est mon mois préféré."},
+    {id:"tm24",pt:"Maio",fr:"Mai",ph:"MA-yo",s:"Em maio as flores aparecem.",t:"En mai les fleurs apparaissent."},
+    {id:"tm25",pt:"Junho",fr:"Juin",ph:"JHUNG-nyo",s:"Junho é o mês das festas juninas.",t:"Juin est le mois des fêtes juninas."},
+    {id:"tm26",pt:"Julho",fr:"Juillet",ph:"JHUL-lyo",s:"Em julho há férias escolares.",t:"En juillet il y a les vacances scolaires."},
+    {id:"tm27",pt:"Agosto",fr:"Août",ph:"a-GOS-to",s:"Agosto ainda é inverno.",t:"Août c'est encore l'hiver."},
+    {id:"tm28",pt:"Setembro",fr:"Septembre",ph:"se-TENG-bro",s:"Em setembro vou ao Brasil.",t:"En septembre je vais au Brésil."},
+    {id:"tm29",pt:"Outubro",fr:"Octobre",ph:"ou-TU-bro",s:"Outubro é mês de eleições.",t:"Octobre est le mois des élections."},
+    {id:"tm30",pt:"Novembro",fr:"Novembre",ph:"no-VENG-bro",s:"Em novembro começa o calor.",t:"En novembre la chaleur commence."},
+    {id:"tm31",pt:"Dezembro",fr:"Décembre",ph:"de-ZENG-bro",s:"Em dezembro tem Natal!",t:"En décembre il y a Noël !"},
+  ]},
+  family:{label:"Família",icon:"👨‍👩‍👧",color:"#D4522A",words:[
+    {id:"fa01",pt:"O pai",fr:"Le père",ph:"o PAI",s:"Meu pai é muito gentil.",t:"Mon père est très gentil."},
+    {id:"fa02",pt:"A mãe",fr:"La mère",ph:"a MANG",s:"A minha mãe cozinha muito bem.",t:"Ma mère cuisine très bien."},
+    {id:"fa03",pt:"O filho",fr:"Le fils",ph:"o FIL-lyo",s:"Meu filho tem dez anos.",t:"Mon fils a dix ans."},
+    {id:"fa04",pt:"A filha",fr:"La fille",ph:"a FIL-lya",s:"Minha filha estuda medicina.",t:"Ma fille étudie la médecine."},
+    {id:"fa05",pt:"O irmão",fr:"Le frère",ph:"o ir-MANG",s:"Tenho dois irmãos.",t:"J'ai deux frères."},
+    {id:"fa06",pt:"A irmã",fr:"La sœur",ph:"a ir-MANG",s:"Minha irmã mora em São Paulo.",t:"Ma sœur vit à São Paulo."},
+    {id:"fa07",pt:"O avô",fr:"Le grand-père",ph:"o a-VO",s:"Meu avô tem oitenta anos.",t:"Mon grand-père a quatre-vingts ans."},
+    {id:"fa08",pt:"A avó",fr:"La grand-mère",ph:"a a-VO",s:"Minha avó faz bolo delicioso.",t:"Ma grand-mère fait un délicieux gâteau."},
+    {id:"fa09",pt:"O tio",fr:"L'oncle",ph:"o CHI-o",s:"Meu tio é engenheiro.",t:"Mon oncle est ingénieur."},
+    {id:"fa10",pt:"A tia",fr:"La tante",ph:"a CHI-a",s:"Minha tia mora no Rio.",t:"Ma tante vit à Rio."},
+    {id:"fa11",pt:"O primo / A prima",fr:"Le cousin / La cousine",ph:"o PRI-mo",s:"Meu primo é muito engraçado.",t:"Mon cousin est très drôle."},
+    {id:"fa12",pt:"O marido",fr:"Le mari",ph:"o ma-RI-do",s:"O marido dela é simpático.",t:"Son mari est sympathique."},
+    {id:"fa13",pt:"A esposa",fr:"La femme / L'épouse",ph:"a es-PO-za",s:"Minha esposa é dentista.",t:"Ma femme est dentiste."},
+    {id:"fa14",pt:"O namorado",fr:"Le petit ami",ph:"o na-mo-RA-do",s:"Meu namorado é muito carinhoso.",t:"Mon petit ami est très affectueux."},
+    {id:"fa15",pt:"A namorada",fr:"La petite amie",ph:"a na-mo-RA-da",s:"A namorada dele é francesa.",t:"Sa petite amie est française."},
+    {id:"fa16",pt:"O bebê",fr:"Le bébé",ph:"o be-BE",s:"O bebê está dormindo.",t:"Le bébé dort."},
+    {id:"fa17",pt:"A criança",fr:"L'enfant",ph:"a kri-ANG-sa",s:"As crianças brincam no parque.",t:"Les enfants jouent dans le parc."},
+    {id:"fa18",pt:"Os pais",fr:"Les parents",ph:"os PAICE",s:"Meus pais moram no interior.",t:"Mes parents vivent dans l'intérieur."},
+    {id:"fa19",pt:"O sogro / A sogra",fr:"Le beau-père / La belle-mère",ph:"o SO-gro",s:"Minha sogra cozinha bem.",t:"Ma belle-mère cuisine bien."},
+    {id:"fa20",pt:"O bebê",fr:"La famille",ph:"a fa-MI-lya",s:"Minha família é muito unida.",t:"Ma famille est très unie."},
+  ]},
+  body:{label:"Corpo",icon:"🫀",color:"#C0392B",words:[
+    {id:"co01",pt:"A cabeça",fr:"La tête",ph:"a ka-BE-sa",s:"Estou com dor de cabeça.",t:"J'ai mal à la tête."},
+    {id:"co02",pt:"O rosto",fr:"Le visage",ph:"o HOS-to",s:"Ela tem um rosto bonito.",t:"Elle a un beau visage."},
+    {id:"co03",pt:"Os olhos",fr:"Les yeux",ph:"os OL-lyos",s:"Ele tem olhos verdes.",t:"Il a les yeux verts."},
+    {id:"co04",pt:"O nariz",fr:"Le nez",ph:"o na-RISS",s:"Estou com o nariz entupido.",t:"J'ai le nez bouché."},
+    {id:"co05",pt:"A boca",fr:"La bouche",ph:"a BO-ka",s:"Abra a boca, por favor.",t:"Ouvrez la bouche, s'il vous plaît."},
+    {id:"co06",pt:"Os dentes",fr:"Les dents",ph:"os DENG-tchis",s:"Escove os dentes duas vezes.",t:"Brossez les dents deux fois."},
+    {id:"co07",pt:"As orelhas",fr:"Les oreilles",ph:"as o-RE-lyas",s:"Ela usa brincos nas orelhas.",t:"Elle porte des boucles d'oreilles."},
+    {id:"co08",pt:"O pescoço",fr:"Le cou",ph:"o pes-KO-so",s:"Estou com dor no pescoço.",t:"J'ai mal au cou."},
+    {id:"co09",pt:"Os ombros",fr:"Les épaules",ph:"os OM-bros",s:"Ele tem ombros largos.",t:"Il a de larges épaules."},
+    {id:"co10",pt:"O braço",fr:"Le bras",ph:"o BRA-so",s:"Ele quebrou o braço.",t:"Il s'est cassé le bras."},
+    {id:"co11",pt:"A mão",fr:"La main",ph:"a MANG",s:"Dê a mão para mim.",t:"Donne-moi la main."},
+    {id:"co12",pt:"Os dedos",fr:"Les doigts",ph:"os DE-dos",s:"Ela tem dedos longos.",t:"Elle a de longs doigts."},
+    {id:"co13",pt:"A barriga",fr:"Le ventre",ph:"a ba-HI-ga",s:"Estou com dor de barriga.",t:"J'ai mal au ventre."},
+    {id:"co14",pt:"As costas",fr:"Le dos",ph:"as KOS-tas",s:"Tenho dor nas costas.",t:"J'ai mal dans le dos."},
+    {id:"co15",pt:"A perna",fr:"La jambe",ph:"a PER-na",s:"Corri e a perna dói.",t:"J'ai couru et la jambe fait mal."},
+    {id:"co16",pt:"O joelho",fr:"Le genou",ph:"o jhoe-EL-lyo",s:"Machuquei o joelho.",t:"Je me suis blessé au genou."},
+    {id:"co17",pt:"O pé",fr:"Le pied",ph:"o PE",s:"Estou com bolha no pé.",t:"J'ai une ampoule au pied."},
+    {id:"co18",pt:"O coração",fr:"Le cœur",ph:"o ko-ra-SANG",s:"Meu coração bate forte.",t:"Mon cœur bat fort."},
+    {id:"co19",pt:"O cabelo",fr:"Les cheveux",ph:"o ka-BE-lo",s:"Ela cortou o cabelo.",t:"Elle a coupé ses cheveux."},
+    {id:"co20",pt:"A pele",fr:"La peau",ph:"a PE-li",s:"Cuide bem da sua pele.",t:"Prenez bien soin de votre peau."},
+  ]},
+  food:{label:"Comida",icon:"🍽️",color:"#E67E22",words:[
+    {id:"fo01",pt:"A comida",fr:"La nourriture",ph:"a ko-MI-da",s:"A comida brasileira é incrível.",t:"La nourriture brésilienne est incroyable."},
+    {id:"fo02",pt:"O arroz",fr:"Le riz",ph:"o a-HOSS",s:"Arroz e feijão todo dia!",t:"Du riz et des haricots tous les jours !"},
+    {id:"fo03",pt:"O feijão",fr:"Le haricot",ph:"o fey-JHAONG",s:"Feijoada é feita com feijão preto.",t:"La feijoada est faite avec des haricots noirs."},
+    {id:"fo04",pt:"A carne",fr:"La viande",ph:"a KAR-ni",s:"O churrasco tem muita carne.",t:"Le barbecue a beaucoup de viande."},
+    {id:"fo05",pt:"O frango",fr:"Le poulet",ph:"o FRANG-go",s:"Frango grelhado com salada.",t:"Poulet grillé avec salade."},
+    {id:"fo06",pt:"O peixe",fr:"Le poisson",ph:"o PEY-shi",s:"Gosto de peixe grelhado.",t:"J'aime le poisson grillé."},
+    {id:"fo07",pt:"O ovo",fr:"L'œuf",ph:"o O-vo",s:"Ovos mexidos no café da manhã.",t:"Des œufs brouillés au petit-déjeuner."},
+    {id:"fo08",pt:"O pão",fr:"Le pain",ph:"o PANG",s:"Pão de queijo é típico de Minas.",t:"Le pain au fromage est typique du Minas."},
+    {id:"fo09",pt:"O queijo",fr:"Le fromage",ph:"o KEY-jho",s:"O queijo mineiro é famoso.",t:"Le fromage du Minas est fameux."},
+    {id:"fo10",pt:"O leite",fr:"Le lait",ph:"o LEY-tchi",s:"Café com leite!",t:"Café au lait !"},
+    {id:"fo11",pt:"O açúcar",fr:"Le sucre",ph:"o a-SU-kar",s:"Sem açúcar, por favor.",t:"Sans sucre, s'il vous plaît."},
+    {id:"fo12",pt:"O sal",fr:"Le sel",ph:"o SAL",s:"Precisa de mais sal?",t:"Tu as besoin de plus de sel ?"},
+    {id:"fo13",pt:"A salada",fr:"La salade",ph:"a sa-LA-da",s:"Uma salada fresca, por favor.",t:"Une salade fraîche, s'il vous plaît."},
+    {id:"fo14",pt:"O tomate",fr:"La tomate",ph:"o to-MA-tchi",s:"Tomate na salada é delicioso.",t:"La tomate dans la salade est délicieuse."},
+    {id:"fo15",pt:"A fruta",fr:"Le fruit",ph:"a FRU-ta",s:"O Brasil tem frutas tropicais incríveis.",t:"Le Brésil a des fruits tropicaux incroyables."},
+    {id:"fo16",pt:"A manga",fr:"La mangue",ph:"a MANG-ga",s:"Manga gelada é deliciosa no verão.",t:"La mangue glacée est délicieuse en été."},
+    {id:"fo17",pt:"A banana",fr:"La banane",ph:"a ba-NA-na",s:"Come uma banana por dia.",t:"Mange une banane par jour."},
+    {id:"fo18",pt:"O abacaxi",fr:"L'ananas",ph:"o a-ba-ka-SHI",s:"Suco de abacaxi é refrescante.",t:"Le jus d'ananas est rafraîchissant."},
+    {id:"fo19",pt:"A laranja",fr:"L'orange",ph:"a la-RANG-jha",s:"Suco de laranja pela manhã.",t:"Du jus d'orange le matin."},
+    {id:"fo20",pt:"O almoço",fr:"Le déjeuner",ph:"o al-MO-so",s:"Almoço ao meio-dia.",t:"Déjeuner à midi."},
+    {id:"fo21",pt:"O jantar",fr:"Le dîner",ph:"o jhan-TAR",s:"Jantar em família é especial.",t:"Dîner en famille c'est spécial."},
+    {id:"fo22",pt:"O café da manhã",fr:"Le petit-déjeuner",ph:"o ka-FE da ma-NYANG",s:"Café da manhã é muito importante.",t:"Le petit-déjeuner est très important."},
+    {id:"fo23",pt:"A sobremesa",fr:"Le dessert",ph:"a so-bre-ME-za",s:"De sobremesa, brigadeiro!",t:"En dessert, un brigadeiro !"},
+    {id:"fo24",pt:"O brigadeiro",fr:"Le brigadeiro (bonbon brésilien)",ph:"o bri-ga-DEY-ro",s:"Brigadeiro é o doce mais famoso do Brasil.",t:"Le brigadeiro est la douceur la plus célèbre du Brésil."},
+    {id:"fo25",pt:"A cebola",fr:"L'oignon",ph:"a se-BO-la",s:"Cebola dá sabor ao prato.",t:"L'oignon donne de la saveur au plat."},
+    {id:"fo26",pt:"O alho",fr:"L'ail",ph:"o AL-lyo",s:"Alho frito é muito saboroso.",t:"L'ail frit est très savoureux."},
+    {id:"fo27",pt:"A manteiga",fr:"Le beurre",ph:"a mang-TEY-ga",s:"Pão com manteiga pela manhã.",t:"Du pain avec du beurre le matin."},
+    {id:"fo28",pt:"A maçã",fr:"La pomme",ph:"a ma-SANG",s:"Prefiro maçã a banana.",t:"Je préfère la pomme à la banane."},
+    {id:"fo29",pt:"O chocolate",fr:"Le chocolat",ph:"o sho-ko-LA-tchi",s:"Adoro chocolate quente.",t:"J'adore le chocolat chaud."},
+    {id:"fo30",pt:"O bolo",fr:"Le gâteau",ph:"o BO-lo",s:"Esse bolo está delicioso!",t:"Ce gâteau est délicieux !"},
+  ]},
+  drinks:{label:"Bebidas",icon:"☕",color:"#795548",words:[
+    {id:"dr01",pt:"A água",fr:"L'eau",ph:"a A-gua",s:"Posso ter um copo d'água?",t:"Puis-je avoir un verre d'eau ?"},
+    {id:"dr02",pt:"O café",fr:"Le café",ph:"o ka-FE",s:"Tomo café toda manhã.",t:"Je prends un café chaque matin."},
+    {id:"dr03",pt:"O suco",fr:"Le jus",ph:"o SU-ko",s:"Um suco de laranja, por favor.",t:"Un jus d'orange, s'il vous plaît."},
+    {id:"dr04",pt:"A cerveja",fr:"La bière",ph:"a ser-VE-jha",s:"Uma cerveja gelada!",t:"Une bière bien fraîche !"},
+    {id:"dr05",pt:"O vinho",fr:"Le vin",ph:"o VIN-nyo",s:"Um vinho tinto, por favor.",t:"Un vin rouge, s'il vous plaît."},
+    {id:"dr06",pt:"A caipirinha",fr:"La caïpirinha",ph:"a kai-pi-RIN-nya",s:"Caipirinha com limão é clássica.",t:"La caïpirinha au citron est classique."},
+    {id:"dr07",pt:"O chá",fr:"Le thé",ph:"o SHA",s:"Chá de camomila para dormir.",t:"Tisane de camomille pour dormir."},
+    {id:"dr08",pt:"O refrigerante",fr:"La boisson gazeuse",ph:"o he-fri-jhe-RANG-tchi",s:"Você quer um refrigerante?",t:"Tu veux une boisson gazeuse ?"},
+    {id:"dr09",pt:"O guaraná",fr:"Le guaraná",ph:"o gwa-ra-NA",s:"Guaraná Antárctica é tipicamente brasileiro.",t:"Le Guaraná Antarctica est typiquement brésilien."},
+  ]},
+  home:{label:"Casa",icon:"🏠",color:"#1A6B9A",words:[
+    {id:"ho01",pt:"A casa",fr:"La maison",ph:"a KA-za",s:"Minha casa é meu castelo.",t:"Ma maison est mon château."},
+    {id:"ho02",pt:"O apartamento",fr:"L'appartement",ph:"o a-par-ta-MENG-to",s:"Moro num apartamento pequeno.",t:"Je vis dans un petit appartement."},
+    {id:"ho03",pt:"O quarto",fr:"La chambre",ph:"o KWAR-to",s:"Meu quarto é no segundo andar.",t:"Ma chambre est au deuxième étage."},
+    {id:"ho04",pt:"A sala",fr:"Le salon",ph:"a SA-la",s:"Assistimos TV na sala.",t:"On regarde la télé dans le salon."},
+    {id:"ho05",pt:"A cozinha",fr:"La cuisine",ph:"a ko-ZIN-nya",s:"A cozinha fica no fundo.",t:"La cuisine est au fond."},
+    {id:"ho06",pt:"O banheiro",fr:"La salle de bain",ph:"o ban-NYEY-ro",s:"O banheiro está ocupado.",t:"La salle de bain est occupée."},
+    {id:"ho07",pt:"A varanda",fr:"Le balcon",ph:"a va-RANG-da",s:"Tomo café na varanda.",t:"Je prends mon café sur le balcon."},
+    {id:"ho08",pt:"A cama",fr:"Le lit",ph:"a KA-ma",s:"Essa cama é muito confortável.",t:"Ce lit est très confortable."},
+    {id:"ho09",pt:"A mesa",fr:"La table",ph:"a ME-za",s:"Almoçamos à mesa juntos.",t:"On déjeune ensemble à table."},
+    {id:"ho10",pt:"A cadeira",fr:"La chaise",ph:"a ka-DEY-ra",s:"Essa cadeira é antiga.",t:"Cette chaise est ancienne."},
+    {id:"ho11",pt:"O sofá",fr:"Le canapé",ph:"o so-FA",s:"Adormeço no sofá vendo TV.",t:"Je m'endors sur le canapé en regardant la télé."},
+    {id:"ho12",pt:"A geladeira",fr:"Le réfrigérateur",ph:"a jhe-la-DEY-ra",s:"A geladeira está vazia!",t:"Le réfrigérateur est vide !"},
+    {id:"ho13",pt:"A janela",fr:"La fenêtre",ph:"a jha-NE-la",s:"Abra a janela, faz favor.",t:"Ouvre la fenêtre, s'il te plaît."},
+    {id:"ho14",pt:"A porta",fr:"La porte",ph:"a POR-ta",s:"Feche a porta, está frio.",t:"Ferme la porte, il fait froid."},
+    {id:"ho15",pt:"O espelho",fr:"Le miroir",ph:"o es-PEL-lyo",s:"Olhei no espelho.",t:"Je me suis regardé dans le miroir."},
+  ]},
+  clothes:{label:"Roupas",icon:"👗",color:"#8E44AD",words:[
+    {id:"ro01",pt:"A camiseta",fr:"Le t-shirt",ph:"a ka-mi-ZE-ta",s:"Esta camiseta é nova.",t:"Ce t-shirt est neuf."},
+    {id:"ro02",pt:"A camisa",fr:"La chemise",ph:"a ka-MI-za",s:"Preciso de uma camisa social.",t:"J'ai besoin d'une chemise habillée."},
+    {id:"ro03",pt:"A calça",fr:"Le pantalon",ph:"a KAL-sa",s:"Esta calça é muito justa.",t:"Ce pantalon est très serré."},
+    {id:"ro04",pt:"O vestido",fr:"La robe",ph:"o ves-CHI-do",s:"Ela usou um vestido vermelho.",t:"Elle a porté une robe rouge."},
+    {id:"ro05",pt:"A saia",fr:"La jupe",ph:"a SA-ya",s:"A saia está na moda.",t:"La jupe est à la mode."},
+    {id:"ro06",pt:"O casaco",fr:"Le manteau / La veste",ph:"o ka-ZA-ko",s:"Preciso de um casaco pesado.",t:"J'ai besoin d'un manteau chaud."},
+    {id:"ro07",pt:"O tênis",fr:"Les baskets",ph:"o TE-nis",s:"Comprei um tênis novo.",t:"J'ai acheté de nouvelles baskets."},
+    {id:"ro08",pt:"O sapato",fr:"La chaussure",ph:"o sa-PA-to",s:"Esses sapatos são confortáveis.",t:"Ces chaussures sont confortables."},
+    {id:"ro09",pt:"A sandália",fr:"La sandale",ph:"a sang-DA-lya",s:"No verão uso sandália.",t:"En été je porte des sandales."},
+    {id:"ro10",pt:"O chapéu",fr:"Le chapeau",ph:"o sha-PE-u",s:"Coloquei o chapéu na praia.",t:"J'ai mis le chapeau à la plage."},
+    {id:"ro11",pt:"A bolsa",fr:"Le sac",ph:"a BOL-sa",s:"Minha bolsa é muito pesada.",t:"Mon sac est très lourd."},
+    {id:"ro12",pt:"As meias",fr:"Les chaussettes",ph:"as MEY-as",s:"Esqueci de colocar meias.",t:"J'ai oublié de mettre mes chaussettes."},
+    {id:"ro13",pt:"O biquíni",fr:"Le bikini",ph:"o bi-KI-ni",s:"Comprei um biquíni novo.",t:"J'ai acheté un nouveau bikini."},
+  ]},
+  travel:{label:"Viagem",icon:"✈️",color:"#27AE60",words:[
+    {id:"tr01",pt:"O aeroporto",fr:"L'aéroport",ph:"o ae-ro-POR-to",s:"Precisamos chegar cedo ao aeroporto.",t:"Nous devons arriver tôt à l'aéroport."},
+    {id:"tr02",pt:"O avião",fr:"L'avion",ph:"o a-vi-AONG",s:"O avião decolou no horário.",t:"L'avion a décollé à l'heure."},
+    {id:"tr03",pt:"O passaporte",fr:"Le passeport",ph:"o pa-sa-POR-tchi",s:"Não esqueça o passaporte!",t:"N'oublie pas le passeport !"},
+    {id:"tr04",pt:"A mala",fr:"La valise",ph:"a MA-la",s:"Minha mala está pesada demais.",t:"Ma valise est trop lourde."},
+    {id:"tr05",pt:"O hotel",fr:"L'hôtel",ph:"o o-TEL",s:"O hotel fica perto da praia.",t:"L'hôtel est près de la plage."},
+    {id:"tr06",pt:"O ônibus",fr:"Le bus",ph:"o O-ni-bus",s:"Qual ônibus vai ao centro?",t:"Quel bus va au centre ?"},
+    {id:"tr07",pt:"O metrô",fr:"Le métro",ph:"o me-TRO",s:"O metrô de São Paulo é rápido.",t:"Le métro de São Paulo est rapide."},
+    {id:"tr08",pt:"O táxi",fr:"Le taxi",ph:"o TAK-si",s:"Chame um táxi, por favor.",t:"Appelez un taxi, s'il vous plaît."},
+    {id:"tr09",pt:"O carro",fr:"La voiture",ph:"o KA-ho",s:"Aluguei um carro para viajar.",t:"J'ai loué une voiture pour voyager."},
+    {id:"tr10",pt:"A praia",fr:"La plage",ph:"a PRA-ya",s:"A praia de Ipanema é linda.",t:"La plage d'Ipanema est belle."},
+    {id:"tr11",pt:"O mapa",fr:"Le plan / La carte",ph:"o MA-pa",s:"Você tem um mapa da cidade?",t:"Avez-vous un plan de la ville ?"},
+    {id:"tr12",pt:"À direita",fr:"À droite",ph:"a dji-REY-ta",s:"Vire à direita na esquina.",t:"Tournez à droite au coin."},
+    {id:"tr13",pt:"À esquerda",fr:"À gauche",ph:"a es-KER-da",s:"A farmácia fica à esquerda.",t:"La pharmacie est à gauche."},
+    {id:"tr14",pt:"Em frente",fr:"En face / Devant",ph:"eng FRENG-tchi",s:"O banco fica em frente.",t:"La banque est en face."},
+    {id:"tr15",pt:"Perto",fr:"Près / À côté",ph:"PER-to",s:"O hotel é perto daqui?",t:"L'hôtel est près d'ici ?"},
+    {id:"tr16",pt:"Longe",fr:"Loin",ph:"LON-jhi",s:"O aeroporto fica longe do centro.",t:"L'aéroport est loin du centre."},
+    {id:"tr17",pt:"A reserva",fr:"La réservation",ph:"a he-ZER-va",s:"Fiz a reserva online.",t:"J'ai fait la réservation en ligne."},
+    {id:"tr18",pt:"A cidade",fr:"La ville",ph:"a si-DA-dji",s:"Gosto de explorar cidades novas.",t:"J'aime explorer de nouvelles villes."},
+  ]},
+  work:{label:"Trabalho",icon:"💼",color:"#2C3E50",words:[
+    {id:"wo01",pt:"O trabalho",fr:"Le travail",ph:"o tra-BAL-lyo",s:"Vou ao trabalho de manhã.",t:"Je vais au travail le matin."},
+    {id:"wo02",pt:"O emprego",fr:"L'emploi",ph:"o eng-PRE-go",s:"Consegui um emprego novo!",t:"J'ai trouvé un nouvel emploi !"},
+    {id:"wo03",pt:"A empresa",fr:"L'entreprise",ph:"a eng-PRE-za",s:"A empresa fica no centro.",t:"L'entreprise est au centre."},
+    {id:"wo04",pt:"O chefe",fr:"Le/La chef(fe)",ph:"o SHE-fi",s:"Meu chefe é muito exigente.",t:"Mon chef est très exigeant."},
+    {id:"wo05",pt:"O colega",fr:"Le/La collègue",ph:"o ko-LE-ga",s:"Meu colega me ajudou muito.",t:"Mon collègue m'a beaucoup aidé."},
+    {id:"wo06",pt:"A reunião",fr:"La réunion",ph:"a he-u-ni-AONG",s:"Tenho uma reunião às três.",t:"J'ai une réunion à trois heures."},
+    {id:"wo07",pt:"O salário",fr:"Le salaire",ph:"o sa-LA-ri-o",s:"Meu salário aumentou este ano.",t:"Mon salaire a augmenté cette année."},
+    {id:"wo08",pt:"O médico/a",fr:"Le médecin",ph:"o ME-dji-ko",s:"O médico me receitou repouso.",t:"Le médecin m'a prescrit du repos."},
+    {id:"wo09",pt:"O professor/a",fr:"Le professeur / La professeure",ph:"o pro-fe-SOR",s:"A professora é muito boa.",t:"La professeure est très bonne."},
+    {id:"wo10",pt:"O advogado/a",fr:"L'avocat(e)",ph:"o ad-vo-GA-do",s:"Preciso falar com um advogado.",t:"J'ai besoin de parler à un avocat."},
+    {id:"wo11",pt:"O engenheiro/a",fr:"L'ingénieur(e)",ph:"o eng-jhe-NYEY-ro",s:"Ela é engenheira civil.",t:"Elle est ingénieure civile."},
+    {id:"wo12",pt:"O cozinheiro/a",fr:"Le cuisinier / La cuisinière",ph:"o ko-zi-NYEY-ro",s:"O cozinheiro prepara pratos incríveis.",t:"Le cuisinier prépare des plats incroyables."},
+  ]},
+  health:{label:"Saúde",icon:"🏥",color:"#C0392B",words:[
+    {id:"sa01",pt:"A saúde",fr:"La santé",ph:"a sa-U-dji",s:"A saúde é o bem mais precioso.",t:"La santé est le bien le plus précieux."},
+    {id:"sa02",pt:"O hospital",fr:"L'hôpital",ph:"o os-pi-TAL",s:"Levei meu filho ao hospital.",t:"J'ai emmené mon fils à l'hôpital."},
+    {id:"sa03",pt:"A farmácia",fr:"La pharmacie",ph:"a far-MA-si-a",s:"Tem uma farmácia perto daqui?",t:"Il y a une pharmacie près d'ici ?"},
+    {id:"sa04",pt:"O remédio",fr:"Le médicament",ph:"o he-ME-dji-o",s:"Preciso comprar um remédio.",t:"J'ai besoin d'acheter un médicament."},
+    {id:"sa05",pt:"A dor",fr:"La douleur",ph:"a DOR",s:"Estou com muita dor.",t:"J'ai très mal."},
+    {id:"sa06",pt:"A febre",fr:"La fièvre",ph:"a FE-bri",s:"Meu filho está com febre.",t:"Mon fils a de la fièvre."},
+    {id:"sa07",pt:"A tosse",fr:"La toux",ph:"a TOS-si",s:"Estou com tosse há três dias.",t:"Je tousse depuis trois jours."},
+    {id:"sa08",pt:"O resfriado",fr:"Le rhume",ph:"o hes-fri-A-do",s:"Peguei um resfriado.",t:"J'ai attrapé un rhume."},
+    {id:"sa09",pt:"A alergia",fr:"L'allergie",ph:"a a-ler-JHI-a",s:"Tenho alergia a amendoim.",t:"J'ai une allergie aux cacahuètes."},
+    {id:"sa10",pt:"O dentista",fr:"Le/La dentiste",ph:"o deng-CHIS-ta",s:"Vou ao dentista amanhã.",t:"Je vais chez le dentiste demain."},
+  ]},
+  nature:{label:"Natureza",icon:"🌿",color:"#27AE60",words:[
+    {id:"na01",pt:"O sol",fr:"Le soleil",ph:"o SOL",s:"O sol está muito forte hoje.",t:"Le soleil est très fort aujourd'hui."},
+    {id:"na02",pt:"A chuva",fr:"La pluie",ph:"a SHU-va",s:"A chuva molhou tudo.",t:"La pluie a tout mouillé."},
+    {id:"na03",pt:"O vento",fr:"Le vent",ph:"o VENG-to",s:"O vento está muito forte.",t:"Le vent est très fort."},
+    {id:"na04",pt:"O calor",fr:"La chaleur",ph:"o ka-LOR",s:"Que calor insuportável!",t:"Quelle chaleur insupportable !"},
+    {id:"na05",pt:"O frio",fr:"Le froid",ph:"o FRI-o",s:"Que frio hoje à noite!",t:"Quel froid ce soir !"},
+    {id:"na06",pt:"A floresta",fr:"La forêt",ph:"a flo-RES-ta",s:"A Amazônia é a maior floresta do mundo.",t:"L'Amazonie est la plus grande forêt du monde."},
+    {id:"na07",pt:"O rio",fr:"La rivière / Le fleuve",ph:"o HI-o",s:"O Rio Amazonas é gigantesco.",t:"Le fleuve Amazone est gigantesque."},
+    {id:"na08",pt:"A montanha",fr:"La montagne",ph:"a mong-TAN-ya",s:"A Serra Gaúcha é linda.",t:"La Serra Gaúcha est magnifique."},
+    {id:"na09",pt:"O mar",fr:"La mer",ph:"o MAR",s:"O Brasil tem um litoral lindo.",t:"Le Brésil a un beau littoral."},
+    {id:"na10",pt:"O cachorro",fr:"Le chien",ph:"o ka-SHO-ho",s:"Tenho um cachorro chamado Rex.",t:"J'ai un chien qui s'appelle Rex."},
+    {id:"na11",pt:"O gato",fr:"Le chat",ph:"o GA-to",s:"Meu gato dorme o dia inteiro.",t:"Mon chat dort toute la journée."},
+    {id:"na12",pt:"O pássaro",fr:"L'oiseau",ph:"o PA-sa-ro",s:"Que pássaro bonito!",t:"Quel bel oiseau !"},
+    {id:"na13",pt:"O macaco",fr:"Le singe",ph:"o ma-KA-ko",s:"Macacos vivem na Amazônia.",t:"Des singes vivent en Amazonie."},
+    {id:"na14",pt:"A onça-pintada",fr:"Le jaguar",ph:"a ON-sa ping-TA-da",s:"A onça-pintada é o maior felino das Américas.",t:"Le jaguar est le plus grand félin des Amériques."},
+    {id:"na15",pt:"O verão",fr:"L'été",ph:"o ve-RAONG",s:"O verão no Brasil é muito quente.",t:"L'été au Brésil est très chaud."},
+    {id:"na16",pt:"O inverno",fr:"L'hiver",ph:"o ing-VER-no",s:"O inverno no sul é gelado.",t:"L'hiver dans le sud est glacial."},
+    {id:"na17",pt:"A primavera",fr:"Le printemps",ph:"a pri-ma-VE-ra",s:"Na primavera as flores desabrocham.",t:"Au printemps les fleurs s'épanouissent."},
+    {id:"na18",pt:"O outono",fr:"L'automne",ph:"o ou-TO-no",s:"No outono as folhas caem.",t:"En automne les feuilles tombent."},
+  ]},
+  colors:{label:"Cores",icon:"🎨",color:"#F39C12",words:[
+    {id:"cl01",pt:"Vermelho",fr:"Rouge",ph:"ver-MEL-lyo",s:"O céu ficou vermelho ao pôr do sol.",t:"Le ciel est devenu rouge au coucher du soleil."},
+    {id:"cl02",pt:"Azul",fr:"Bleu",ph:"a-ZUL",s:"O céu está azul lindo hoje.",t:"Le ciel est d'un beau bleu aujourd'hui."},
+    {id:"cl03",pt:"Verde",fr:"Vert",ph:"VER-dji",s:"A bandeira do Brasil é verde e amarela.",t:"Le drapeau du Brésil est vert et jaune."},
+    {id:"cl04",pt:"Amarelo",fr:"Jaune",ph:"a-ma-RE-lo",s:"O girassol é amarelo.",t:"Le tournesol est jaune."},
+    {id:"cl05",pt:"Branco",fr:"Blanc",ph:"BRANG-ko",s:"A neve é branca.",t:"La neige est blanche."},
+    {id:"cl06",pt:"Preto",fr:"Noir",ph:"PRE-to",s:"O feijão preto é típico.",t:"Le haricot noir est typique."},
+    {id:"cl07",pt:"Cinza",fr:"Gris",ph:"SING-za",s:"O céu ficou cinza.",t:"Le ciel est devenu gris."},
+    {id:"cl08",pt:"Roxo",fr:"Violet / Mauve",ph:"HO-sho",s:"Ela usou um vestido roxo.",t:"Elle a porté une robe violette."},
+    {id:"cl09",pt:"Rosa",fr:"Rose",ph:"HO-za",s:"As flores são rosas.",t:"Les fleurs sont roses."},
+    {id:"cl10",pt:"Laranja",fr:"Orange",ph:"la-RANG-jha",s:"A laranja é da cor laranja.",t:"L'orange est de couleur orange."},
+    {id:"cl11",pt:"Marrom",fr:"Marron",ph:"ma-HONG",s:"O café tem cor marrom.",t:"Le café est de couleur marron."},
+    {id:"cl12",pt:"Dourado",fr:"Doré",ph:"do-RA-do",s:"O troféu é dourado.",t:"Le trophée est doré."},
+  ]},
+  verbs:{label:"Verbos",icon:"⚡",color:"#E74C3C",words:[
+    {id:"vb01",pt:"Ser / Estar",fr:"Être",ph:"SER / es-TAR",s:"Eu sou brasileiro. Estou bem.",t:"Je suis brésilien. Je vais bien."},
+    {id:"vb02",pt:"Ter",fr:"Avoir",ph:"TER",s:"Tenho dois irmãos.",t:"J'ai deux frères."},
+    {id:"vb03",pt:"Ir",fr:"Aller",ph:"IR",s:"Vou ao mercado amanhã.",t:"Je vais au marché demain."},
+    {id:"vb04",pt:"Vir",fr:"Venir",ph:"VIR",s:"Você vai vir à festa?",t:"Tu vas venir à la fête ?"},
+    {id:"vb05",pt:"Falar",fr:"Parler",ph:"fa-LAR",s:"Eu falo um pouco de português.",t:"Je parle un peu portugais."},
+    {id:"vb06",pt:"Entender",fr:"Comprendre",ph:"eng-teng-DER",s:"Não entendi o que você disse.",t:"Je n'ai pas compris ce que tu as dit."},
+    {id:"vb07",pt:"Querer",fr:"Vouloir",ph:"ke-RER",s:"Quero aprender português.",t:"Je veux apprendre le portugais."},
+    {id:"vb08",pt:"Poder",fr:"Pouvoir",ph:"po-DER",s:"Posso usar seu telefone?",t:"Puis-je utiliser votre téléphone ?"},
+    {id:"vb09",pt:"Precisar",fr:"Avoir besoin de",ph:"pre-si-ZAR",s:"Preciso de ajuda.",t:"J'ai besoin d'aide."},
+    {id:"vb10",pt:"Gostar",fr:"Aimer / Apprécier",ph:"gos-TAR",s:"Gosto muito de música.",t:"J'aime beaucoup la musique."},
+    {id:"vb11",pt:"Amar",fr:"Aimer (profondément)",ph:"a-MAR",s:"Eu te amo!",t:"Je t'aime !"},
+    {id:"vb12",pt:"Comer",fr:"Manger",ph:"ko-MER",s:"Vamos comer fora hoje?",t:"On mange dehors aujourd'hui ?"},
+    {id:"vb13",pt:"Beber",fr:"Boire",ph:"be-BER",s:"Beba muita água.",t:"Bois beaucoup d'eau."},
+    {id:"vb14",pt:"Dormir",fr:"Dormir",ph:"dor-MIR",s:"Dormi muito bem ontem.",t:"J'ai très bien dormi hier."},
+    {id:"vb15",pt:"Acordar",fr:"Se réveiller",ph:"a-kor-DAR",s:"Acordo às sete da manhã.",t:"Je me réveille à sept heures du matin."},
+    {id:"vb16",pt:"Trabalhar",fr:"Travailler",ph:"tra-bal-LHAR",s:"Trabalho de segunda a sexta.",t:"Je travaille du lundi au vendredi."},
+    {id:"vb17",pt:"Estudar",fr:"Étudier",ph:"es-tu-DAR",s:"Estudo português todo dia.",t:"J'étudie le portugais tous les jours."},
+    {id:"vb18",pt:"Comprar",fr:"Acheter",ph:"kong-PRAR",s:"Vou comprar frutas no mercado.",t:"Je vais acheter des fruits au marché."},
+    {id:"vb19",pt:"Pagar",fr:"Payer",ph:"pa-GAR",s:"Posso pagar com cartão?",t:"Je peux payer par carte ?"},
+    {id:"vb20",pt:"Ajudar",fr:"Aider",ph:"a-jhu-DAR",s:"Você pode me ajudar?",t:"Peux-tu m'aider ?"},
+    {id:"vb21",pt:"Saber",fr:"Savoir",ph:"sa-BER",s:"Você sabe onde fica?",t:"Tu sais où c'est ?"},
+    {id:"vb22",pt:"Conhecer",fr:"Connaître",ph:"ko-nyhe-SER",s:"Você conhece São Paulo?",t:"Tu connais São Paulo ?"},
+    {id:"vb23",pt:"Morar",fr:"Habiter / Vivre",ph:"mo-RAR",s:"Moro no Rio de Janeiro.",t:"J'habite à Rio de Janeiro."},
+    {id:"vb24",pt:"Chegar",fr:"Arriver",ph:"she-GAR",s:"Cheguei na hora certa.",t:"Je suis arrivé à temps."},
+    {id:"vb25",pt:"Sair",fr:"Sortir / Partir",ph:"sa-IR",s:"Vou sair mais cedo.",t:"Je vais partir plus tôt."},
+    {id:"vb26",pt:"Voltar",fr:"Revenir / Retourner",ph:"vol-TAR",s:"Voltei para casa às dez.",t:"Je suis rentré à la maison à dix heures."},
+    {id:"vb27",pt:"Ouvir",fr:"Entendre / Écouter",ph:"o-VIR",s:"Ouço música enquanto trabalho.",t:"J'écoute de la musique pendant que je travaille."},
+    {id:"vb28",pt:"Ver / Assistir",fr:"Voir / Regarder",ph:"VER",s:"Vamos assistir um filme?",t:"On regarde un film ?"},
+    {id:"vb29",pt:"Pensar",fr:"Penser",ph:"peng-SAR",s:"Preciso pensar antes de decidir.",t:"Je dois réfléchir avant de décider."},
+    {id:"vb30",pt:"Escrever",fr:"Écrire",ph:"es-kre-VER",s:"Escrevo no meu diário todo dia.",t:"J'écris dans mon journal tous les jours."},
+  ]},
+  adjectives:{label:"Adjetivos",icon:"✨",color:"#9B59B6",words:[
+    {id:"ad01",pt:"Grande",fr:"Grand(e)",ph:"GRANG-dji",s:"São Paulo é uma cidade grande.",t:"São Paulo est une grande ville."},
+    {id:"ad02",pt:"Pequeno/a",fr:"Petit(e)",ph:"pe-KE-no",s:"O Brasil tem aldeias pequenas.",t:"Le Brésil a de petits villages."},
+    {id:"ad03",pt:"Bonito/a",fr:"Beau / Belle",ph:"bo-NI-to",s:"Que cidade linda!",t:"Quelle belle ville !"},
+    {id:"ad04",pt:"Bom / Boa",fr:"Bon(ne)",ph:"BONG / BO-a",s:"Esse restaurante é muito bom.",t:"Ce restaurant est très bon."},
+    {id:"ad05",pt:"Rápido/a",fr:"Rapide",ph:"HA-pi-do",s:"O metrô é rápido.",t:"Le métro est rapide."},
+    {id:"ad06",pt:"Lento/a",fr:"Lent(e)",ph:"LENG-to",s:"O ônibus é lento no trânsito.",t:"Le bus est lent dans la circulation."},
+    {id:"ad07",pt:"Novo/a",fr:"Nouveau / Neuf",ph:"NO-vo",s:"Comprei um carro novo.",t:"J'ai acheté une nouvelle voiture."},
+    {id:"ad08",pt:"Velho/a",fr:"Vieux / Ancien",ph:"VEL-lyo",s:"Este museu tem obras antigas.",t:"Ce musée a des œuvres anciennes."},
+    {id:"ad09",pt:"Caro/a",fr:"Cher / Coûteux",ph:"KA-ro",s:"Este hotel é muito caro.",t:"Cet hôtel est très cher."},
+    {id:"ad10",pt:"Barato/a",fr:"Bon marché",ph:"ba-RA-to",s:"Este mercado é barato.",t:"Ce marché est bon marché."},
+    {id:"ad11",pt:"Quente",fr:"Chaud(e)",ph:"KENG-tchi",s:"O café está muito quente.",t:"Le café est très chaud."},
+    {id:"ad12",pt:"Frio/a",fr:"Froid(e)",ph:"FRI-o",s:"A água do mar está fria.",t:"L'eau de mer est froide."},
+    {id:"ad13",pt:"Gostoso / Delicioso",fr:"Délicieux",ph:"gos-TO-zo",s:"Este bolo é gostoso demais!",t:"Ce gâteau est vraiment délicieux !"},
+    {id:"ad14",pt:"Difícil",fr:"Difficile",ph:"dji-FI-sil",s:"O português não é tão difícil.",t:"Le portugais n'est pas si difficile."},
+    {id:"ad15",pt:"Fácil",fr:"Facile",ph:"FA-sil",s:"Este exercício é fácil.",t:"Cet exercice est facile."},
+    {id:"ad16",pt:"Feliz",fr:"Heureux / Content",ph:"fe-LIS",s:"Estou muito feliz hoje!",t:"Je suis très heureux aujourd'hui !"},
+    {id:"ad17",pt:"Triste",fr:"Triste",ph:"TRIS-tchi",s:"Ela ficou triste com a notícia.",t:"Elle est devenue triste avec la nouvelle."},
+    {id:"ad18",pt:"Cansado/a",fr:"Fatigué(e)",ph:"kang-ZA-do",s:"Estou muito cansado.",t:"Je suis très fatigué."},
+    {id:"ad19",pt:"Forte",fr:"Fort(e)",ph:"FOR-tchi",s:"Ele é muito forte.",t:"Il est très fort."},
+    {id:"ad20",pt:"Fraco/a",fr:"Faible",ph:"FRA-ko",s:"Me sinto fraco hoje.",t:"Je me sens faible aujourd'hui."},
+  ]},
+  culture:{label:"Cultura",icon:"🎭",color:"#E67E22",words:[
+    {id:"cu01",pt:"O carnaval",fr:"Le carnaval",ph:"o kar-na-VAL",s:"O carnaval do Rio é o maior do mundo.",t:"Le carnaval de Rio est le plus grand du monde."},
+    {id:"cu02",pt:"O samba",fr:"La samba",ph:"o SANG-ba",s:"Todo mundo ama samba no carnaval.",t:"Tout le monde aime la samba au carnaval."},
+    {id:"cu03",pt:"A bossa nova",fr:"La bossa nova",ph:"a BOS-sa NO-va",s:"João Gilberto criou a bossa nova.",t:"João Gilberto a créé la bossa nova."},
+    {id:"cu04",pt:"O forró",fr:"Le forró (danse)",ph:"o fo-HO",s:"Forró é a dança do nordeste.",t:"Le forró est la danse du nord-est."},
+    {id:"cu05",pt:"A capoeira",fr:"La capoeira",ph:"a ka-poe-EY-ra",s:"A capoeira é luta e dança ao mesmo tempo.",t:"La capoeira est à la fois lutte et danse."},
+    {id:"cu06",pt:"O futebol",fr:"Le football",ph:"o fu-tchi-BOL",s:"Futebol é a paixão nacional.",t:"Le football est la passion nationale."},
+    {id:"cu07",pt:"O Natal",fr:"Noël",ph:"o na-TAL",s:"Natal no Brasil é em pleno verão.",t:"Noël au Brésil c'est en plein été."},
+    {id:"cu08",pt:"As festas juninas",fr:"Les fêtes juninas",ph:"as FES-tas jhu-NI-nas",s:"As festas juninas são em junho.",t:"Les fêtes juninas sont en juin."},
+    {id:"cu09",pt:"A saudade",fr:"La saudade (nostalgie brésilienne)",ph:"a sa-u-DA-dji",s:"Sinto saudade da minha terra.",t:"J'ai la saudade de mon pays."},
+    {id:"cu10",pt:"O churrasco",fr:"Le barbecue brésilien",ph:"o shu-HAS-ko",s:"Vamos fazer churrasco no domingo!",t:"On fait un barbecue dimanche !"},
+  ]},
+  money:{label:"Dinheiro",icon:"💰",color:"#F39C12",words:[
+    {id:"mo01",pt:"O dinheiro",fr:"L'argent",ph:"o dji-NYEY-ro",s:"Não tenho muito dinheiro.",t:"Je n'ai pas beaucoup d'argent."},
+    {id:"mo02",pt:"O real",fr:"Le real (monnaie)",ph:"o he-AL",s:"Um café custa cinco reais.",t:"Un café coûte cinq reais."},
+    {id:"mo03",pt:"O cartão",fr:"La carte bancaire",ph:"o kar-TAONG",s:"Pago com cartão de débito.",t:"Je paye par carte de débit."},
+    {id:"mo04",pt:"O banco",fr:"La banque",ph:"o BANG-ko",s:"Preciso ir ao banco.",t:"Je dois aller à la banque."},
+    {id:"mo05",pt:"O preço",fr:"Le prix",ph:"o PRE-so",s:"Qual é o preço?",t:"Quel est le prix ?"},
+    {id:"mo06",pt:"O desconto",fr:"La réduction",ph:"o des-KONG-to",s:"Tem desconto para estudante?",t:"Il y a une réduction pour les étudiants ?"},
+    {id:"mo07",pt:"O supermercado",fr:"Le supermarché",ph:"o su-per-mer-KA-do",s:"Vou ao supermercado depois.",t:"Je vais au supermarché après."},
+    {id:"mo08",pt:"A conta",fr:"L'addition",ph:"a KONG-ta",s:"A conta, por favor!",t:"L'addition, s'il vous plaît !"},
+    {id:"mo09",pt:"A gorjeta",fr:"Le pourboire",ph:"a gor-JHE-ta",s:"A gorjeta não está incluída.",t:"Le pourboire n'est pas inclus."},
+    {id:"mo10",pt:"Caro/Barato",fr:"Cher / Pas cher",ph:"KA-ro / ba-RA-to",s:"Isso é muito caro!",t:"C'est très cher !"},
+  ]},
+  feelings:{label:"Sentimentos",icon:"💙",color:"#3498DB",words:[
+    {id:"se01",pt:"A alegria",fr:"La joie",ph:"a a-le-GRI-a",s:"A alegria do carnaval é contagiante.",t:"La joie du carnaval est contagieuse."},
+    {id:"se02",pt:"O amor",fr:"L'amour",ph:"o a-MOR",s:"O amor é universal.",t:"L'amour est universel."},
+    {id:"se03",pt:"A raiva",fr:"La colère",ph:"a HA-i-va",s:"Não deixe a raiva te dominar.",t:"Ne laisse pas la colère te dominer."},
+    {id:"se04",pt:"O medo",fr:"La peur",ph:"o ME-do",s:"Tenho medo de altura.",t:"J'ai peur des hauteurs."},
+    {id:"se05",pt:"A surpresa",fr:"La surprise",ph:"a sur-PRE-za",s:"Que surpresa maravilhosa!",t:"Quelle merveilleuse surprise !"},
+    {id:"se06",pt:"A esperança",fr:"L'espoir",ph:"a es-pe-RANG-sa",s:"A esperança é a última que morre.",t:"L'espoir est le dernier à mourir."},
+    {id:"se07",pt:"A saudade",fr:"La saudade (nostalgie unique)",ph:"a sa-u-DA-dji",s:"Sinto muita saudade de você.",t:"Tu me manques beaucoup."},
+    {id:"se08",pt:"A vergonha",fr:"La honte",ph:"a ver-GON-nya",s:"Que vergonha!",t:"Quelle honte !"},
+    {id:"se09",pt:"A solidão",fr:"La solitude",ph:"a so-li-DAONG",s:"Sinto solidão às vezes.",t:"Je ressens la solitude parfois."},
+    {id:"se10",pt:"A felicidade",fr:"Le bonheur",ph:"a fe-li-si-DA-dji",s:"A felicidade está nas pequenas coisas.",t:"Le bonheur est dans les petites choses."},
+  ]},
+};
+
+const ALL_WORDS = Object.values(VOCAB).flatMap(c=>c.words);
+const TOTAL = ALL_WORDS.length;
+
+/* ════════════════════════════════════════
+   SRS — Algorithme SM-2
+════════════════════════════════════════ */
+function sm2(card={},q){
+  let{ease=2.5,interval=1,reps=0}=card;
+  if(q<1){reps=0;interval=1;}
+  else{
+    if(reps===0)interval=1;
+    else if(reps===1)interval=6;
+    else interval=Math.round(interval*ease);
+    reps++;
+  }
+  ease=Math.max(1.3,ease+0.1-(3-q)*(0.08+(3-q)*0.02));
+  return{ease,interval,reps,nextReview:Date.now()+interval*86400000,lastQ:q};
+}
+function getDue(){
+  const now=Date.now();
+  return ALL_WORDS.filter(w=>{const c=cards[w.id];return!c||c.nextReview<=now});
+}
+function masteryLevel(c){
+  if(!c||c.reps===0)return 0;
+  const i=c.interval;
+  if(i>=30)return 5;if(i>=15)return 4;if(i>=7)return 3;if(i>=3)return 2;return 1;
+}
+const MLab=["Nouveau","Débutant","Apprenti","Familier","Maîtrisé","Expert"];
+const MCol=["#555","#E74C3C","#E67E22","#F1C40F","#2ECC71","#3498DB"];
+
+/* ════════════════════════════════════════
+   STATE
+════════════════════════════════════════ */
+let cards={},meta={xp:0,streak:0,lastDate:null,sessionsTotal:0,wordsReviewed:0,correctAnswers:0};
+let screen="home",queue=[],qIdx=0,exercise=null,sesStats={c:0,t:0},sesDone=false;
+let vocabCat=Object.keys(VOCAB)[0],vocabSearch="",expandedWord=null;
+
+function save(){
+  try{localStorage.setItem("fb_cards",JSON.stringify(cards));localStorage.setItem("fb_meta",JSON.stringify(meta));}catch{}
+}
+function load(){
+  try{const c=localStorage.getItem("fb_cards");if(c)cards=JSON.parse(c);}catch{}
+  try{const m=localStorage.getItem("fb_meta");if(m)meta={...meta,...JSON.parse(m)};}catch{}
+}
+load();
+
+function todayStr(){return new Date().toISOString().split("T")[0];}
+function updateStreak(){
+  const today=todayStr();
+  if(meta.lastDate===today)return;
+  const yest=new Date(Date.now()-86400000).toISOString().split("T")[0];
+  meta.streak=meta.lastDate===yest?(meta.streak||0)+1:1;
+  meta.lastDate=today;
+  meta.sessionsTotal=(meta.sessionsTotal||0)+1;
+}
+
+/* ════════════════════════════════════════
+   SESSIONS
+════════════════════════════════════════ */
+function startSession(catKey){
+  const due=getDue();
+  let pool;
+  if(catKey){
+    const catDue=due.filter(w=>VOCAB[catKey].words.some(cw=>cw.id===w.id));
+    pool=catDue.length>0?catDue:[...VOCAB[catKey].words].sort(()=>Math.random()-.5);
+  } else {
+    pool=due.length>0?due:[...ALL_WORDS].sort(()=>Math.random()-.5);
+  }
+  queue=pool.slice(0,10);
+  qIdx=0;sesDone=false;sesStats={c:0,t:0};
+  exercise=mkExercise(queue[0]);
+  screen="session";render();
+}
+
+function mkExercise(word){
+  const types=["flashcard","mc","typing","context"];
+  const type=types[Math.floor(Math.random()*types.length)];
+  if(type==="mc"){
+    // Affiche le mot PT → trouver la bonne traduction FR
+    const distractors=ALL_WORDS.filter(w=>w.id!==word.id).sort(()=>Math.random()-.5).slice(0,3).map(w=>w.fr);
+    return{type,word,options:[word.fr,...distractors].sort(()=>Math.random()-.5)};
+  }
+  if(type==="context"){
+    // Compléter la phrase PT → options en PT
+    const distractors=ALL_WORDS.filter(w=>w.id!==word.id).sort(()=>Math.random()-.5).slice(0,3).map(w=>w.pt);
+    return{type,word,options:[word.pt,...distractors].sort(()=>Math.random()-.5)};
+  }
+  return{type,word};
+}
+
+function rate(q){
+  const word=queue[qIdx];
+  const upd=sm2(cards[word.id],q);
+  cards[word.id]=upd;
+  const xpGain=[0,5,10,15][q]||0;
+  const ok=q>=1;
+  updateStreak();
+  meta.xp=(meta.xp||0)+xpGain;
+  meta.wordsReviewed=(meta.wordsReviewed||0)+1;
+  meta.correctAnswers=(meta.correctAnswers||0)+(ok?1:0);
+  sesStats={c:sesStats.c+(ok?1:0),t:sesStats.t+1};
+  save();
+  if(xpGain>0)showXP(xpGain);
+  const next=qIdx+1;
+  if(next>=queue.length){sesDone=true;render();}
+  else{qIdx=next;exercise=mkExercise(queue[qIdx]);render();}
+}
+
+function showXP(n){
+  const el=document.createElement("div");
+  el.className="xp-pop";el.textContent=`+${n} XP ⚡`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1700);
+}
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+function goTo(s){screen=s;render();}
+
+/* ════════════════════════════════════════
+   RENDER
+════════════════════════════════════════ */
+function render(){
+  updatePills();
+  updateNav();
+  const c=document.getElementById("content");
+  c.innerHTML="";
+  if(screen==="home")    c.appendChild(renderHome());
+  if(screen==="session") c.appendChild(renderSession());
+  if(screen==="vocab")   c.appendChild(renderVocab());
+  if(screen==="dict")    c.appendChild(renderDict());
+  if(screen==="stats")   c.appendChild(renderStats());
+  document.getElementById("hdr").style.display=screen==="session"?"none":"flex";
+  document.getElementById("nav").style.display=screen==="session"?"none":"flex";
+  c.scrollTop=0;
+}
+
+function updatePills(){
+  document.getElementById("pill-streak").textContent=`🔥 ${meta.streak||0}`;
+  document.getElementById("pill-xp").textContent=`⚡ ${meta.xp||0} XP`;
+  const due=getDue().length;
+  const badge=document.getElementById("due-badge");
+  badge.style.display=due>0?"block":"none";
+  badge.textContent=due>99?"99+":due;
+}
+function updateNav(){
+  ["home","vocab","dict","stats"].forEach(s=>{
+    document.getElementById(`nb-${s}`).className="nav-btn"+(screen===s?" active":"");
+  });
+}
+
+function div(cls,html=""){const d=document.createElement("div");d.className=cls;d.innerHTML=html;return d;}
+function h(tag,cls,html){const e=document.createElement(tag);e.className=cls;e.innerHTML=html;return e;}
+
+/* ── HOME ── */
+function renderHome(){
+  const due=getDue().length;
+  const learned=Object.values(cards).filter(c=>c.reps>0).length;
+  const acc=meta.wordsReviewed>0?Math.round(meta.correctAnswers/meta.wordsReviewed*100):0;
+  const wrap=div("au");
+
+  wrap.innerHTML=`
+    <div class="hero">
+      <div class="hero-flag">🇧🇷</div>
+      <h1 class="hero-title">Apprendre le<br><em>Portugais Brésilien</em></h1>
+      <p class="hero-sub">${TOTAL} mots · 22 thèmes · SRS + Rappel actif + Apprentissage contextuel</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin:18px 0">
+      <button class="btn btn-p btn-full" id="btn-start">▶ ${due>0?`Réviser ${due} carte${due>1?"s":""} dues`:"Commencer une session"}</button>
+      <button class="btn btn-s btn-full" onclick="goTo('vocab')">📚 Parcourir le vocabulaire</button>
+    </div>
+    <p class="lbl">Progression globale</p>
+    <div class="stats-row">
+      <div class="scard"><div class="scard-n">${learned}</div><div class="scard-l">Mots appris</div></div>
+      <div class="scard"><div class="scard-n">${meta.streak||0}</div><div class="scard-l">Jours consécutifs</div></div>
+      <div class="scard"><div class="scard-n">${due}</div><div class="scard-l">À réviser</div></div>
+    </div>
+    <div class="stats-row" style="margin-top:8px">
+      <div class="scard"><div class="scard-n">${meta.sessionsTotal||0}</div><div class="scard-l">Sessions</div></div>
+      <div class="scard"><div class="scard-n">${acc}%</div><div class="scard-l">Précision</div></div>
+      <div class="scard"><div class="scard-n">${TOTAL-learned}</div><div class="scard-l">Restants</div></div>
+    </div>
+    <p class="lbl">Thèmes</p>
+    <div class="cats-grid" id="cats-grid"></div>
+    <p class="lbl">La science derrière l'app</p>
+    <div class="sci-box">
+      <div class="sci-title">🧠 Techniques scientifiquement prouvées</div>
+      ${[
+        ["Répétition espacée (SM-2)","L'algorithme SuperMemo calcule l'intervalle optimal avant l'oubli — courbe d'Ebbinghaus."],
+        ["Rappel actif","Tester sa mémoire est 2× plus efficace que relire passivement (Roediger & Karpicke, 2006)."],
+        ["Apprentissage contextuel","Chaque mot est présenté dans une vraie phrase brésilienne pour créer des connexions solides."],
+        ["Interleaving","Alterner flashcard, QCM, frappe, contexte améliore le transfert d'apprentissage."],
+        ["Pratique distribuée","Sessions courtes et régulières > bachotage (Spacing Effect, Ebbinghaus, 1885)."],
+        ["Difficulté désirable","La production active (frappe) laisse une trace mémorielle plus robuste (Bjork & Bjork)."],
+      ].map(([t,d])=>`<div class="sci-item"><div class="sci-dot"></div><div class="sci-text"><strong>${t}</strong> — ${d}</div></div>`).join("")}
+    </div>
+  `;
+  wrap.querySelector("#btn-start").addEventListener("click",()=>startSession(null));
+
+  const grid=wrap.querySelector("#cats-grid");
+  Object.entries(VOCAB).forEach(([key,cat])=>{
+    const words=cat.words;
+    const lrn=words.filter(w=>cards[w.id]?.reps>0).length;
+    const pct=lrn/words.length*100;
+    const card=document.createElement("div");
+    card.className="cat-card";
+    card.style.setProperty("--cc",cat.color);
+    card.innerHTML=`
+      <div class="cat-icon">${cat.icon}</div>
+      <div class="cat-name">${cat.label}</div>
+      <div class="cat-count">${lrn}/${words.length} mots</div>
+      <div class="cat-bar"><div class="cat-bar-f" style="width:${pct}%;background:${cat.color}"></div></div>`;
+    card.addEventListener("click",()=>startSession(key));
+    grid.appendChild(card);
+  });
+  return wrap;
+}
+
+/* ── SESSION ── */
+function renderSession(){
+  const wrap=div("ex-screen au");
+  if(sesDone){
+    const acc=sesStats.t>0?Math.round(sesStats.c/sesStats.t*100):0;
+    wrap.innerHTML=`
+      <div class="finish">
+        <div class="fin-emoji">${acc>=80?"🎉":acc>=50?"💪":"📚"}</div>
+        <div class="fin-title">${acc>=80?"Incrível!":acc>=50?"Muito bom!":"Continue!"}</div>
+        <div class="fin-sub">Session terminée · ${sesStats.t} mots pratiqués</div>
+        <div class="fin-stats">
+          <div><span class="fin-n">${sesStats.c}</span><span class="fin-l">Corrects</span></div>
+          <div><span class="fin-n">${acc}%</span><span class="fin-l">Précision</span></div>
+          <div><span class="fin-n">${meta.xp||0}</span><span class="fin-l">Total XP</span></div>
+        </div>
+        <button class="btn btn-p" onclick="goTo('home')">← Retour à l'accueil</button>
+      </div>`;
+    return wrap;
+  }
+  const pct=(qIdx/queue.length*100).toFixed(1);
+  wrap.innerHTML=`
+    <div class="pbar" style="margin-bottom:14px"><div class="pbar-f" style="width:${pct}%"></div></div>
+    <div class="ex-topbar">
+      <button class="ex-quit" onclick="goTo('home')">← Quitter</button>
+      <span class="ex-ctr">${qIdx+1} / ${queue.length}</span>
+    </div>`;
+  wrap.appendChild(renderExercise());
+  return wrap;
+}
+
+function renderExercise(){
+  const {type}=exercise;
+  if(type==="flashcard") return renderFlashcard();
+  if(type==="mc")        return renderMC();
+  if(type==="typing")    return renderTyping();
+  if(type==="context")   return renderContext();
+  return div("");
+}
+
+function renderFlashcard(){
+  const {word}=exercise;
+  const wrap=div("au");
+  wrap.innerHTML=`<div class="type-badge">🃏 Flashcard — rappel actif</div>`;
+  const fc=div("fc-wrap");
+  fc.innerHTML=`
+    <div class="fc-inner" id="fci">
+      <div class="ex-card fc-face">
+        <div class="ex-word">${word.pt}</div>
+        <div class="ex-phon">/${word.ph}/</div>
+        <div class="ex-hint">Appuyez pour retourner</div>
+      </div>
+      <div class="ex-card fc-face fc-back">
+        <div class="ex-fr">${word.fr}</div>
+        <div class="ex-sent">${word.s}</div>
+        <div class="ex-trans">${word.t}</div>
+      </div>
+    </div>`;
+  const ratingDiv=div("au");
+  ratingDiv.innerHTML=`
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:8px">Comment c'était ?</p>
+    <div class="rating-row">
+      <button class="r-btn r-fail"><span>😰</span>Raté</button>
+      <button class="r-btn r-hard"><span>😓</span>Difficile</button>
+      <button class="r-btn r-ok"><span>🙂</span>OK</button>
+      <button class="r-btn r-easy"><span>😄</span>Facile</button>
+    </div>`;
+  ratingDiv.style.display="none";
+  fc.addEventListener("click",()=>{
+    document.getElementById("fci").classList.toggle("flipped");
+    setTimeout(()=>ratingDiv.style.display="block",300);
+  });
+  ratingDiv.querySelectorAll(".r-btn").forEach((btn,i)=>{
+    btn.addEventListener("click",()=>rate(i));
+  });
+  wrap.appendChild(fc);
+  wrap.appendChild(ratingDiv);
+  return wrap;
+}
+
+function renderMC(){
+  const {word,options}=exercise;
+  const wrap=div("au");
+  wrap.innerHTML=`
+    <div class="type-badge">❓ Choix multiple</div>
+    <div class="ex-card">
+      <div class="ex-word">${word.pt}</div>
+      <div class="ex-phon">/${word.ph}/</div>
+      <div class="ex-sent" style="margin-top:10px;font-size:13px">${word.s}</div>
+    </div>
+    <div class="mc-opts"></div>`;
+  const optsDiv=wrap.querySelector(".mc-opts");
+  options.forEach(opt=>{
+    const btn=document.createElement("button");
+    btn.className="mc-opt";btn.textContent=opt;
+    btn.addEventListener("click",()=>{
+      if(btn.disabled)return;
+      optsDiv.querySelectorAll(".mc-opt").forEach(b=>{
+        b.disabled=true;
+        if(b.textContent===word.fr)b.classList.add("mc-correct");
+        else if(b===btn&&opt!==word.fr)b.classList.add("mc-wrong");
+      });
+      setTimeout(()=>rate(opt===word.fr?2:0),1300);
+    });
+    optsDiv.appendChild(btn);
+  });
+  return wrap;
+}
+
+function renderTyping(){
+  const {word}=exercise;
+  const wrap=div("au");
+  wrap.innerHTML=`
+    <div class="type-badge">✏️ Production active</div>
+    <div class="ex-card" style="min-height:140px">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Traduisez en français :</div>
+      <div style="font-family:var(--fd);font-size:20px;line-height:1.6">${word.s}</div>
+      <div style="font-size:12px;color:var(--dim);margin-top:8px">Mot clé : <span style="color:var(--gold);font-weight:600">${word.pt}</span></div>
+    </div>`;
+  const inp=document.createElement("input");
+  inp.className="t-input";inp.placeholder=`Traduction de « ${word.pt} »…`;
+  const fb=div("t-fb","");fb.style.display="none";
+  const checkBtn=document.createElement("button");
+  checkBtn.className="btn btn-p btn-full";checkBtn.textContent="Vérifier →";checkBtn.style.display="none";
+  function norm(s){return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s]/g,"");}
+  function check(){
+    if(inp.disabled)return;
+    const ok=norm(inp.value)===norm(word.fr)||norm(inp.value)===norm(word.pt);
+    inp.disabled=true;checkBtn.style.display="none";
+    inp.classList.add(ok?"t-correct":"t-wrong");
+    fb.style.display="block";
+    fb.className="t-fb "+(ok?"t-fb-ok":"t-fb-no");
+    fb.innerHTML=ok?"✓ Parfait !":`✗ Réponse : <strong>${word.fr}</strong>`;
+    setTimeout(()=>rate(ok?2:0),1300);
+  }
+  inp.addEventListener("input",()=>{checkBtn.style.display=inp.value.trim()?"block":"none";});
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  checkBtn.addEventListener("click",check);
+  wrap.appendChild(inp);wrap.appendChild(fb);wrap.appendChild(checkBtn);
+  setTimeout(()=>inp.focus(),100);
+  return wrap;
+}
+
+function renderContext(){
+  const {word,options}=exercise;
+  const ptWords=word.pt.split("/")[0].trim();
+  const escaped=ptWords.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const blank=word.s.replace(new RegExp(escaped,"gi"),"___");
+  const wrap=div("au");
+  wrap.innerHTML=`
+    <div class="type-badge">📖 Apprentissage contextuel</div>
+    <div class="ex-card" style="min-height:150px">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Quel mot complète cette phrase en portugais ?</div>
+      <div style="font-family:var(--fd);font-size:20px;line-height:1.65">${blank}</div>
+      <div style="font-size:13px;color:var(--muted);font-style:italic;margin-top:8px">${word.t}</div>
+    </div>
+    <div class="mc-opts"></div>`;
+  const optsDiv=wrap.querySelector(".mc-opts");
+  options.forEach(opt=>{
+    const btn=document.createElement("button");
+    btn.className="mc-opt";btn.textContent=opt;
+    btn.addEventListener("click",()=>{
+      if(btn.disabled)return;
+      const correct=word.pt;
+      optsDiv.querySelectorAll(".mc-opt").forEach(b=>{
+        b.disabled=true;
+        if(b.textContent===correct)b.classList.add("mc-correct");
+        else if(b===btn&&opt!==correct)b.classList.add("mc-wrong");
+      });
+      setTimeout(()=>rate(opt===correct?2:0),1300);
+    });
+    optsDiv.appendChild(btn);
+  });
+  return wrap;
+}
+
+/* ── VOCAB ── */
+function renderVocab(){
+  const wrap=div("au");
+  wrap.style.paddingTop="16px";
+  wrap.innerHTML=`<h2 style="font-family:var(--fd);font-size:24px;font-weight:900;margin-bottom:14px">Vocabulaire</h2>
+    <input class="v-search" id="vsearch" placeholder="🔍 Rechercher un mot…" value="${vocabSearch}"/>
+    <div class="vocab-tabs" id="vtabs"></div>
+    <div id="vwords"></div>`;
+
+  const search=wrap.querySelector("#vsearch");
+  search.addEventListener("input",e=>{vocabSearch=e.target.value;expandedWord=null;refreshVocab(wrap);});
+
+  const tabs=wrap.querySelector("#vtabs");
+  Object.entries(VOCAB).forEach(([key,cat])=>{
+    const btn=document.createElement("button");
+    btn.className="v-tab";
+    btn.textContent=`${cat.icon} ${cat.label}`;
+    btn.style.background=vocabCat===key&&!vocabSearch?cat.color:"rgba(240,235,224,.07)";
+    btn.style.color=vocabCat===key&&!vocabSearch?"#0F1A14":"rgba(240,235,224,.6)";
+    btn.addEventListener("click",()=>{vocabCat=key;vocabSearch="";expandedWord=null;search.value="";renderVocab_refresh(wrap);renderVocab_tabs(wrap);});
+    tabs.appendChild(btn);
+  });
+  refreshVocab(wrap);
+  return wrap;
+}
+function renderVocab_tabs(wrap){
+  const tabs=wrap.querySelector("#vtabs");
+  tabs.querySelectorAll(".v-tab").forEach((btn,i)=>{
+    const key=Object.keys(VOCAB)[i];
+    const cat=VOCAB[key];
+    btn.style.background=vocabCat===key&&!vocabSearch?cat.color:"rgba(240,235,224,.07)";
+    btn.style.color=vocabCat===key&&!vocabSearch?"#0F1A14":"rgba(240,235,224,.6)";
+  });
+}
+function refreshVocab(wrap){
+  const searching=vocabSearch.trim().length>0;
+  const words=searching
+    ?ALL_WORDS.filter(w=>w.pt.toLowerCase().includes(vocabSearch.toLowerCase())||w.fr.toLowerCase().includes(vocabSearch.toLowerCase()))
+    :VOCAB[vocabCat].words;
+  const container=wrap.querySelector("#vwords");
+  container.innerHTML="";
+  if(searching)container.insertAdjacentHTML("beforeend",`<p style="font-size:12px;color:var(--muted);margin-bottom:12px">${words.length} résultat${words.length!==1?"s":""}</p>`);
+  words.forEach(word=>{
+    const card=document.createElement("div");
+    const card_data=cards[word.id];
+    const lvl=masteryLevel(card_data);
+    card.className="wcard"+(expandedWord===word.id?" open":"");
+    card.innerHTML=`
+      <div class="wcard-row">
+        <div><div class="wcard-pt">${word.pt}</div><div class="wcard-fr">${word.fr}</div></div>
+        <div class="wcard-meta">
+          <span style="font-size:10px;font-weight:600;color:${MCol[lvl]}">${lvl>0?MLab[lvl]:""}</span>
+          <div class="wcard-dot" style="background:${lvl>0?MCol[lvl]:"rgba(240,235,224,.18)"}"></div>
+        </div>
+      </div>
+      ${expandedWord===word.id?`
+      <div class="wcard-expand au">
+        <div style="margin-bottom:8px"><div class="exp-lbl">Prononciation</div><div class="exp-phon">/${word.ph}/</div></div>
+        <div><div class="exp-lbl">Exemple</div><div class="exp-val">${word.s}</div><div class="exp-trans">${word.t}</div></div>
+        ${card_data&&card_data.reps>0?`<div style="margin-top:8px"><div class="exp-lbl">SRS</div><div style="font-size:12px;color:var(--muted)">Intervalle: ${card_data.interval}j · Rép: ${card_data.reps} · Ease: ${card_data.ease?.toFixed(2)}</div></div>`:""}
+      </div>`:""}`;
+    card.addEventListener("click",()=>{expandedWord=expandedWord===word.id?null:word.id;refreshVocab(wrap);});
+    container.appendChild(card);
+  });
+}
+function renderVocab_refresh(wrap){refreshVocab(wrap);}
+
+/* ── STATS ── */
+function renderStats(){
+  const learned=Object.values(cards).filter(c=>c.reps>0).length;
+  const due=getDue().length;
+  const acc=meta.wordsReviewed>0?Math.round(meta.correctAnswers/meta.wordsReviewed*100):0;
+  const dist=[0,0,0,0,0,0];
+  ALL_WORDS.forEach(w=>dist[masteryLevel(cards[w.id])]++);
+
+  const wrap=div("au");
+  wrap.style.paddingTop="16px";
+  wrap.innerHTML=`
+    <h2 style="font-family:var(--fd);font-size:24px;font-weight:900;margin-bottom:20px">Statistiques</h2>
+    <div class="stats-row">
+      <div class="scard"><div class="scard-n">${meta.xp||0}</div><div class="scard-l">Total XP</div></div>
+      <div class="scard"><div class="scard-n">${meta.streak||0}</div><div class="scard-l">Série jours</div></div>
+      <div class="scard"><div class="scard-n">${meta.sessionsTotal||0}</div><div class="scard-l">Sessions</div></div>
+    </div>
+    <div class="stats-row" style="margin-top:8px;margin-bottom:24px">
+      <div class="scard"><div class="scard-n">${learned}</div><div class="scard-l">Appris</div></div>
+      <div class="scard"><div class="scard-n">${acc}%</div><div class="scard-l">Précision</div></div>
+      <div class="scard"><div class="scard-n">${due}</div><div class="scard-l">À réviser</div></div>
+    </div>
+    <p class="lbl">Niveaux de maîtrise</p>
+    ${MLab.map((lbl,i)=>`
+      <div class="cat-prog">
+        <div class="cat-prog-top">
+          <span style="font-weight:600;color:${MCol[i]}">${lbl}</span>
+          <span style="font-size:12px;color:var(--muted)">${dist[i]} / ${TOTAL}</span>
+        </div>
+        <div class="cat-prog-bar"><div class="cat-prog-f" style="width:${dist[i]/TOTAL*100}%;background:${MCol[i]}"></div></div>
+      </div>`).join("")}
+    <p class="lbl">Progression par thème</p>
+    ${Object.entries(VOCAB).map(([key,cat])=>{
+      const lrn=cat.words.filter(w=>cards[w.id]?.reps>0).length;
+      const pct=lrn/cat.words.length*100;
+      return `<div class="cat-prog">
+        <div class="cat-prog-top"><span style="font-weight:600">${cat.icon} ${cat.label}</span><span style="font-size:12px;color:var(--muted)">${lrn}/${cat.words.length}</span></div>
+        <div class="cat-prog-bar"><div class="cat-prog-f" style="width:${pct}%;background:${cat.color}"></div></div>
+      </div>`;
+    }).join("")}
+    <p class="lbl" style="margin-top:28px">Guide SRS</p>
+    <div class="sci-box" style="margin-bottom:16px">
+      <div class="sci-title">📈 Comment fonctionne l'algorithme</div>
+      ${[
+        ["Facile (+15 XP)","L'intervalle est multiplié par le facteur de facilité. Exemple : J1 → J6 → J15 → J38…"],
+        ["Raté (0 XP)","Le mot revient dès le lendemain — la courbe d'Ebbinghaus en action."],
+        ["Ease factor","Commence à 2.5, monte si vous répondez «Facile», descend si vous ratez."],
+      ].map(([t,d])=>`<div class="sci-item"><div class="sci-dot"></div><div class="sci-text"><strong>${t}</strong> — ${d}</div></div>`).join("")}
+    </div>
+    <button class="btn btn-s btn-full" id="reset-btn" style="color:#FF7A5A;border-color:rgba(212,82,42,.3);margin-bottom:20px">🗑 Remettre la progression à zéro</button>`;
+  wrap.querySelector("#reset-btn").addEventListener("click",()=>{
+    if(confirm("Remettre toute la progression à zéro ?")){
+      localStorage.removeItem("fb_cards");localStorage.removeItem("fb_meta");
+      cards={};meta={xp:0,streak:0,lastDate:null,sessionsTotal:0,wordsReviewed:0,correctAnswers:0};
+      render();
+    }
+  });
+  return wrap;
+}
+
+/* ── DICT ── */
+let dictHistory=[];
+
+async function dictLookup(query, container){
+  if(!query.trim())return;
+  container.innerHTML=`<div class="dict-spinner">Recherche en cours…</div>`;
+  try{
+    // MyMemory free translation API — no key needed
+    const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(query.trim())}&langpair=fr|pt-BR&de=a@b.c`;
+    const resp=await fetch(url);
+    const data=await resp.json();
+
+    if(!data||data.responseStatus!==200){
+      container.innerHTML=`<div class="dict-error">😕 Aucun résultat pour "<strong>${query}</strong>". Essayez un autre mot.</div>`;
+      return;
+    }
+
+    const translation=data.responseData.translatedText;
+    const frWord=query.trim();
+
+    // Build phonetic approximation from PT word
+    function makePhonetic(pt){
+      return pt
+        .replace(/nh/g,"gn").replace(/lh/g,"ly").replace(/ch/g,"ch")
+        .replace(/ão/g,"ang").replace(/ã/g,"an").replace(/õ/g,"ong")
+        .replace(/ê/g,"ê").replace(/é/g,"é").replace(/â/g,"â")
+        .replace(/ç/g,"ss").replace(/rr/g,"h").replace(/^r/i,"h")
+        .toUpperCase();
+    }
+
+    // Try to get an example from matches
+    let examplePt="", exampleFr="";
+    const matches=data.matches||[];
+    const goodMatch=matches.find(m=>m.segment&&m.segment.length>5&&m.translation&&m.translation.length>5&&m.quality>50);
+    if(goodMatch){
+      exampleFr=goodMatch.segment;
+      examplePt=goodMatch.translation;
+    } else {
+      // Fallback: build a simple sentence
+      examplePt=`Eu uso "${translation}" todos os dias.`;
+      exampleFr=`J'utilise "${frWord}" tous les jours.`;
+    }
+
+    // Detect rough grammatical tag
+    const tags=[];
+    const q=frWord.toLowerCase();
+    if(/^(être|avoir|aller|faire|pouvoir|vouloir|savoir|partir|venir|prendre|donner|parler|manger|boire|aimer|voir|dire)\b/.test(q)||q.endsWith("er")||q.endsWith("ir")||q.endsWith("re"))tags.push("verbe");
+    else if(/^(le |la |les |un |une |des |l')/.test(q))tags.push("nom");
+    else if(q.split(" ").length>2)tags.push("expression");
+
+    if(!dictHistory.find(h=>h.fr===frWord)){
+      dictHistory.unshift({pt:translation,fr:frWord,phonetic:makePhonetic(translation),example_pt:examplePt,example_fr:exampleFr,tags});
+      if(dictHistory.length>20)dictHistory.pop();
+    }
+
+    const tagsHtml=tags.map(t=>`<span class="dict-tag">${t}</span>`).join("");
+    container.innerHTML=`
+      <div class="dict-result">
+        <div class="dict-result-header">
+          <div class="dict-pt-word">${translation}</div>
+          <div class="dict-phonetic">/${makePhonetic(translation)}/</div>
+          <div class="dict-fr-word">🇫🇷 ${frWord}</div>
+        </div>
+        <div class="dict-body">
+          ${tagsHtml?`<div><div class="dict-section-lbl">Catégorie</div><div class="dict-tags">${tagsHtml}</div></div>`:""}
+          <div>
+            <div class="dict-section-lbl">Exemple en contexte</div>
+            <div class="dict-example">${examplePt}</div>
+            <div class="dict-example-trans">${exampleFr}</div>
+          </div>
+          <div style="margin-top:4px">
+            <a href="https://translate.google.com/?sl=fr&tl=pt-BR&text=${encodeURIComponent(frWord)}" target="_blank" style="font-size:11px;color:var(--dim);text-decoration:none">Vérifier sur Google Traduction →</a>
+          </div>
+        </div>
+      </div>`;
+  }catch(e){
+    container.innerHTML=`<div class="dict-error">❌ Erreur réseau. Vérifiez votre connexion internet.</div>`;
+    console.error(e);
+  }
+}
+
+function renderDict(){
+  const wrap=document.createElement("div");
+  wrap.className="dict-wrap au";
+
+  wrap.innerHTML=`
+    <h2 style="font-family:var(--fd);font-size:24px;font-weight:900;margin-bottom:6px">📖 Dictionnaire</h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:18px">Français → Portugais Brésilien · Gratuit</p>
+    <div class="dict-input-row">
+      <input class="dict-input" id="dict-q" placeholder="Ex: bonjour, je suis fatigué, aimer…" autocomplete="off" autocorrect="off"/>
+      <button class="dict-btn" id="dict-search-btn" title="Chercher">🔍</button>
+    </div>
+    <div id="dict-result-area"></div>
+    <div id="dict-history-area"></div>`;
+
+  const input=wrap.querySelector("#dict-q");
+  const btn=wrap.querySelector("#dict-search-btn");
+  const resultArea=wrap.querySelector("#dict-result-area");
+  const histArea=wrap.querySelector("#dict-history-area");
+
+  function renderHistory(){
+    if(dictHistory.length===0){
+      histArea.innerHTML=`
+        <div class="dict-empty">
+          <div class="dict-empty-icon">🇧🇷</div>
+          <div class="dict-empty-title">Cherchez un mot</div>
+          <div class="dict-empty-sub">Tapez n'importe quel mot ou expression en français pour obtenir sa traduction en portugais brésilien avec un exemple d'utilisation.</div>
+        </div>`;
+      return;
+    }
+    histArea.innerHTML=`<p class="lbl" style="margin-top:24px">Recherches récentes</p>`;
+    dictHistory.forEach(item=>{
+      const el=document.createElement("div");
+      el.className="dict-hist-item";
+      el.innerHTML=`<div><div class="dict-hist-pt">${item.pt}</div><div class="dict-hist-fr">${item.fr}</div></div><span style="color:var(--dim);font-size:12px">→</span>`;
+      el.addEventListener("click",()=>{
+        input.value=item.fr;
+        // show stored result directly
+        const tagsHtml=(item.tags||[]).map(t=>`<span class="dict-tag">${t}</span>`).join("");
+        resultArea.innerHTML=`
+          <div class="dict-result">
+            <div class="dict-result-header">
+              <div class="dict-pt-word">${item.pt}</div>
+              <div class="dict-phonetic">/${item.phonetic}/</div>
+              <div class="dict-fr-word">🇫🇷 ${item.fr}</div>
+            </div>
+            <div class="dict-body">
+              ${tagsHtml?`<div><div class="dict-section-lbl">Catégorie</div><div class="dict-tags">${tagsHtml}</div></div>`:""}
+              <div>
+                <div class="dict-section-lbl">Exemple en contexte</div>
+                <div class="dict-example">${item.example_pt}</div>
+                <div class="dict-example-trans">${item.example_fr}</div>
+              </div>
+            </div>
+          </div>`;
+        wrap.scrollTop=0;
+        resultArea.scrollIntoView({behavior:"smooth",block:"start"});
+      });
+      histArea.appendChild(el);
+    });
+  }
+
+  async function doSearch(){
+    const q=input.value.trim();
+    if(!q)return;
+    btn.disabled=true;
+    await dictLookup(q,resultArea);
+    btn.disabled=false;
+    renderHistory();
+    resultArea.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  btn.addEventListener("click",doSearch);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")doSearch();});
+
+  renderHistory();
+  return wrap;
+}
+
+/* ── INIT ── */
+render();
+</script>
+</body>
+</html>
