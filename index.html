@@ -1557,7 +1557,7 @@ function showXP(n){
 /* ════════════════════════════════════════
    NAV
 ════════════════════════════════════════ */
-const NAV_ORDER=["home","vocab","expr","conj","parcours","dict","chat","videos"];
+const NAV_ORDER=["home","vocab","expr","conj","parcours","dict","chat","videos","dictee","chanson"];
 let prevScreen="home";
 
 function goTo(s){
@@ -1594,6 +1594,8 @@ function render(){
   else if(screen==="stats")   node=renderStats();
   else if(screen==="chat")    node=renderChat();
   else if(screen==="videos")  node=renderVideos();
+  else if(screen==="dictee")  node=renderDictee();
+  else if(screen==="chanson") node=renderChanson();
   if(node){
     node.classList.add(animClass);
     c.appendChild(node);
@@ -1620,7 +1622,7 @@ function updatePills(){
   }
 }
 function updateNav(){
-  ["home","vocab","expr","conj","parcours","dict","chat","videos"].forEach(s=>{
+  ["home","vocab","expr","conj","parcours","dict","chat","videos","dictee","chanson"].forEach(s=>{
     const btn=document.getElementById(`nb-${s}`);
     if(btn)btn.className="nav-btn"+(screen===s?" active":"");
   });
@@ -1714,6 +1716,10 @@ function renderHome(){
       <button class="btn btn-s btn-full" onclick="goTo('gram')">📖 Grammaire essentielle</button>
       <button class="btn btn-s btn-full" onclick="showBrazilMap()" style="background:linear-gradient(135deg,rgba(34,160,102,.12),rgba(0,180,100,.06));border-color:rgba(34,160,102,.3);color:var(--gbright)">🗺️ Carte du Brésil · Accents & Expressions régionales</button>
       <button class="btn btn-s btn-full" onclick="goTo('stats')" style="opacity:.7;font-size:13px">📊 Statistiques & Badges</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px">
+        <button class="btn btn-s btn-full" onclick="goTo('dictee')" style="background:linear-gradient(135deg,rgba(94,196,255,.1),rgba(26,122,175,.07));border-color:rgba(94,196,255,.3);color:#5EC4FF;font-size:13px">🎧 Dictée</button>
+        <button class="btn btn-s btn-full" onclick="goTo('chanson')" style="background:linear-gradient(135deg,rgba(242,178,51,.1),rgba(232,82,42,.07));border-color:rgba(242,178,51,.3);color:var(--gold2);font-size:13px">🎵 Chanson</button>
+      </div>
     </div>
     <p class="lbl">Mot du jour</p>
     <div class="wod-card">
@@ -3681,6 +3687,458 @@ function showBrazilMap(){
 }
 
 render();
+
+/* ════════════════════════════════════════
+   DICTÉE — Écoute et écris ce que tu entends
+════════════════════════════════════════ */
+
+const DICTEE_POOL = [
+  // Niveau 1 — mots isolés
+  {level:1,pt:"Obrigado",fr:"Merci",type:"mot"},
+  {level:1,pt:"Por favor",fr:"S'il vous plaît",type:"mot"},
+  {level:1,pt:"Bom dia",fr:"Bonjour (matin)",type:"mot"},
+  {level:1,pt:"Boa noite",fr:"Bonsoir",type:"mot"},
+  {level:1,pt:"Tudo bem",fr:"Tout va bien",type:"mot"},
+  {level:1,pt:"Sim",fr:"Oui",type:"mot"},
+  {level:1,pt:"Não",fr:"Non",type:"mot"},
+  {level:1,pt:"Água",fr:"Eau",type:"mot"},
+  {level:1,pt:"Casa",fr:"Maison",type:"mot"},
+  {level:1,pt:"Amigo",fr:"Ami",type:"mot"},
+  {level:1,pt:"Cachorro",fr:"Chien",type:"mot"},
+  {level:1,pt:"Comer",fr:"Manger",type:"mot"},
+  {level:1,pt:"Bonito",fr:"Beau / Joli",type:"mot"},
+  {level:1,pt:"Muito",fr:"Très / Beaucoup",type:"mot"},
+  {level:1,pt:"Feliz",fr:"Heureux",type:"mot"},
+  // Niveau 2 — phrases courtes
+  {level:2,pt:"Como vai você?",fr:"Comment ça va ?",type:"phrase"},
+  {level:2,pt:"Eu não entendo",fr:"Je ne comprends pas",type:"phrase"},
+  {level:2,pt:"Quanto custa?",fr:"Combien ça coûte ?",type:"phrase"},
+  {level:2,pt:"Fala mais devagar",fr:"Parle plus lentement",type:"phrase"},
+  {level:2,pt:"Eu estou com fome",fr:"J'ai faim",type:"phrase"},
+  {level:2,pt:"Me chamo João",fr:"Je m'appelle João",type:"phrase"},
+  {level:2,pt:"Onde fica o banheiro?",fr:"Où sont les toilettes ?",type:"phrase"},
+  {level:2,pt:"Gosto muito de você",fr:"Je t'apprécie beaucoup",type:"phrase"},
+  {level:2,pt:"Que horas são?",fr:"Quelle heure est-il ?",type:"phrase"},
+  {level:2,pt:"Posso te ajudar?",fr:"Je peux t'aider ?",type:"phrase"},
+  // Niveau 3 — phrases avec sons difficiles
+  {level:3,pt:"Minha família é muito grande",fr:"Ma famille est très grande",type:"phrase"},
+  {level:3,pt:"O cachorro está dormindo",fr:"Le chien est en train de dormir",type:"phrase"},
+  {level:3,pt:"Eu preciso de informações",fr:"J'ai besoin d'informations",type:"phrase"},
+  {level:3,pt:"Você fala português muito bem",fr:"Tu parles très bien portugais",type:"phrase"},
+  {level:3,pt:"O restaurante fica na esquina",fr:"Le restaurant est au coin de la rue",type:"phrase"},
+];
+
+let dicteeState = {
+  level: 1,
+  queue: [],
+  idx: 0,
+  score: 0,
+  total: 0,
+  answered: false,
+  current: null,
+};
+
+function renderDictee() {
+  const wrap = document.createElement("div");
+  wrap.style.cssText = "padding-top:14px";
+  showDicteeMenu(wrap);
+  return wrap;
+}
+
+function showDicteeMenu(wrap) {
+  wrap.innerHTML = `
+    <p class="lbl" style="margin-top:0">🎧 Dictée portugaise</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+      L'app prononce un mot ou une phrase. Tu l'écris. Entraîne ton oreille au portugais brésilien !
+    </p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+      <button class="dictee-level-btn btn btn-s btn-full" data-level="1" style="border-color:rgba(69,214,138,.4);color:#45D68A;background:rgba(69,214,138,.07)">
+        🟢 Niveau 1 — Mots de base<br><span style="font-size:11px;opacity:.7;font-weight:400">Obrigado, Casa, Água…</span>
+      </button>
+      <button class="dictee-level-btn btn btn-s btn-full" data-level="2" style="border-color:rgba(242,178,51,.4);color:var(--gold2);background:rgba(242,178,51,.07)">
+        🟡 Niveau 2 — Phrases courtes<br><span style="font-size:11px;opacity:.7;font-weight:400">Como vai você? Eu não entendo…</span>
+      </button>
+      <button class="dictee-level-btn btn btn-s btn-full" data-level="3" style="border-color:rgba(232,82,42,.4);color:#FF7040;background:rgba(232,82,42,.07)">
+        🔴 Niveau 3 — Phrases complexes<br><span style="font-size:11px;opacity:.7;font-weight:400">Sons difficiles, liaisons, nasales…</span>
+      </button>
+      <button class="dictee-level-btn btn btn-s btn-full" data-level="0" style="border-color:rgba(94,196,255,.4);color:#5EC4FF;background:rgba(94,196,255,.07)">
+        🎲 Tous niveaux mélangés
+      </button>
+    </div>
+    <div style="background:rgba(255,252,245,.04);border:1px solid var(--brd);border-radius:14px;padding:14px 16px">
+      <p style="font-size:12px;color:var(--muted);line-height:1.65;margin:0">
+        💡 <strong>Astuce :</strong> Écoute plusieurs fois avant d'écrire. Le portugais brésilien avale les syllabes — 
+        <em>você</em> se prononce <em>"você"</em> avec le E final très court. Bonne chance !
+      </p>
+    </div>
+  `;
+  wrap.querySelectorAll(".dictee-level-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const level = parseInt(btn.dataset.level);
+      startDictee(wrap, level);
+    });
+  });
+}
+
+function startDictee(wrap, level) {
+  const pool = level === 0
+    ? [...DICTEE_POOL].sort(() => Math.random() - .5)
+    : DICTEE_POOL.filter(x => x.level === level).sort(() => Math.random() - .5);
+  dicteeState = { level, queue: pool, idx: 0, score: 0, total: pool.length, answered: false, current: pool[0] };
+  showDicteeQuestion(wrap);
+}
+
+function normalize(str) {
+  return str.toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[?!.,;:]/g, "")
+    .trim();
+}
+
+function showDicteeQuestion(wrap) {
+  const { queue, idx, score, total } = dicteeState;
+  if (idx >= total) { showDicteeResults(wrap); return; }
+  const item = queue[idx];
+  dicteeState.current = item;
+  dicteeState.answered = false;
+  const pct = Math.round((idx / total) * 100);
+
+  wrap.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <button id="back-dictee" style="background:rgba(255,252,245,.07);border:1px solid var(--brd);border-radius:10px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer">← Quitter</button>
+      <div style="flex:1;height:5px;background:rgba(255,252,245,.07);border-radius:3px">
+        <div style="width:${pct}%;height:100%;background:#5EC4FF;border-radius:3px;transition:width .4s"></div>
+      </div>
+      <span style="font-size:11px;color:var(--muted);font-weight:700">${idx+1}/${total}</span>
+    </div>
+
+    <div style="text-align:center;margin-bottom:28px">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Écoute et écris ce que tu entends :</p>
+      <button id="play-btn" style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,rgba(94,196,255,.2),rgba(26,122,175,.15));border:2px solid rgba(94,196,255,.4);font-size:36px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 0 28px rgba(94,196,255,.2)">🔊</button>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px">Appuie pour écouter · Tu peux réécouter autant de fois que tu veux</p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <input id="dictee-input" type="text" placeholder="Écris ce que tu as entendu…" autocomplete="off" autocorrect="off" spellcheck="false"
+        style="width:100%;background:rgba(255,252,245,.07);border:2px solid var(--brd);border-radius:14px;padding:14px 18px;font-size:16px;color:var(--txt);outline:none;font-family:var(--fb);transition:border-color .2s"/>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <button id="hint-btn" class="btn btn-s" style="font-size:13px">💡 Indice</button>
+      <button id="check-btn" class="btn btn-p" style="font-size:13px">✓ Vérifier</button>
+    </div>
+    <div id="dictee-feedback" style="margin-top:16px"></div>
+    <p style="text-align:center;font-size:11px;color:var(--dim);margin-top:12px">Score : ${score}/${idx} ✓</p>
+  `;
+
+  const input = wrap.querySelector("#dictee-input");
+  const playBtn = wrap.querySelector("#play-btn");
+  const checkBtn = wrap.querySelector("#check-btn");
+  const hintBtn = wrap.querySelector("#hint-btn");
+  const feedback = wrap.querySelector("#dictee-feedback");
+
+  // Auto-play on load
+  setTimeout(() => speakDictee(item.pt), 400);
+
+  playBtn.addEventListener("click", () => {
+    playBtn.style.transform = "scale(.92)";
+    setTimeout(() => playBtn.style.transform = "", 150);
+    speakDictee(item.pt);
+  });
+  playBtn.addEventListener("mouseenter", () => { playBtn.style.boxShadow = "0 0 36px rgba(94,196,255,.4)"; });
+  playBtn.addEventListener("mouseleave", () => { playBtn.style.boxShadow = "0 0 28px rgba(94,196,255,.2)"; });
+
+  hintBtn.addEventListener("click", () => {
+    if (dicteeState.answered) return;
+    const hint = item.pt.split("").map((c, i) => i === 0 || c === " " ? c : "_").join("");
+    feedback.innerHTML = `<div style="background:rgba(242,178,51,.08);border:1px solid rgba(242,178,51,.3);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--gold2)">
+      💡 Indice : <strong>${hint}</strong><br><span style="font-size:11px;opacity:.7">🇫🇷 ${item.fr}</span></div>`;
+  });
+
+  const doCheck = () => {
+    if (dicteeState.answered) {
+      dicteeState.idx++;
+      showDicteeQuestion(wrap);
+      return;
+    }
+    const val = input.value.trim();
+    if (!val) { input.style.borderColor = "rgba(255,94,44,.5)"; setTimeout(() => input.style.borderColor = "", 600); return; }
+    dicteeState.answered = true;
+    const correct = normalize(val) === normalize(item.pt);
+    if (correct) dicteeState.score++;
+    input.style.borderColor = correct ? "#45D68A" : "#FF5E2C";
+    feedback.innerHTML = `
+      <div style="background:${correct ? "rgba(69,214,138,.08)" : "rgba(255,94,44,.08)"};border:1px solid ${correct ? "rgba(69,214,138,.35)" : "rgba(255,94,44,.35)"};border-radius:14px;padding:14px 16px">
+        <div style="font-size:16px;margin-bottom:6px">${correct ? "✅ Parfait !" : "❌ Pas tout à fait…"}</div>
+        ${!correct ? `<div style="font-size:13px;color:var(--txt);margin-bottom:4px">Réponse : <strong>${item.pt}</strong></div>` : ""}
+        <div style="font-size:12px;color:var(--muted)">🇫🇷 ${item.fr}</div>
+      </div>
+      <button id="next-dictee" class="btn btn-p btn-full" style="margin-top:12px">${dicteeState.idx + 1 >= dicteeState.total ? "🏆 Voir les résultats" : "Suivant →"}</button>
+    `;
+    speakDictee(item.pt);
+    wrap.querySelector("#next-dictee").addEventListener("click", () => {
+      dicteeState.idx++;
+      showDicteeQuestion(wrap);
+    });
+    checkBtn.textContent = dicteeState.idx + 1 >= dicteeState.total ? "🏆 Résultats" : "Suivant →";
+  };
+
+  checkBtn.addEventListener("click", doCheck);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") doCheck(); });
+  wrap.querySelector("#back-dictee").addEventListener("click", () => { wrap.innerHTML = ""; showDicteeMenu(wrap); });
+  input.focus();
+}
+
+function speakDictee(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "pt-BR"; u.rate = 0.8; u.pitch = 1;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+
+function showDicteeResults(wrap) {
+  const { score, total } = dicteeState;
+  const pct = Math.round((score / total) * 100);
+  const msg = pct === 100 ? "Oreille parfaite ! 🏆" : pct >= 80 ? "Très bien ! 💪" : pct >= 60 ? "Pas mal, continue ! 👍" : "Continue de t'entraîner 🎯";
+  wrap.innerHTML = `
+    <div style="text-align:center;padding:32px 0">
+      <div style="font-size:64px;margin-bottom:16px">${pct === 100 ? "🏆" : pct >= 80 ? "🎉" : "🎯"}</div>
+      <h2 style="font-family:var(--fd);font-size:26px;font-weight:900;margin-bottom:8px">${msg}</h2>
+      <div style="font-size:18px;color:var(--muted);margin-bottom:6px">${score} / ${total} correctes</div>
+      <div style="font-size:36px;font-weight:900;color:#5EC4FF;margin-bottom:24px">${pct}%</div>
+      <button id="retry-dictee" class="btn btn-p btn-full" style="margin-bottom:10px">🔄 Rejouer ce niveau</button>
+      <button id="menu-dictee" class="btn btn-s btn-full">← Choisir un niveau</button>
+    </div>
+  `;
+  wrap.querySelector("#retry-dictee").addEventListener("click", () => startDictee(wrap, dicteeState.level));
+  wrap.querySelector("#menu-dictee").addEventListener("click", () => { wrap.innerHTML = ""; showDicteeMenu(wrap); });
+}
+
+/* ════════════════════════════════════════
+   CHANSON — Apprendre avec la musique
+════════════════════════════════════════ */
+
+const CHANSONS = [
+  {
+    id: "primeiro_amor",
+    title: "Primeiro Amor",
+    subtitle: "Original FalaBrasil · Niveau débutant",
+    color: "#E8A838",
+    icon: "🌅",
+    bpm: 80,
+    about: "Une chanson originale créée pour apprendre le portugais. Vocabulaire simple, prononciation claire. Parfaite pour les débutants.",
+    verses: [
+      {
+        label: "Couplet 1",
+        lines: [
+          [{pt:"Eu",fr:"Je"},{pt:"acordo",fr:"me réveille"},{pt:"de",fr:"de"},{pt:"manhã",fr:"bon matin"}],
+          [{pt:"e",fr:"et"},{pt:"vejo",fr:"je vois"},{pt:"o",fr:"le"},{pt:"sol",fr:"soleil"},{pt:"brilhar",fr:"briller"}],
+          [{pt:"A",fr:"La"},{pt:"vida",fr:"vie"},{pt:"é",fr:"est"},{pt:"bonita",fr:"belle"}],
+          [{pt:"preciso",fr:"j'ai besoin de"},{pt:"te",fr:"te"},{pt:"contar",fr:"dire"}],
+        ]
+      },
+      {
+        label: "Refrain",
+        lines: [
+          [{pt:"Eu",fr:"Je"},{pt:"gosto",fr:"j'aime"},{pt:"de",fr:"de"},{pt:"você",fr:"toi"}],
+          [{pt:"do",fr:"de la"},{pt:"teu",fr:"ton"},{pt:"sorriso",fr:"sourire"},{pt:"e",fr:"et"},{pt:"da",fr:"de ta"},{pt:"tua",fr:"ta"},{pt:"voz",fr:"voix"}],
+          [{pt:"Com",fr:"Avec"},{pt:"você",fr:"toi"},{pt:"tudo",fr:"tout"},{pt:"fica",fr:"devient"},{pt:"bem",fr:"bien"}],
+          [{pt:"meu",fr:"mon"},{pt:"coração",fr:"cœur"},{pt:"não",fr:"ne"},{pt:"quer",fr:"veut"},{pt:"parar",fr:"s'arrêter"}],
+        ]
+      },
+      {
+        label: "Couplet 2",
+        lines: [
+          [{pt:"De",fr:"Le"},{pt:"noite",fr:"soir"},{pt:"quando",fr:"quand"},{pt:"durmo",fr:"je dors"}],
+          [{pt:"sonho",fr:"je rêve"},{pt:"com",fr:"de"},{pt:"o",fr:"le"},{pt:"nosso",fr:"notre"},{pt:"futuro",fr:"avenir"}],
+          [{pt:"A",fr:"La"},{pt:"lua",fr:"lune"},{pt:"brilha",fr:"brille"},{pt:"lá",fr:"là-bas"},{pt:"fora",fr:"dehors"}],
+          [{pt:"e",fr:"et"},{pt:"tudo",fr:"tout"},{pt:"faz",fr:"fait"},{pt:"sentido",fr:"sens"}],
+        ]
+      }
+    ],
+    vocab_focus: ["acordar","ver","sol","vida","bonita","gostar","sorriso","voz","coração","sonhar","lua"],
+  },
+  {
+    id: "cidade_verde",
+    title: "Cidade Verde",
+    subtitle: "Original FalaBrasil · Niveau intermédiaire",
+    color: "#22A066",
+    icon: "🌿",
+    bpm: 90,
+    about: "Une chanson sur la beauté du Brésil — ses villes, sa nature, ses gens. Vocabulaire de niveau intermédiaire avec quelques expressions idiomatiques.",
+    verses: [
+      {
+        label: "Couplet 1",
+        lines: [
+          [{pt:"Nas",fr:"Dans les"},{pt:"ruas",fr:"rues"},{pt:"de",fr:"de"},{pt:"São Paulo",fr:"São Paulo"}],
+          [{pt:"todo",fr:"tout le"},{pt:"mundo",fr:"monde"},{pt:"corre",fr:"court"},{pt:"demais",fr:"trop"}],
+          [{pt:"Mas",fr:"Mais"},{pt:"quando",fr:"quand"},{pt:"a",fr:"la"},{pt:"noite",fr:"nuit"},{pt:"chega",fr:"arrive"}],
+          [{pt:"a",fr:"la"},{pt:"cidade",fr:"ville"},{pt:"sorri",fr:"sourit"},{pt:"de",fr:"pour"},{pt:"novo",fr:"un autre fois"}],
+        ]
+      },
+      {
+        label: "Refrain",
+        lines: [
+          [{pt:"Brasil",fr:"Brésil"},{pt:"terra",fr:"terre"},{pt:"do",fr:"du"},{pt:"sol",fr:"soleil"}],
+          [{pt:"do",fr:"des"},{pt:"samba",fr:"samba"},{pt:"e",fr:"et"},{pt:"do",fr:"du"},{pt:"amor",fr:"amour"}],
+          [{pt:"Todo",fr:"Chaque"},{pt:"dia",fr:"jour"},{pt:"é",fr:"est"},{pt:"um",fr:"une"},{pt:"novo",fr:"nouvelle"},{pt:"começo",fr:"début"}],
+          [{pt:"nessa",fr:"dans cette"},{pt:"cidade",fr:"ville"},{pt:"que",fr:"que"},{pt:"eu",fr:"j'"},{pt:"amo",fr:"aime"}],
+        ]
+      },
+      {
+        label: "Ponte",
+        lines: [
+          [{pt:"Aqui",fr:"Ici"},{pt:"a",fr:"la"},{pt:"gente",fr:"les gens"},{pt:"não",fr:"ne"},{pt:"desiste",fr:"renoncent pas"}],
+          [{pt:"mesmo",fr:"même"},{pt:"quando",fr:"quand"},{pt:"a",fr:"la"},{pt:"vida",fr:"vie"},{pt:"é",fr:"est"},{pt:"difícil",fr:"difficile"}],
+          [{pt:"Porque",fr:"Parce que"},{pt:"no",fr:"dans le"},{pt:"peito",fr:"cœur"},{pt:"do",fr:"du"},{pt:"brasileiro",fr:"Brésilien"}],
+          [{pt:"sempre",fr:"il y a toujours"},{pt:"tem",fr:"de la"},{pt:"esperança",fr:"espoir"}],
+        ]
+      }
+    ],
+    vocab_focus: ["rua","mundo","noite","cidade","Brasil","samba","amor","dia","gente","vida","esperança"],
+  }
+];
+
+let chansonActive = null;
+let chansonHighlight = null;
+
+function renderChanson() {
+  const wrap = document.createElement("div");
+  wrap.style.cssText = "padding-top:14px";
+  showChansonList(wrap);
+  return wrap;
+}
+
+function showChansonList(wrap) {
+  wrap.innerHTML = `
+    <p class="lbl" style="margin-top:0">🎵 Apprendre avec la musique</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6">
+      Touche un mot pour voir sa traduction instantanée. Écoute la prononciation de chaque ligne. Apprends en chantant !
+    </p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      ${CHANSONS.map(s => `
+        <div class="chanson-card" data-id="${s.id}" style="background:linear-gradient(135deg,${s.color}15,${s.color}07);border:1.5px solid ${s.color}40;border-radius:18px;padding:18px;cursor:pointer;transition:transform .15s,box-shadow .15s">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <div style="font-size:32px">${s.icon}</div>
+            <div>
+              <div style="font-family:var(--fd);font-size:18px;font-weight:900;color:var(--txt)">${s.title}</div>
+              <div style="font-size:11px;color:${s.color};font-weight:700;margin-top:2px">${s.subtitle}</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px">${s.about}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            ${s.vocab_focus.slice(0,6).map(w => `<span style="background:${s.color}20;border:1px solid ${s.color}40;border-radius:20px;padding:3px 10px;font-size:11px;color:${s.color};font-weight:600">${w}</span>`).join("")}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+    <div style="background:rgba(255,252,245,.04);border:1px solid var(--brd);border-radius:14px;padding:14px 16px;margin-top:16px">
+      <p style="font-size:12px;color:var(--muted);line-height:1.65;margin:0">
+        🎵 Ces chansons sont des <strong>créations originales</strong> de FalaBrasil — conçues spécialement pour apprendre le portugais brésilien avec un vocabulaire progressif et des sons authentiques.
+      </p>
+    </div>
+  `;
+  wrap.querySelectorAll(".chanson-card").forEach(card => {
+    card.addEventListener("mouseenter", () => { card.style.transform = "translateY(-3px)"; card.style.boxShadow = "0 10px 28px rgba(0,0,0,.3)"; });
+    card.addEventListener("mouseleave", () => { card.style.transform = ""; card.style.boxShadow = ""; });
+    card.addEventListener("click", () => {
+      const s = CHANSONS.find(x => x.id === card.dataset.id);
+      wrap.innerHTML = "";
+      showChansonPlayer(wrap, s);
+    });
+  });
+}
+
+function showChansonPlayer(wrap, song) {
+  chansonActive = song;
+  chansonHighlight = null;
+
+  let html = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <button id="back-chanson" style="background:rgba(255,252,245,.07);border:1px solid var(--brd);border-radius:10px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer">← Retour</button>
+      <div style="flex:1;text-align:center">
+        <div style="font-family:var(--fd);font-size:16px;font-weight:900">${song.icon} ${song.title}</div>
+        <div style="font-size:10px;color:${song.color}">Touche un mot pour sa traduction</div>
+      </div>
+    </div>
+
+    <div id="tooltip-box" style="display:none;position:sticky;top:70px;z-index:40;background:linear-gradient(135deg,${song.color}22,${song.color}10);border:1.5px solid ${song.color}50;border-radius:14px;padding:12px 16px;margin-bottom:14px;text-align:center;transition:all .2s;backdrop-filter:blur(10px)">
+      <div id="tooltip-pt" style="font-family:var(--fd);font-size:22px;font-weight:900;color:var(--txt)"></div>
+      <div id="tooltip-fr" style="font-size:13px;color:var(--muted);margin-top:2px"></div>
+    </div>
+  `;
+
+  song.verses.forEach((verse, vi) => {
+    html += `<div style="margin-bottom:24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${song.color};margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        ${verse.label}
+        <button class="play-line-btn" data-verse="${vi}" data-line="all" style="background:${song.color}22;border:1px solid ${song.color}50;border-radius:8px;padding:3px 10px;font-size:11px;color:${song.color};cursor:pointer;font-weight:700">▶ Écouter</button>
+      </div>`;
+    verse.lines.forEach((line, li) => {
+      html += `<div class="lyric-line" style="display:flex;flex-wrap:wrap;gap:4px;align-items:baseline;margin-bottom:10px;padding:6px 8px;border-radius:10px;transition:background .2s" data-verse="${vi}" data-line="${li}">`;
+      line.forEach((word, wi) => {
+        html += `<span class="lyric-word" data-pt="${word.pt}" data-fr="${word.fr}" data-vi="${vi}" data-li="${li}" data-wi="${wi}"
+          style="font-family:var(--fd);font-size:20px;font-weight:700;color:var(--txt);cursor:pointer;padding:2px 4px;border-radius:6px;transition:background .15s,color .15s">${word.pt}</span>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `
+    <div style="background:rgba(255,252,245,.04);border:1px solid var(--brd);border-radius:14px;padding:14px 16px;margin-top:8px;margin-bottom:16px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px">Vocabulaire clé</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${song.vocab_focus.map(w => `<span class="vocab-pill" data-word="${w}" style="background:${song.color}18;border:1px solid ${song.color}35;border-radius:20px;padding:4px 12px;font-size:12px;color:${song.color};font-weight:600;cursor:pointer">${w}</span>`).join("")}
+      </div>
+    </div>
+  `;
+
+  wrap.innerHTML = html;
+
+  // Tooltip logic
+  const tooltip = wrap.querySelector("#tooltip-box");
+  const tooltipPt = wrap.querySelector("#tooltip-pt");
+  const tooltipFr = wrap.querySelector("#tooltip-fr");
+
+  wrap.querySelectorAll(".lyric-word").forEach(word => {
+    word.addEventListener("click", () => {
+      wrap.querySelectorAll(".lyric-word").forEach(w => {
+        w.style.background = "";
+        w.style.color = "var(--txt)";
+      });
+      word.style.background = song.color + "35";
+      word.style.color = song.color;
+      tooltipPt.textContent = word.dataset.pt;
+      tooltipFr.textContent = "🇫🇷 " + word.dataset.fr;
+      tooltip.style.display = "block";
+      speakDictee(word.dataset.pt);
+    });
+  });
+
+  // Play line buttons
+  wrap.querySelectorAll(".play-line-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const vi = parseInt(btn.dataset.verse);
+      const verse = song.verses[vi];
+      const text = verse.lines.map(l => l.map(w => w.pt).join(" ")).join(". ");
+      speakDictee(text);
+      // Highlight verse lines
+      wrap.querySelectorAll(`.lyric-line[data-verse="${vi}"]`).forEach(line => {
+        line.style.background = song.color + "12";
+        setTimeout(() => line.style.background = "", 3000);
+      });
+    });
+  });
+
+  // Vocab pills
+  wrap.querySelectorAll(".vocab-pill").forEach(pill => {
+    pill.addEventListener("click", () => speakDictee(pill.dataset.word));
+  });
+
+  wrap.querySelector("#back-chanson").addEventListener("click", () => { wrap.innerHTML = ""; showChansonList(wrap); });
+}
+
 
 /* ════════════════════════════════════════
    PARCOURS — Apprentissage progressif
