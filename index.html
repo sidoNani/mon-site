@@ -358,9 +358,75 @@ body.light .ex-card{background:linear-gradient(145deg,rgba(20,42,30,.05) 0%,rgba
 body.light .fc-back{background:linear-gradient(145deg,rgba(165,110,0,.08) 0%,rgba(165,110,0,.03) 100%)}
 body.light .scard-n{text-shadow:none}
 
+/* ── Carnaval theme 🎭 ── */
+body.carnaval{
+  --bg:#0D0518;--bg2:#120720;--surf:rgba(255,220,255,.05);
+  --brd:rgba(255,200,255,.10);--brd2:rgba(255,200,255,.22);
+  --txt:#F8F0FF;--muted:rgba(248,240,255,.48);--dim:rgba(248,240,255,.24);
+  --gold:#FF6FD8;--gold2:#FF9EF5;--red:#FF3A8C;--green:#00E5C8;--gbright:#00FFD5;
+  --blue:#7B4FFF;--bbright:#B49AFF;--danger:#FF3A8C;
+}
+body.carnaval #app::before{background:radial-gradient(ellipse,rgba(255,111,216,.15) 0%,rgba(123,79,255,.08) 45%,transparent 70%)}
+body.carnaval #app::after{background:radial-gradient(ellipse,rgba(0,229,200,.12) 0%,transparent 65%)}
+body.carnaval .hdr{background:rgba(13,5,24,.93);border-bottom-color:rgba(255,111,216,.2)}
+body.carnaval .nav{background:rgba(13,5,24,.96);border-top-color:rgba(255,111,216,.15)}
+body.carnaval .logo{background:linear-gradient(135deg,#FF9EF5,#FF6FD8,#FF3A8C);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+body.carnaval .btn-p{background:linear-gradient(135deg,#FF9EF5,#FF6FD8,#FF3A8C)}
+body.carnaval .pbar-f{background:linear-gradient(90deg,#FF6FD8,#FF9EF5)}
+body.carnaval .nav-btn.active{color:#FF9EF5}
+body.carnaval .nav-btn.active::before{background:linear-gradient(90deg,#FF6FD8,#FF9EF5);box-shadow:0 0 10px rgba(255,111,216,.6)}
+body.carnaval .scard-n{color:#FF9EF5;text-shadow:0 0 20px rgba(255,111,216,.4)}
+body.carnaval ::-webkit-scrollbar-thumb{background:rgba(255,111,216,.4)}
+
 /* ── Theme toggle ── */
 .theme-toggle{background:rgba(255,252,245,.07);border:1px solid var(--brd);border-radius:20px;padding:5px 10px;font-size:14px;cursor:pointer;transition:background .2s,transform .15s,border-color .2s;color:var(--txt)}
 .theme-toggle:hover{background:rgba(255,252,245,.14);transform:scale(1.08);border-color:var(--brd2)}
+
+/* ── Brazil Map Modal ── */
+.map-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:500;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.map-sheet{background:var(--bg);border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:90dvh;overflow-y:auto;padding:0 16px 32px;border-top:1px solid var(--brd);animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.map-handle{width:36px;height:4px;border-radius:2px;background:var(--brd2);margin:12px auto 20px}
+.map-svg-wrap{position:relative;margin-bottom:20px}
+.map-region{cursor:pointer;transition:opacity .2s,filter .2s}
+.map-region:hover{opacity:.85;filter:brightness(1.2)}
+.map-region.active{filter:brightness(1.4) drop-shadow(0 0 8px rgba(255,255,255,.3))}
+.region-info{background:linear-gradient(135deg,rgba(255,252,245,.07),rgba(255,252,245,.03));border:1px solid var(--brd2);border-radius:var(--rl);padding:16px 18px;animation:fadeUp .25s ease}
+.region-info-title{font-family:var(--fd);font-size:18px;font-weight:900;margin-bottom:4px}
+.region-info-sub{font-size:12px;color:var(--muted);margin-bottom:14px}
+.region-slang{margin-bottom:8px;padding:10px 14px;background:rgba(255,252,245,.04);border-radius:var(--r);border-left:3px solid var(--rc,var(--gold2))}
+.region-slang-expr{font-family:var(--fd);font-size:15px;font-weight:900;color:var(--rc,var(--gold2))}
+.region-slang-fr{font-size:12px;color:var(--muted);margin-top:2px}
+.region-slang-ctx{font-size:11px;color:var(--dim);font-style:italic;margin-top:3px}
+
+/* ── Videos screen ── */
+.videos-wrap{padding-top:14px}
+.videos-search-row{display:flex;gap:8px;margin-bottom:14px}
+.videos-input{flex:1;background:rgba(255,252,245,.05);border:1.5px solid var(--brd);border-radius:var(--r);padding:12px 16px;font-size:14px;color:var(--txt);outline:none;transition:border-color .2s;font-family:var(--fb)}
+.videos-input:focus{border-color:rgba(242,178,51,.45);box-shadow:0 0 0 3px rgba(242,178,51,.08)}
+.videos-input::placeholder{color:var(--dim)}
+.videos-search-btn{background:linear-gradient(135deg,var(--gold2),var(--gold));border:none;border-radius:var(--r);padding:12px 16px;color:#1A0A00;font-size:18px;cursor:pointer;font-weight:800;transition:transform .15s,box-shadow .15s;flex-shrink:0;box-shadow:0 2px 10px rgba(242,178,51,.25)}
+.videos-search-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(242,178,51,.35)}
+.videos-search-btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+.videos-suggestions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.vid-chip{border:1px solid var(--brd);border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:700;color:var(--muted);background:rgba(255,252,245,.04);cursor:pointer;transition:all .15s;white-space:nowrap}
+.vid-chip:hover{border-color:rgba(242,178,51,.4);color:var(--gold2);background:rgba(242,178,51,.07)}
+.vid-card{display:flex;gap:12px;background:linear-gradient(145deg,rgba(255,252,245,.055),rgba(255,252,245,.02));border:1px solid var(--brd);border-radius:var(--rl);padding:12px;margin-bottom:10px;cursor:pointer;transition:border-color .2s,transform .15s,box-shadow .15s;text-decoration:none;color:inherit}
+.vid-card:hover{border-color:var(--brd2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.vid-thumb{width:100px;height:60px;border-radius:10px;object-fit:cover;flex-shrink:0;background:rgba(255,252,245,.08)}
+.vid-thumb-placeholder{width:100px;height:60px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,rgba(255,252,245,.1),rgba(255,252,245,.04));display:flex;align-items:center;justify-content:center;font-size:24px}
+.vid-info{flex:1;min-width:0}
+.vid-title{font-weight:700;font-size:13px;line-height:1.4;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vid-channel{font-size:11px;color:var(--muted);margin-bottom:3px}
+.vid-meta{display:flex;gap:8px;font-size:10.5px;color:var(--dim)}
+.vid-duration{background:rgba(0,0,0,.5);color:#fff;border-radius:4px;padding:1px 5px;font-size:10px;font-weight:700}
+.videos-spinner{display:flex;align-items:center;justify-content:center;gap:10px;padding:40px;color:var(--muted);font-size:14px}
+.videos-spinner::before{content:'';width:22px;height:22px;border:2px solid rgba(242,178,51,.15);border-top-color:var(--gold2);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.videos-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.videos-empty-icon{font-size:48px;margin-bottom:12px}
+.videos-error{background:rgba(232,82,42,.08);border:1px solid rgba(232,82,42,.22);border-radius:var(--r);padding:12px 16px;color:#FF7A5A;font-size:13px;margin-bottom:14px}
+
 
 /* ── Mot du jour ── */
 .wod-card{background:linear-gradient(135deg,rgba(242,178,51,.12) 0%,rgba(232,82,42,.07) 60%,rgba(34,160,102,.05) 100%);border:1px solid rgba(242,178,51,.28);border-radius:var(--rl);padding:20px 20px;margin-bottom:8px;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
@@ -400,9 +466,9 @@ body.light .scard-n{text-shadow:none}
 .slow-btn{background:rgba(26,122,175,.12);border:1px solid rgba(26,122,175,.22);border-radius:50%;width:22px;height:22px;font-size:9px;cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;color:var(--bbright);font-weight:700;transition:background .15s}
 .slow-btn:hover{background:rgba(26,122,175,.26)}
 
-/* ── Ultra-compact nav for 7 items ── */
-.nav-btn{font-size:7.5px;padding:8px 1px 10px;letter-spacing:0}
-.nav-btn svg{width:17px;height:17px}
+/* ── Ultra-compact nav for 8 items ── */
+.nav-btn{font-size:7px;padding:7px 1px 9px;letter-spacing:0}
+.nav-btn svg{width:15px;height:15px}
 
 /* ── Special keyboard ── */
 .pt-keyboard{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;padding:10px 12px;background:rgba(242,178,51,.05);border:1px solid rgba(242,178,51,.14);border-radius:var(--r)}
@@ -545,9 +611,9 @@ body.light .scard-n{text-shadow:none}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
       Conj.
     </button>
-    <button class="nav-btn" onclick="goTo('gram')" id="nb-gram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Gram.
+    <button class="nav-btn" onclick="goTo('parcours')" id="nb-parcours">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Parcours
     </button>
     <button class="nav-btn" onclick="goTo('dict')" id="nb-dict">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -556,6 +622,10 @@ body.light .scard-n{text-shadow:none}
     <button class="nav-btn" onclick="goTo('chat')" id="nb-chat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="11" r=".5" fill="currentColor"/><circle cx="12" cy="11" r=".5" fill="currentColor"/><circle cx="15" cy="11" r=".5" fill="currentColor"/></svg>
       Chat IA
+    </button>
+    <button class="nav-btn" onclick="goTo('videos')" id="nb-videos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      Vidéos
     </button>
   </nav>
 </div>
@@ -1026,6 +1096,60 @@ const VOCAB = {
     {id:"em14",pt:"O número de emergência",fr:"Le numéro d'urgence",ph:"o NU-me-ro dji e-mer-JHENG-sia",s:"O número de emergência no Brasil é 190.",t:"Le numéro d'urgence au Brésil est le 190."},
     {id:"em15",pt:"Me ajuda, por favor",fr:"Aidez-moi, s'il vous plaît",ph:"mi a-JU-da por fa-VOR",s:"Me ajuda, por favor, estou em dificuldade.",t:"Aidez-moi, s'il vous plaît, je suis en difficulté."},
   ]},
+  musique:{label:"Música",icon:"🎵",color:"#9B59B6",words:[
+    {id:"mu01",pt:"Samba",fr:"La samba",ph:"SAM-ba",s:"O samba nasceu no Rio de Janeiro.",t:"La samba est née à Rio de Janeiro."},
+    {id:"mu02",pt:"Forró",fr:"Le forró (danse nordestine)",ph:"fo-HO",s:"Vamos dançar forró neste fim de semana?",t:"On va danser le forró ce week-end ?"},
+    {id:"mu03",pt:"Funk carioca",fr:"Le funk carioca",ph:"FUNK ka-ri-O-ka",s:"O funk carioca é muito popular nas favelas.",t:"Le funk carioca est très populaire dans les favelas."},
+    {id:"mu04",pt:"Axé",fr:"L'axé (musique baiana)",ph:"a-SHE",s:"Axé é a música típica da Bahia.",t:"L'axé est la musique typique de Bahia."},
+    {id:"mu05",pt:"Bossa nova",fr:"La bossa nova",ph:"BO-sa NO-va",s:"João Gilberto criou a bossa nova.",t:"João Gilberto a créé la bossa nova."},
+    {id:"mu06",pt:"Baile funk",fr:"La soirée funk",ph:"BAY-li FUNK",s:"Tem baile funk neste sábado.",t:"Il y a une soirée funk ce samedi."},
+    {id:"mu07",pt:"Pagode",fr:"Le pagode (samba festive)",ph:"pa-GO-dji",s:"Adoramos um bom pagode com os amigos.",t:"On adore un bon pagode entre amis."},
+    {id:"mu08",pt:"Letra",fr:"Les paroles",ph:"LE-tra",s:"Qual é a letra dessa música?",t:"Quelles sont les paroles de cette chanson ?"},
+    {id:"mu09",pt:"Ritmo",fr:"Le rythme",ph:"HI-tmo",s:"O ritmo do samba é contagiante!",t:"Le rythme de la samba est contagieux !"},
+    {id:"mu10",pt:"Dançar",fr:"Danser",ph:"dan-SAR",s:"Você sabe dançar forró?",t:"Tu sais danser le forró ?"},
+    {id:"mu11",pt:"Cantor/Cantora",fr:"Chanteur/Chanteuse",ph:"kan-TOR/kan-TO-ra",s:"Ela é a cantora mais famosa do Brasil.",t:"Elle est la chanteuse la plus célèbre du Brésil."},
+    {id:"mu12",pt:"Ao vivo",fr:"En direct / En live",ph:"ow VI-vo",s:"Você viu o show ao vivo?",t:"Tu as vu le concert en live ?"},
+  ]},
+  internet:{label:"Internet & Gírias modernas",icon:"📱",color:"#00BCD4",words:[
+    {id:"in01",pt:"Meme",fr:"Un mème",ph:"ME-mi",s:"Esse meme está em todo lugar!",t:"Ce mème est partout !"},
+    {id:"in02",pt:"Textão",fr:"Un long message/roman",ph:"tex-TAONG",s:"Ele mandou um textão de 3 páginas.",t:"Il a envoyé un roman de 3 pages."},
+    {id:"in03",pt:"Cancelar",fr:"Annuler / Cancel (culture)",ph:"kan-se-LAR",s:"A internet tentou cancelar a cantora.",t:"Internet a essayé de canceller la chanteuse."},
+    {id:"in04",pt:"Engajar",fr:"Créer de l'engagement",ph:"en-ga-ZHAR",s:"Esse post engajou muito no Instagram.",t:"Ce post a créé beaucoup d'engagement sur Instagram."},
+    {id:"in05",pt:"Story",fr:"Une story",ph:"STO-ri",s:"Vi sua story, ficou lindo!",t:"J'ai vu ta story, c'était super !"},
+    {id:"in06",pt:"Stalkear",fr:"Stalker / fouiner",ph:"staw-KI-ar",s:"Fui stalkear o perfil dele.",t:"J'ai été fouiner son profil."},
+    {id:"in07",pt:"Postar",fr:"Poster",ph:"pos-TAR",s:"Vou postar uma foto hoje.",t:"Je vais poster une photo aujourd'hui."},
+    {id:"in08",pt:"Selfie",fr:"Un selfie",ph:"SEL-fi",s:"Tiramos uma selfie juntos.",t:"On a pris un selfie ensemble."},
+    {id:"in09",pt:"Seguir",fr:"Suivre (les réseaux)",ph:"se-GIR",s:"Me segue no Instagram!",t:"Suis-moi sur Instagram !"},
+    {id:"in10",pt:"Zap",fr:"WhatsApp (argot)",ph:"ZAP",s:"Manda pelo zap!",t:"Envoie par WhatsApp !"},
+    {id:"in11",pt:"Viralizar",fr:"Devenir viral",ph:"vi-ra-li-ZAR",s:"O vídeo viralizou em uma hora.",t:"La vidéo est devenue virale en une heure."},
+    {id:"in12",pt:"Print",fr:"Une capture d'écran",ph:"PRINT",s:"Tira um print disso.",t:"Fais une capture d'écran de ça."},
+  ]},
+  praia:{label:"Praia & Natureza",icon:"🌊",color:"#0288D1",words:[
+    {id:"pr01",pt:"Praia",fr:"La plage",ph:"PRA-ia",s:"A praia está cheia hoje.",t:"La plage est bondée aujourd'hui."},
+    {id:"pr02",pt:"Areia",fr:"Le sable",ph:"a-REI-a",s:"A areia está muito quente!",t:"Le sable est très chaud !"},
+    {id:"pr03",pt:"Onda",fr:"La vague",ph:"ON-da",s:"As ondas estão perfeitas para surfar.",t:"Les vagues sont parfaites pour surfer."},
+    {id:"pr04",pt:"Bronzear",fr:"Bronzer",ph:"bron-ZI-ar",s:"Vou bronzear na praia.",t:"Je vais bronzer à la plage."},
+    {id:"pr05",pt:"Protetor solar",fr:"La crème solaire",ph:"pro-te-TOR so-LAR",s:"Não esqueça o protetor solar!",t:"N'oublie pas la crème solaire !"},
+    {id:"pr06",pt:"Floresta amazônica",fr:"La forêt amazonienne",ph:"flo-RES-ta a-ma-ZO-ni-ka",s:"A floresta amazônica é o pulmão do mundo.",t:"La forêt amazonienne est le poumon du monde."},
+    {id:"pr07",pt:"Cachoeira",fr:"La cascade / chute d'eau",ph:"ka-sho-EI-ra",s:"A cachoeira é lindíssima!",t:"La cascade est magnifique !"},
+    {id:"pr08",pt:"Calor",fr:"La chaleur",ph:"ka-LOR",s:"Que calor hoje, hein?",t:"Quelle chaleur aujourd'hui, hein ?"},
+    {id:"pr09",pt:"Chuva",fr:"La pluie",ph:"SHU-va",s:"Está chovendo muito em São Paulo.",t:"Il pleut beaucoup à São Paulo."},
+    {id:"pr10",pt:"Papagaio",fr:"Le perroquet",ph:"pa-pa-GAI-o",s:"O papagaio fala português!",t:"Le perroquet parle portugais !"},
+    {id:"pr11",pt:"Macaco",fr:"Le singe",ph:"ma-KA-ko",s:"Vi um macaco na floresta.",t:"J'ai vu un singe dans la forêt."},
+    {id:"pr12",pt:"Tucano",fr:"Le toucan",ph:"tu-KA-no",s:"O tucano é um símbolo do Brasil.",t:"Le toucan est un symbole du Brésil."},
+  ]},
+  universite:{label:"Universidade",icon:"🎓",color:"#3F51B5",words:[
+    {id:"uv01",pt:"Faculdade",fr:"La faculté / l'université",ph:"fa-kuw-DA-dji",s:"Entrei na faculdade de medicina.",t:"Je suis entré à la faculté de médecine."},
+    {id:"uv02",pt:"Vestibular",fr:"Le concours d'entrée à l'université",ph:"ves-tchi-bu-LAR",s:"O vestibular é muito difícil no Brasil.",t:"Le concours d'entrée est très difficile au Brésil."},
+    {id:"uv03",pt:"Prova",fr:"L'examen / le test",ph:"PRO-va",s:"Tenho prova amanhã.",t:"J'ai un examen demain."},
+    {id:"uv04",pt:"Matéria",fr:"La matière (cours)",ph:"ma-TE-ria",s:"Qual é sua matéria favorita?",t:"Quelle est ta matière préférée ?"},
+    {id:"uv05",pt:"Formatura",fr:"La remise des diplômes / graduation",ph:"for-ma-TU-ra",s:"A formatura é em dezembro.",t:"La remise des diplômes est en décembre."},
+    {id:"uv06",pt:"Bolsa",fr:"La bourse d'études",ph:"BOW-sa",s:"Consegui uma bolsa de estudos.",t:"J'ai obtenu une bourse d'études."},
+    {id:"uv07",pt:"Estágio",fr:"Le stage",ph:"es-TA-zhio",s:"Estou fazendo estágio numa empresa.",t:"Je fais un stage dans une entreprise."},
+    {id:"uv08",pt:"Trabalho de conclusão",fr:"Le mémoire / travail de fin d'études",ph:"tra-BA-lho dji kong-klu-ZAONG",s:"Estou escrevendo meu trabalho de conclusão.",t:"J'écris mon mémoire de fin d'études."},
+    {id:"uv09",pt:"Calote",fr:"Sécher un cours (argot étudiant)",ph:"ka-LO-tchi",s:"Dei calote na aula de física.",t:"J'ai séché le cours de physique."},
+    {id:"uv10",pt:"Republica",fr:"La coloc étudiante",ph:"re-PU-bli-ka",s:"Moro numa república com outros estudantes.",t:"J'habite dans une coloc avec d'autres étudiants."},
+  ]},
 };
 
 const ALL_WORDS = Object.values(VOCAB).flatMap(c=>c.words);
@@ -1228,7 +1352,7 @@ function save(){
     localStorage.setItem("fb_meta",JSON.stringify(meta));
     localStorage.setItem("fb_favs",JSON.stringify([...favorites]));
     localStorage.setItem("fb_badges",JSON.stringify([...earnedBadges]));
-    localStorage.setItem("fb_theme",lightMode?"light":"dark");
+    localStorage.setItem("fb_theme",document.body.classList.contains("carnaval")?"carnaval":lightMode?"light":"dark");
   }catch{}
 }
 function load(){
@@ -1236,7 +1360,7 @@ function load(){
   try{const m=localStorage.getItem("fb_meta");if(m)meta={...meta,...JSON.parse(m)};}catch{}
   try{const f=localStorage.getItem("fb_favs");if(f)favorites=new Set(JSON.parse(f));}catch{}
   try{const b=localStorage.getItem("fb_badges");if(b)earnedBadges=new Set(JSON.parse(b));}catch{}
-  try{const t=localStorage.getItem("fb_theme");if(t==="light"){lightMode=true;document.body.classList.add("light");}}catch{}
+  try{const t=localStorage.getItem("fb_theme");if(t==="light"){lightMode=true;document.body.classList.add("light");}else if(t==="carnaval"){document.body.classList.add("carnaval");}}catch{}
   // ensure defaults for new fields
   if(!meta.streakFreezes&&meta.streakFreezes!==0)meta.streakFreezes=1;
 }
@@ -1262,10 +1386,15 @@ function showBadgeToast(badge){
 }
 
 function toggleTheme(){
-  lightMode=!lightMode;
-  document.body.classList.toggle("light",lightMode);
+  const themes=["dark","light","carnaval"];
+  const icons={"dark":"🌙","light":"🌕","carnaval":"🎭"};
+  const cur=lightMode?"light":(document.body.classList.contains("carnaval")?"carnaval":"dark");
+  const next=themes[(themes.indexOf(cur)+1)%3];
+  lightMode=next==="light";
+  document.body.classList.remove("light","carnaval");
+  if(next!=="dark")document.body.classList.add(next);
   const btn=document.getElementById("theme-toggle");
-  if(btn)btn.textContent=lightMode?"🌕":"🌙";
+  if(btn)btn.textContent=icons[next];
   save();
 }
 
@@ -1428,7 +1557,7 @@ function showXP(n){
 /* ════════════════════════════════════════
    NAV
 ════════════════════════════════════════ */
-const NAV_ORDER=["home","vocab","expr","conj","gram","dict","chat"];
+const NAV_ORDER=["home","vocab","expr","conj","parcours","dict","chat","videos"];
 let prevScreen="home";
 
 function goTo(s){
@@ -1459,10 +1588,12 @@ function render(){
   else if(screen==="expr")    node=renderExpr();
   else if(screen==="conj")    node=renderConj();
   else if(screen==="gram")    node=renderGram();
+  else if(screen==="parcours") node=renderParcours();
   else if(screen==="dict")    node=renderDict();
   else if(screen==="alpha")   node=renderAlpha();
   else if(screen==="stats")   node=renderStats();
   else if(screen==="chat")    node=renderChat();
+  else if(screen==="videos")  node=renderVideos();
   if(node){
     node.classList.add(animClass);
     c.appendChild(node);
@@ -1480,10 +1611,16 @@ function updatePills(){
   badge.style.display=due>0?"block":"none";
   badge.textContent=due>99?"99+":due;
   const tt=document.getElementById("theme-toggle");
-  if(tt){tt.textContent=lightMode?"🌕":"🌙";tt.onclick=toggleTheme;}
+  if(tt){
+    const icons={"dark":"🌙","light":"🌕","carnaval":"🎭"};
+    const cur=lightMode?"light":(document.body.classList.contains("carnaval")?"carnaval":"dark");
+    tt.textContent=icons[cur];
+    tt.onclick=toggleTheme;
+    tt.title="Thème : "+cur+" (cliquer pour changer)";
+  }
 }
 function updateNav(){
-  ["home","vocab","expr","conj","gram","dict","chat"].forEach(s=>{
+  ["home","vocab","expr","conj","parcours","dict","chat","videos"].forEach(s=>{
     const btn=document.getElementById(`nb-${s}`);
     if(btn)btn.className="nav-btn"+(screen===s?" active":"");
   });
@@ -1575,6 +1712,7 @@ function renderHome(){
       <button class="btn btn-s btn-full" onclick="goTo('expr')">🗣️ Expressions brésiliennes</button>
       <button class="btn btn-s btn-full" onclick="goTo('conj')">📝 Conjuguer les verbes</button>
       <button class="btn btn-s btn-full" onclick="goTo('gram')">📖 Grammaire essentielle</button>
+      <button class="btn btn-s btn-full" onclick="showBrazilMap()" style="background:linear-gradient(135deg,rgba(34,160,102,.12),rgba(0,180,100,.06));border-color:rgba(34,160,102,.3);color:var(--gbright)">🗺️ Carte du Brésil · Accents & Expressions régionales</button>
       <button class="btn btn-s btn-full" onclick="goTo('stats')" style="opacity:.7;font-size:13px">📊 Statistiques & Badges</button>
     </div>
     <p class="lbl">Mot du jour</p>
@@ -3056,6 +3194,7 @@ function makeAlphaCard(item){
    Propulsé par Pollinations.ai (gratuit, sans clé)
 ════════════════════════════════════════ */
 const CHAT_SCENARIOS=[
+  {id:"libre",icon:"💬",name:"Discussion libre",desc:"Parle de tout et n'importe quoi",persona:"Tu t'appelles Gabriel, un jeune Brésilien de 25 ans de São Paulo. Tu es curieux, ouvert, sympa et tu adores discuter de tout : la vie, la musique, les voyages, le sport, les films, la nourriture, les rêves... Tu t'adaptes à n'importe quel sujet que l'utilisateur veut aborder. Tu es comme un ami brésilien qu'on a depuis toujours.",freeMode:true},
   {id:"cafe",icon:"☕",name:"Au café",desc:"Commander, discuter à São Paulo",persona:"Tu t'appelles Lucas, barista sympa d'un café branché de São Paulo. Tu es décontracté, tu utilises beaucoup de gírias (argot brésilien). Le café s'appelle 'Café Paulista'."},
   {id:"marche",icon:"🛒",name:"Au marché",desc:"Acheter fruits, légumes, marchander",persona:"Tu t'appelles Dona Rosa, vendeuse au Mercadão de São Paulo. Tu es chaleureuse, maternelle, tu utilises 'querido(a)' et 'meu bem'. Tu vends fruits, légumes et épices."},
   {id:"transport",icon:"🚌",name:"Transport",desc:"Bus, métro, taxi, directions",persona:"Tu t'appelles Carlos, chauffeur de taxi à Rio de Janeiro. Tu es bavard, passionné par Rio, tu parles de la ville avec fierté."},
@@ -3074,7 +3213,27 @@ const CHAT_SCENARIOS=[
   {id:"enfants",icon:"👨‍👩‍👧",name:"Famille",desc:"Parents, enfants, maison",persona:"Tu t'appelles Sandra, mère de famille de 40 ans à Porto Alegre. Tu parles de tes enfants, de la maison, du quotidien brésilien. Tu es chaleureuse, tu poses des questions sur la famille de l'utilisateur. Tu utilises des expressions gaúchas parfois."},
 ];
 
-const CHAT_SYSTEM_PROMPT=(scenario,level)=>`Tu es ${scenario.persona}
+const CHAT_SYSTEM_PROMPT=(scenario,level)=>{
+if(scenario.freeMode) return `Tu es ${scenario.persona}
+
+RÈGLES :
+1. L'utilisateur peut écrire en FRANÇAIS, en portugais, ou mélanger les deux — peu importe. Tu t'adaptes toujours.
+2. Si l'utilisateur écrit en français : réponds en français, puis ajoute une version portugaise.
+3. Si l'utilisateur écrit en portugais : réponds en portugais, puis ajoute la traduction française.
+4. Tes réponses sont naturelles, chaleureuses, comme un vrai ami sur WhatsApp. 1-4 phrases.
+5. Tu parles de N'IMPORTE QUEL sujet : films, musique, sport, vie quotidienne, voyages, opinions, humour...
+6. Tu poses parfois des questions pour garder la conversation vivante.
+7. Si l'utilisateur fait une grosse faute de portugais, tu la corriges discrètement dans ta réponse.
+
+FORMAT :
+- Si message en français : [Réponse en français]
+🇧🇷 [Version en portugais]
+- Si message en portugais : [Réponse en portugais]
+🇫🇷 [Traduction en français]
+
+Sois naturel, pas robotique. C'est une vraie conversation entre amis.`;
+
+return `Tu es ${scenario.persona}
 
 RÈGLES ABSOLUES :
 1. Tu réponds UNIQUEMENT en portugais brésilien, jamais en français ou anglais.
@@ -3090,6 +3249,7 @@ FORMAT OBLIGATOIRE — respecte-le exactement :
 🇫🇷 [Traduction courte en français]
 
 Ne mets rien d'autre. Pas de guillemets, pas de "Note:", juste le message et la traduction.`;
+};
 
 let chatMessages=[];
 let chatScenario=CHAT_SCENARIOS[0];
@@ -3302,6 +3462,10 @@ function getScenarioIntro(s){
     gym:{pt:"Bora! 💪 Sou o Igor, seu coach aqui na academia. Primeira vez por aqui? Me fala um pouco — qual é seu objetivo? Perder gordura, ganhar massa ou melhorar o condicionamento físico?",fr:"Allez ! 💪 Je suis Igor, votre coach ici. C'est votre première fois ? Dites-moi — quel est votre objectif ? Perdre de la graisse, prendre du muscle ou améliorer l'endurance ?"},
     enfants:{pt:"Oi, vizinho(a)! 👨‍👩‍👧 Que bom te ver! Tô aqui esperando as crianças voltarem da escola. E aí, como foi seu dia? Você tem filhos também?",fr:"Salut voisin(e) ! 👨‍👩‍👧 Contente de te voir ! J'attends les enfants rentrer de l'école. Et toi, ta journée ? T'as des enfants aussi ?"},
   };
+  if(s.id==="libre") return {
+    pt:"Oi! 💬 Sou o Gabriel! Pode falar o que quiser — em francês, português ou os dois misturados. Tô aqui pra bater um papo sobre qualquer assunto. O que tá passando pela sua cabeça?",
+    fr:"Salut ! 💬 Je suis Gabriel ! Tu peux écrire ce que tu veux — en français, en portugais ou les deux mélangés. Je suis là pour discuter de n'importe quoi. Qu'est-ce qui te passe par la tête ?"
+  };
   return intros[s.id]||intros.cafe;
 }
 
@@ -3323,7 +3487,610 @@ function appendMessage(container,msg){
   container.appendChild(el);
 }
 
+/* ════════════════════════════════════════
+   VIDÉOS — Recherche YouTube via Piped API
+════════════════════════════════════════ */
+const VIDEO_SUGGESTIONS=[
+  "prononciation portugais brésilien","apprendre brésilien débutant",
+  "samba danse","expressions gírias","conjugaison portugais",
+  "musique brésilienne","culture Rio","forró nordeste",
+  "português para estrangeiros","sotaque carioca"
+];
+
+function fmtDuration(sec){if(!sec)return"";const m=Math.floor(sec/60),s=sec%60;return m+":"+(s<10?"0":"")+s;}
+function fmtViews(v){if(!v)return"";if(v>=1e6)return(v/1e6).toFixed(1)+"M vues";if(v>=1e3)return(v/1e3).toFixed(0)+"k vues";return v+" vues";}
+
+let videoResults=[];
+let videoQuery="";
+
+function renderVideos(){
+  const wrap=div("videos-wrap au");
+  wrap.innerHTML=`
+    <h2 style="font-family:var(--fd);font-size:24px;font-weight:900;margin-bottom:6px">🎬 Vidéos d'apprentissage</h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Recherche des vidéos YouTube sur le brésilien</p>
+    <div class="videos-search-row">
+      <input class="videos-input" id="vid-inp" placeholder="Ex: prononciation, samba, gírias…" value="${videoQuery}" autocomplete="off"/>
+      <button class="videos-search-btn" id="vid-btn">🔍</button>
+    </div>
+    <div class="videos-suggestions">
+      ${VIDEO_SUGGESTIONS.map(s=>`<button class="vid-chip" data-q="${s}">${s}</button>`).join("")}
+    </div>
+    <div id="vid-results"></div>`;
+
+  const inp=wrap.querySelector("#vid-inp");
+  const btn=wrap.querySelector("#vid-btn");
+  const resultsEl=wrap.querySelector("#vid-results");
+
+  if(videoResults.length>0)renderVideoCards(resultsEl,videoResults);
+
+  wrap.querySelectorAll(".vid-chip").forEach(chip=>{
+    chip.addEventListener("click",()=>{inp.value=chip.dataset.q;doVideoSearch(chip.dataset.q,resultsEl,btn);});
+  });
+  btn.addEventListener("click",()=>doVideoSearch(inp.value,resultsEl,btn));
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")doVideoSearch(inp.value,resultsEl,btn);});
+  return wrap;
+}
+
+async function doVideoSearch(q,container,btn){
+  if(!q.trim())return;
+  videoQuery=q.trim();
+  btn.disabled=true;
+  container.innerHTML=`<div class="videos-spinner">Recherche en cours…</div>`;
+
+  // Bibliothèque curatée de vidéos pour apprendre le portugais brésilien
+  const VIDEO_LIBRARY=[
+    // Speaking Brazilian (Virginia Langhammer) — chaîne principale
+    {videoId:"eVCXr41exPE",title:"Les 3 temps verbaux essentiels du portugais brésilien",channel:"Speaking Brazilian",tags:["grammaire","débutant"],level:"🟢 Débutant"},
+    {videoId:"fkLv6azXlvU",title:"Être poli en portugais brésilien — expressions et formules",channel:"Speaking Brazilian",tags:["vocabulaire","débutant"],level:"🟢 Débutant"},
+    {videoId:"MnJYSeZvYZ0",title:"Verbes irréguliers en portugais — leçon complète",channel:"Speaking Brazilian",tags:["grammaire","intermédiaire"],level:"🟡 Intermédiaire"},
+    {videoId:"m-OLshYF07I",title:"Voyelles nasales en portugais brésilien — prononciation",channel:"Speaking Brazilian",tags:["prononciation","débutant"],level:"🟢 Débutant"},
+    {videoId:"chgPxMAD5xw",title:"Prononcer le R en portugais brésilien",channel:"Speaking Brazilian",tags:["prononciation","débutant"],level:"🟢 Débutant"},
+    {videoId:"_5hzrk5Odyg",title:"Mots similaires en portugais et en anglais",channel:"Speaking Brazilian",tags:["vocabulaire","débutant"],level:"🟢 Débutant"},
+    {videoId:"-C-btAPV4B8",title:"Lier les mots comme un natif brésilien",channel:"Speaking Brazilian",tags:["prononciation","avancé"],level:"🔴 Avancé"},
+    {videoId:"I__eJ7Cai58",title:"Réduire les mots comme un Brésilien natif",channel:"Speaking Brazilian",tags:["prononciation","intermédiaire"],level:"🟡 Intermédiaire"},
+    {videoId:"U6Z2PKb8ksg",title:"PÃO ou PAU ? — Test de prononciation avancé",channel:"Speaking Brazilian",tags:["prononciation","intermédiaire"],level:"🟡 Intermédiaire"},
+    {videoId:"3pTRsazcBhk",title:"Prononcer la lettre S en portugais brésilien",channel:"Speaking Brazilian",tags:["prononciation","débutant"],level:"🟢 Débutant"},
+    {videoId:"xhcN8FH3csw",title:"Sons difficiles du portugais brésilien pour francophones",channel:"Speaking Brazilian",tags:["prononciation","débutant"],level:"🟢 Débutant"},
+    {videoId:"Xqhl0W_8oCg",title:"7 mots courants en français qui n'existent pas en portugais",channel:"Speaking Brazilian",tags:["vocabulaire","intermédiaire"],level:"🟡 Intermédiaire"},
+    {videoId:"nxhu86lVxtA",title:"Tudo vs Todo — différence et utilisation en portugais",channel:"Speaking Brazilian",tags:["grammaire","intermédiaire"],level:"🟡 Intermédiaire"},
+    // Street Smart Brazil
+    {videoId:"LcrJfc7FRow",title:"Apprendre le portugais avec des chansons brésiliennes #1",channel:"Street Smart Brazil",tags:["musique","débutant"],level:"🟢 Débutant"},
+  ];
+
+  // Filtre selon la recherche (titre, tags, level)
+  const qLower=q.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  const keywords=qLower.split(/\s+/).filter(Boolean);
+  
+  const scored=VIDEO_LIBRARY.map(v=>{
+    const haystack=(v.title+" "+v.channel+" "+v.tags.join(" ")+" "+v.level).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+    const score=keywords.reduce((acc,kw)=>acc+(haystack.includes(kw)?2:0),0);
+    return {...v,score};
+  }).sort((a,b)=>b.score-a.score);
+
+  // Si score 0 pour tout, on affiche tous les résultats mélangés
+  const hasMatch=scored.some(v=>v.score>0);
+  const results=(hasMatch?scored:VIDEO_LIBRARY).slice(0,8);
+
+  const items=results.map(v=>({
+    url:`https://www.youtube.com/watch?v=${v.videoId}`,
+    title:`${v.level} — ${v.title}`,
+    uploaderName:v.channel,
+    thumbnail:`https://i.ytimg.com/vi/${v.videoId}/mqdefault.jpg`,
+    duration:0,views:0,uploadedDate:""
+  }));
+  videoResults=items;
+  renderVideoCards(container,items);
+  btn.disabled=false;
+  return;
+
+  // Fallback
+  container.innerHTML=`<div class="videos-empty"><div class="videos-empty-icon">🎬</div><p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px">Recherche indisponible.<br>Cherche "<strong>${q}</strong>" directement sur YouTube :</p><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(q+" portugais brésilien apprendre")}" target="_blank" class="btn btn-p" style="display:inline-flex;text-decoration:none;padding:12px 20px">▶ Ouvrir YouTube</a></div>`;
+  btn.disabled=false;
+}
+
+function renderVideoCards(container,items){
+  container.innerHTML="";
+  if(!items.length){container.innerHTML=`<div class="videos-empty"><div class="videos-empty-icon">😕</div><p>Aucun résultat</p></div>`;return;}
+  items.forEach(item=>{
+    const videoId=(item.url||"").replace("/watch?v=","");
+    const ytUrl=`https://www.youtube.com/watch?v=${videoId}`;
+    const thumb=item.thumbnail||item.thumbnailUrl||"";
+    const a=document.createElement("a");
+    a.className="vid-card";a.href=ytUrl;a.target="_blank";a.rel="noopener";
+    a.innerHTML=`
+      <div style="position:relative;flex-shrink:0">
+        ${thumb?`<img class="vid-thumb" src="${thumb}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=vid-thumb-placeholder>▶</div>'">`:`<div class="vid-thumb-placeholder">▶</div>`}
+        ${item.duration?`<span class="vid-duration" style="position:absolute;bottom:4px;right:4px">${fmtDuration(item.duration)}</span>`:""}
+      </div>
+      <div class="vid-info">
+        <div class="vid-title">${item.title||"Vidéo"}</div>
+        <div class="vid-channel">${item.uploaderName||""}</div>
+        <div class="vid-meta">${item.views?`<span>${fmtViews(item.views)}</span>`:""}${item.uploadedDate?`<span>${item.uploadedDate}</span>`:""}</div>
+      </div>`;
+    container.appendChild(a);
+  });
+}
+
+/* ════════════════════════════════════════
+   CARTE DU BRÉSIL
+════════════════════════════════════════ */
+const BRAZIL_REGIONS=[
+  {id:"norte",name:"Norte 🌿",color:"#22A066",cities:"Manaus, Belém, Macapá",desc:"La plus grande région, cœur de l'Amazonie. Accent chantant, vocabulaire influencé par les langues indigènes.",
+    slangs:[{expr:"Égua!",fr:"Putain ! / Wow !",ctx:"Exclamation typique du Pará, très forte"},{expr:"Maninho",fr:"Petit frère (terme affectif)",ctx:"Utilisé au Pará pour s'adresser à quelqu'un"},{expr:"Na maior",fr:"Au maximum / En plein",ctx:"Faire quelque chose 'na maior' = à fond"},{expr:"Boto",fr:"Le dauphin rose d'Amazonie",ctx:"Animal mythique, symbole culturel du Norte"}]},
+  {id:"nordeste",name:"Nordeste ☀️",color:"#F2B233",cities:"Salvador, Fortaleza, Recife, Natal",desc:"Région de la culture afro-brésilienne, du forró et de l'axé. Accent fort et musical, très reconnaissable.",
+    slangs:[{expr:"Oxe!",fr:"Quoi ! / Sérieusement ?",ctx:"Exclamation de surprise très typique du Nordeste"},{expr:"Massa!",fr:"Super ! / Génial !",ctx:"'Que massa!' — l'expression la plus iconique du Nordeste"},{expr:"Visse?",fr:"Tu as vu ça ? / T'as compris ?",ctx:"Demande de confirmation, surtout en Bahia"},{expr:"Mainha / Painho",fr:"Maman / Papa (affectueux)",ctx:"Termes d'affection pour les parents en Bahia"}]},
+  {id:"centroeste",name:"Centro-Oeste 🌾",color:"#8D6E63",cities:"Brasília, Goiânia, Cuiabá",desc:"Région du Cerrado, des fazendas et de Brasília. Accent neutre, influencé par les migrations de tout le Brésil.",
+    slangs:[{expr:"Uai!",fr:"Hein ? / Quoi ? (étonnement)",ctx:"Interjection iconique de Minas Gerais et du Centre-Ouest"},{expr:"Trem",fr:"Chose / Truc / Machin",ctx:"'Que trem é esse?' = 'C'est quoi ce truc ?' Typique de Minas"},{expr:"Sô",fr:"Monsieur (familier, de 'senhor')",ctx:"Particulier à Minas Gerais"},{expr:"Peão",fr:"Le cowboy brésilien",ctx:"Travailleur des fazendas, figure culturelle du Centre-Ouest"}]},
+  {id:"sudeste",name:"Sudeste 🏙️",color:"#1A7AAF",cities:"São Paulo, Rio de Janeiro, Belo Horizonte",desc:"La région la plus peuplée. L'accent carioca (Rio) et paulistano (SP) sont bien distincts et reconnaissables.",
+    slangs:[{expr:"Mano!",fr:"Mec ! / Frère !",ctx:"Ultra-courant à São Paulo chez les jeunes"},{expr:"Carioca",fr:"Habitant(e) de Rio",ctx:"Réputés pour leur décontraction et le 'jeitinho carioca'"},{expr:"Cara!",fr:"Mec ! / Oh putain !",ctx:"Universel mais très São Paulo"},{expr:"Paulistano",fr:"Habitant(e) de São Paulo",ctx:"Réputés pour leur rythme de travail intense"}]},
+  {id:"sul",name:"Sul ❄️",color:"#5C6BC0",cities:"Porto Alegre, Florianópolis, Curitiba",desc:"Forte influence européenne (allemands, italiens). Les Gaúchos ont une identité et un accent très distincts.",
+    slangs:[{expr:"Bah!",fr:"Ben… / Eh bien… (étonnement)",ctx:"Interjection iconique des Gaúchos, utilisée constamment"},{expr:"Tchê",fr:"Hé (interjection gaúcha)",ctx:"L'interjection la plus emblématique du Rio Grande do Sul"},{expr:"Tri bom",fr:"Très bien / Super",ctx:"Archaïsme gaúcho encore très utilisé"},{expr:"Chimarrão",fr:"Le maté brésilien",ctx:"Boisson traditionnelle gaúcha, rituel social fort dans le Sul"}]},
+];
+
+function showBrazilMap(){
+  const overlay=document.createElement("div");
+  overlay.className="map-overlay";
+  let activeRegion=BRAZIL_REGIONS[3];
+
+  function buildSheet(){
+    overlay.innerHTML=`<div class="map-sheet">
+      <div class="map-handle"></div>
+      <h2 style="font-family:var(--fd);font-size:22px;font-weight:900;text-align:center;margin-bottom:4px">🗺️ Carte du Brésil</h2>
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px">Clique sur une région pour voir ses expressions</p>
+      <div class="map-svg-wrap">
+        <svg viewBox="0 0 300 340" style="width:100%;max-width:280px;display:block;margin:0 auto">
+          <path class="map-region${activeRegion.id==="norte"?" active":""}" data-rid="norte" d="M30,18 L150,12 L168,28 L180,52 L170,78 L150,88 L132,108 L112,113 L90,106 L68,118 L48,108 L30,92 L20,66 L22,38 Z" fill="${BRAZIL_REGIONS[0].color}" opacity="${activeRegion.id==="norte"?.9:.55}" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <path class="map-region${activeRegion.id==="nordeste"?" active":""}" data-rid="nordeste" d="M150,88 L180,52 L202,58 L222,78 L232,98 L228,122 L215,142 L195,148 L175,132 L162,112 L132,108 Z" fill="${BRAZIL_REGIONS[1].color}" opacity="${activeRegion.id==="nordeste"?.9:.55}" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <path class="map-region${activeRegion.id==="centroeste"?" active":""}" data-rid="centroeste" d="M48,108 L90,106 L112,113 L132,108 L162,112 L158,138 L145,158 L125,168 L100,172 L75,162 L54,148 L44,128 Z" fill="${BRAZIL_REGIONS[2].color}" opacity="${activeRegion.id==="centroeste"?.9:.55}" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <path class="map-region${activeRegion.id==="sudeste"?" active":""}" data-rid="sudeste" d="M125,168 L145,158 L158,138 L175,132 L195,148 L205,168 L195,192 L175,205 L155,205 L138,192 L128,180 Z" fill="${BRAZIL_REGIONS[3].color}" opacity="${activeRegion.id==="sudeste"?.9:.55}" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <path class="map-region${activeRegion.id==="sul"?" active":""}" data-rid="sul" d="M128,180 L138,192 L155,205 L162,225 L158,252 L142,265 L122,260 L105,245 L98,224 L105,202 Z" fill="${BRAZIL_REGIONS[4].color}" opacity="${activeRegion.id==="sul"?.9:.55}" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <text x="82" y="68" fill="white" font-size="10" font-weight="bold" text-anchor="middle" opacity=".95">Norte</text>
+          <text x="188" y="108" fill="white" font-size="9" font-weight="bold" text-anchor="middle" opacity=".95">Nordeste</text>
+          <text x="102" y="142" fill="white" font-size="9" font-weight="bold" text-anchor="middle" opacity=".95">C.-Oeste</text>
+          <text x="168" y="178" fill="white" font-size="9" font-weight="bold" text-anchor="middle" opacity=".95">Sudeste</text>
+          <text x="130" y="228" fill="white" font-size="10" font-weight="bold" text-anchor="middle" opacity=".95">Sul</text>
+        </svg>
+      </div>
+      <!-- Tabs for regions -->
+      <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px;padding:2px 0">
+        ${BRAZIL_REGIONS.map(r=>`<button class="v-tab" data-rid="${r.id}" style="background:${activeRegion.id===r.id?r.color:"rgba(255,252,245,.05)"};color:${activeRegion.id===r.id?"#fff":"var(--muted)"};border:1px solid ${activeRegion.id===r.id?r.color:"var(--brd)"};border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;white-space:nowrap;cursor:pointer;flex-shrink:0">${r.name}</button>`).join("")}
+      </div>
+      <div class="region-info" style="--rc:${activeRegion.color}">
+        <div class="region-info-title" style="color:${activeRegion.color}">${activeRegion.name}</div>
+        <div class="region-info-sub">🏙️ ${activeRegion.cities}</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px">${activeRegion.desc}</p>
+        <p class="lbl" style="margin-top:0">Expressions locales</p>
+        ${activeRegion.slangs.map(s=>`<div class="region-slang"><div class="region-slang-expr">${s.expr}</div><div class="region-slang-fr">🇫🇷 ${s.fr}</div><div class="region-slang-ctx">${s.ctx}</div></div>`).join("")}
+      </div>
+      <button class="btn btn-s btn-full" style="margin-top:16px" id="close-map-btn">✕ Fermer</button>
+    </div>`;
+
+    overlay.querySelectorAll(".map-region,[data-rid]").forEach(el=>{
+      el.addEventListener("click",e=>{
+        e.stopPropagation();
+        const rid=el.dataset.rid;
+        if(rid){activeRegion=BRAZIL_REGIONS.find(r=>r.id===rid);buildSheet();}
+      });
+    });
+    overlay.querySelector("#close-map-btn").addEventListener("click",()=>overlay.remove());
+    overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove();});
+  }
+
+  buildSheet();
+  document.body.appendChild(overlay);
+}
+
 render();
+
+/* ════════════════════════════════════════
+   PARCOURS — Apprentissage progressif
+════════════════════════════════════════ */
+
+const PARCOURS_LESSONS = [
+  {
+    id:"p00", icon:"🔊", title:"Les sons du portugais",
+    subtitle:"Avant tout — comprendre comment ça se prononce",
+    color:"#9B59B6",
+    type:"sounds",
+    items:[
+      {symbol:"A",desc:"Comme en français — 'papa'",ex:"água (eau)",sound:"AH"},
+      {symbol:"E",desc:"Ouvert = 'é' / Fermé = 'ê'",ex:"café, mesa",sound:"EH"},
+      {symbol:"I",desc:"Comme le 'i' français",ex:"sim (oui)",sound:"EE"},
+      {symbol:"O",desc:"Ouvert 'o' / Fermé 'ô'",ex:"bom (bien)",sound:"OH"},
+      {symbol:"U",desc:"Comme le 'ou' français",ex:"tudo (tout)",sound:"OO"},
+      {symbol:"Ã / ÃO",desc:"Son nasal — dans le nez !",ex:"mãe (maman), pão (pain)",sound:"ANG/AONG"},
+      {symbol:"LH",desc:"Comme 'lh' = 'y' mouillé",ex:"filho (fils), mulher (femme)",sound:"LY"},
+      {symbol:"NH",desc:"Comme le 'gn' de 'montagne'",ex:"senha (mot de passe)",sound:"NY"},
+      {symbol:"RR / R initial",desc:"R guttural, du fond de la gorge",ex:"Rio, carro (voiture)",sound:"H fort"},
+      {symbol:"ç / s / ss",desc:"Toujours son S — jamais Z",ex:"caça, isso, cedo",sound:"SS"},
+      {symbol:"D + I / T + I",desc:"Di = 'dji' / Ti = 'tchi'",ex:"dia (dji-a), tia (tchi-a)",sound:"Spécifique SP"},
+    ]
+  },
+  {
+    id:"p01", icon:"👶", title:"Leçon 1 — Premiers mots",
+    subtitle:"Les mots absolument indispensables",
+    color:"#27AE60",
+    type:"vocab",
+    items:[
+      {pt:"Sim",fr:"Oui",ph:"SING"},
+      {pt:"Não",fr:"Non",ph:"NAONG"},
+      {pt:"Ok",fr:"Ok",ph:"o-KAY"},
+      {pt:"Obrigado",fr:"Merci (dit par un homme)",ph:"o-bri-GA-do"},
+      {pt:"Obrigada",fr:"Merci (dit par une femme)",ph:"o-bri-GA-da"},
+      {pt:"Por favor",fr:"S'il vous plaît",ph:"por fa-VOR"},
+      {pt:"Desculpa",fr:"Pardon / Désolé",ph:"des-KUL-pa"},
+      {pt:"Tudo bem",fr:"Tout va bien",ph:"TU-do beng"},
+    ]
+  },
+  {
+    id:"p02", icon:"👋", title:"Leçon 2 — Dire bonjour",
+    subtitle:"Saluer selon le moment de la journée",
+    color:"#E8A838",
+    type:"vocab",
+    items:[
+      {pt:"Oi",fr:"Salut (informel)",ph:"OY"},
+      {pt:"Olá",fr:"Bonjour",ph:"o-LAH"},
+      {pt:"Bom dia",fr:"Bonjour (le matin)",ph:"bong JI-a"},
+      {pt:"Boa tarde",fr:"Bon après-midi",ph:"boa TAR-dji"},
+      {pt:"Boa noite",fr:"Bonsoir / Bonne nuit",ph:"boa NOY-tchi"},
+      {pt:"Tchau",fr:"Au revoir",ph:"CHOW"},
+      {pt:"Até logo",fr:"À tout à l'heure",ph:"a-TE LO-go"},
+      {pt:"Até amanhã",fr:"À demain",ph:"a-TE a-ma-NYANG"},
+    ]
+  },
+  {
+    id:"p03", icon:"🙋", title:"Leçon 3 — Se présenter",
+    subtitle:"Dire qui on est",
+    color:"#2980B9",
+    type:"phrases",
+    items:[
+      {pt:"Meu nome é ___",fr:"Je m'appelle ___",ph:"mew NO-mi E"},
+      {pt:"Sou francês / francesa",fr:"Je suis français(e)",ph:"sow frang-SESS"},
+      {pt:"Tenho ___ anos",fr:"J'ai ___ ans",ph:"TEN-yo A-nos"},
+      {pt:"Eu moro em ___",fr:"J'habite à ___",ph:"EW MO-ro eng"},
+      {pt:"Prazer em te conhecer",fr:"Enchanté(e) de te rencontrer",ph:"pra-ZER eng tchi ko-NYE-ser"},
+      {pt:"De onde você é?",fr:"Tu viens d'où ?",ph:"dji ON-dji vo-SE E"},
+      {pt:"Você fala português?",fr:"Tu parles portugais ?",ph:"vo-SE FA-la por-tu-GUESS"},
+      {pt:"Estou aprendendo português",fr:"J'apprends le portugais",ph:"es-TOW a-preng-DEN-do"},
+    ]
+  },
+  {
+    id:"p04", icon:"🔢", title:"Leçon 4 — Nombres 1 à 10",
+    subtitle:"Compter de un à dix",
+    color:"#16A085",
+    type:"vocab",
+    items:[
+      {pt:"Um / Uma",fr:"Un / Une",ph:"UNG / U-ma"},
+      {pt:"Dois / Duas",fr:"Deux",ph:"DOYS / DU-as"},
+      {pt:"Três",fr:"Trois",ph:"TRESS"},
+      {pt:"Quatro",fr:"Quatre",ph:"KWA-tro"},
+      {pt:"Cinco",fr:"Cinq",ph:"SING-ko"},
+      {pt:"Seis",fr:"Six",ph:"SEICE"},
+      {pt:"Sete",fr:"Sept",ph:"SE-tchi"},
+      {pt:"Oito",fr:"Huit",ph:"OY-to"},
+      {pt:"Nove",fr:"Neuf",ph:"NO-vi"},
+      {pt:"Dez",fr:"Dix",ph:"DESS"},
+    ]
+  },
+  {
+    id:"p05", icon:"🎨", title:"Leçon 5 — Les couleurs",
+    subtitle:"Nommer les couleurs de base",
+    color:"#E74C3C",
+    type:"vocab",
+    items:[
+      {pt:"Vermelho",fr:"Rouge",ph:"ver-MEL-lyo"},
+      {pt:"Azul",fr:"Bleu",ph:"a-ZUL"},
+      {pt:"Verde",fr:"Vert",ph:"VER-dji"},
+      {pt:"Amarelo",fr:"Jaune",ph:"a-ma-RE-lo"},
+      {pt:"Branco",fr:"Blanc",ph:"BRANG-ko"},
+      {pt:"Preto",fr:"Noir",ph:"PRE-to"},
+      {pt:"Rosa",fr:"Rose",ph:"HO-za"},
+      {pt:"Laranja",fr:"Orange",ph:"la-RANG-ja"},
+      {pt:"Roxo",fr:"Violet",ph:"HO-sho"},
+      {pt:"Cinza",fr:"Gris",ph:"SING-za"},
+    ]
+  },
+  {
+    id:"p06", icon:"👨‍👩‍👧", title:"Leçon 6 — La famille",
+    subtitle:"Les membres de la famille proche",
+    color:"#D4522A",
+    type:"vocab",
+    items:[
+      {pt:"O pai",fr:"Le père",ph:"o PAI"},
+      {pt:"A mãe",fr:"La mère",ph:"a MANG"},
+      {pt:"O filho",fr:"Le fils",ph:"o FIL-lyo"},
+      {pt:"A filha",fr:"La fille",ph:"a FIL-lya"},
+      {pt:"O irmão",fr:"Le frère",ph:"o ir-MANG"},
+      {pt:"A irmã",fr:"La sœur",ph:"a ir-MANG"},
+      {pt:"O avô",fr:"Le grand-père",ph:"o a-VO"},
+      {pt:"A avó",fr:"La grand-mère",ph:"a a-VO"},
+    ]
+  },
+  {
+    id:"p07", icon:"🍽️", title:"Leçon 7 — Manger et boire",
+    subtitle:"La nourriture et les boissons de base",
+    color:"#C0392B",
+    type:"vocab",
+    items:[
+      {pt:"A água",fr:"L'eau",ph:"a A-gwa"},
+      {pt:"O café",fr:"Le café",ph:"o ka-FE"},
+      {pt:"O pão",fr:"Le pain",ph:"o PAONG"},
+      {pt:"O arroz",fr:"Le riz",ph:"o a-HOSS"},
+      {pt:"O feijão",fr:"Les haricots noirs",ph:"o fey-JHAONG"},
+      {pt:"A carne",fr:"La viande",ph:"a KAR-ni"},
+      {pt:"A fruta",fr:"Le fruit",ph:"a FRU-ta"},
+      {pt:"O suco",fr:"Le jus",ph:"o SU-ko"},
+    ]
+  },
+  {
+    id:"p08", icon:"🏠", title:"Leçon 8 — La maison",
+    subtitle:"Les pièces et objets du quotidien",
+    color:"#8D6E63",
+    type:"vocab",
+    items:[
+      {pt:"A casa",fr:"La maison",ph:"a KA-za"},
+      {pt:"O quarto",fr:"La chambre",ph:"o KWAR-to"},
+      {pt:"A cozinha",fr:"La cuisine",ph:"a ko-ZI-nya"},
+      {pt:"O banheiro",fr:"La salle de bain",ph:"o ba-NYEY-ro"},
+      {pt:"A sala",fr:"Le salon",ph:"a SA-la"},
+      {pt:"A porta",fr:"La porte",ph:"a POR-ta"},
+      {pt:"A janela",fr:"La fenêtre",ph:"a ja-NE-la"},
+      {pt:"A cama",fr:"Le lit",ph:"a KA-ma"},
+    ]
+  },
+  {
+    id:"p09", icon:"🐾", title:"Leçon 9 — Les animaux",
+    subtitle:"Les animaux courants",
+    color:"#7D6608",
+    type:"vocab",
+    items:[
+      {pt:"O cachorro",fr:"Le chien",ph:"o ka-SHO-ho"},
+      {pt:"O gato",fr:"Le chat",ph:"o GA-to"},
+      {pt:"O pássaro",fr:"L'oiseau",ph:"o PA-sa-ro"},
+      {pt:"O peixe",fr:"Le poisson",ph:"o PEY-shi"},
+      {pt:"A vaca",fr:"La vache",ph:"a VA-ka"},
+      {pt:"O cavalo",fr:"Le cheval",ph:"o ka-VA-lo"},
+      {pt:"O macaco",fr:"Le singe",ph:"o ma-KA-ko"},
+      {pt:"A cobra",fr:"Le serpent",ph:"a KO-bra"},
+    ]
+  },
+  {
+    id:"p10", icon:"💪", title:"Leçon 10 — Verbes essentiels",
+    subtitle:"Les 8 verbes les plus importants",
+    color:"#1A7AAF",
+    type:"phrases",
+    items:[
+      {pt:"Eu sou / Eu estou",fr:"Je suis (permanent / temporaire)",ph:"EW SOW / EW es-TOW"},
+      {pt:"Eu tenho",fr:"J'ai",ph:"EW TEN-yo"},
+      {pt:"Eu quero",fr:"Je veux",ph:"EW KE-ro"},
+      {pt:"Eu gosto de",fr:"J'aime / J'apprécie",ph:"EW GOS-to dji"},
+      {pt:"Eu vou",fr:"Je vais",ph:"EW VOW"},
+      {pt:"Eu falo",fr:"Je parle",ph:"EW FA-lo"},
+      {pt:"Eu como",fr:"Je mange",ph:"EW KO-mo"},
+      {pt:"Eu preciso de",fr:"J'ai besoin de",ph:"EW pre-SI-zo dji"},
+    ]
+  },
+  {
+    id:"p11", icon:"🗣️", title:"Leçon 11 — Phrases de survie",
+    subtitle:"Ce qu'il faut savoir pour se débrouiller",
+    color:"#117A65",
+    type:"phrases",
+    items:[
+      {pt:"Quanto custa?",fr:"Combien ça coûte ?",ph:"KWAN-to KUS-ta"},
+      {pt:"Onde fica o banheiro?",fr:"Où sont les toilettes ?",ph:"ON-dji FI-ka o ba-NYEY-ro"},
+      {pt:"Eu não entendo",fr:"Je ne comprends pas",ph:"EW naong eng-TEN-do"},
+      {pt:"Pode repetir?",fr:"Vous pouvez répéter ?",ph:"PO-dji he-pe-TCHIR"},
+      {pt:"Fala mais devagar",fr:"Parlez plus lentement",ph:"FA-la mice de-va-GAR"},
+      {pt:"Eu estou com fome",fr:"J'ai faim",ph:"EW es-TOW kong FO-mi"},
+      {pt:"Eu estou com sede",fr:"J'ai soif",ph:"EW es-TOW kong SE-dji"},
+      {pt:"Me ajuda, por favor",fr:"Aidez-moi s'il vous plaît",ph:"mi a-JHOO-da por fa-VOR"},
+    ]
+  },
+];
+
+// Progress stored in localStorage
+function getParcourProgress(){
+  try{ return JSON.parse(localStorage.getItem("parcours_progress")||"{}"); }catch(e){ return {}; }
+}
+function setParcourProgress(id){
+  const p=getParcourProgress(); p[id]=true;
+  localStorage.setItem("parcours_progress",JSON.stringify(p));
+}
+
+let currentLesson=null;
+let lessonStep=0; // 0=learn, 1=quiz
+let quizState={items:[],idx:0,score:0,choices:[]};
+
+function renderParcours(){
+  const wrap=document.createElement("div");
+  wrap.style.cssText="padding-top:14px";
+  showLessonList(wrap);
+  return wrap;
+}
+
+function showLessonList(wrap){
+  const prog=getParcourProgress();
+  wrap.innerHTML=`
+    <p class="lbl" style="margin-top:0">Ton parcours d'apprentissage</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.6">Chaque leçon se débloque après la précédente. Commence depuis le début — comme un bébé qui apprend à parler 👶</p>
+    <div id="lesson-list"></div>
+  `;
+  const list=wrap.querySelector("#lesson-list");
+  PARCOURS_LESSONS.forEach((lesson,i)=>{
+    const done=prog[lesson.id];
+    const locked=i>0&&!prog[PARCOURS_LESSONS[i-1].id];
+    const card=document.createElement("div");
+    card.style.cssText=`display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;margin-bottom:10px;border:1.5px solid ${locked?"var(--brd)":done?"rgba(69,214,138,.3)":"rgba("+hexToRgb(lesson.color)+",.35)"};background:${locked?"rgba(255,252,245,.02)":done?"rgba(69,214,138,.05)":"rgba("+hexToRgb(lesson.color)+",.07)"};cursor:${locked?"default":"pointer"};transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden`;
+    card.innerHTML=`
+      <div style="width:48px;height:48px;border-radius:12px;background:${locked?"rgba(255,252,245,.05)":lesson.color+"22"};display:flex;align-items:center;justify-content:font-size:24px;justify-content:center;flex-shrink:0;font-size:26px;border:1px solid ${locked?"var(--brd)":lesson.color+"55"}">${locked?"🔒":lesson.icon}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:14px;color:${locked?"var(--muted)":"var(--txt)"};margin-bottom:2px">${lesson.title}</div>
+        <div style="font-size:11.5px;color:var(--muted);line-height:1.4">${locked?"Termine la leçon précédente pour débloquer":lesson.subtitle}</div>
+        ${lesson.type!=="sounds"?`<div style="font-size:10.5px;color:var(--dim);margin-top:4px">${lesson.items.length} éléments à apprendre</div>`:""}
+      </div>
+      <div style="flex-shrink:0;font-size:20px">${done?"✅":locked?"":"▶️"}</div>
+    `;
+    if(!locked){
+      card.addEventListener("mouseenter",()=>{ card.style.transform="translateY(-2px)"; card.style.boxShadow=`0 8px 24px rgba(0,0,0,.25)`;});
+      card.addEventListener("mouseleave",()=>{ card.style.transform=""; card.style.boxShadow="";});
+      card.addEventListener("click",()=>openLesson(wrap,lesson,i));
+    }
+    list.appendChild(card);
+  });
+}
+
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return r+","+g+","+b;
+}
+
+function openLesson(wrap,lesson,idx){
+  currentLesson=lesson;
+  lessonStep=0;
+  wrap.innerHTML="";
+  showLessonLearn(wrap,lesson,idx);
+}
+
+function showLessonLearn(wrap,lesson,lessonIdx){
+  const isSounds=lesson.type==="sounds";
+  let html=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <button onclick="" id="back-btn" style="background:rgba(255,252,245,.07);border:1px solid var(--brd);border-radius:10px;padding:7px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer">← Retour</button>
+      <div style="flex:1;height:4px;background:rgba(255,252,245,.07);border-radius:2px"><div style="width:50%;height:100%;background:${lesson.color};border-radius:2px;transition:width .3s"></div></div>
+      <span style="font-size:11px;color:var(--muted);font-weight:700">50%</span>
+    </div>
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:42px;margin-bottom:8px">${lesson.icon}</div>
+      <h2 style="font-family:var(--fd);font-size:20px;font-weight:900;margin-bottom:4px">${lesson.title}</h2>
+      <p style="font-size:12px;color:var(--muted)">${lesson.subtitle}</p>
+    </div>
+    <p class="lbl" style="margin-top:0">${isSounds?"Sons à retenir":"Mots à apprendre"}</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+  `;
+  
+  if(isSounds){
+    lesson.items.forEach(item=>{
+      html+=`<div style="background:rgba(255,252,245,.05);border:1px solid var(--brd);border-radius:14px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+          <span style="font-family:var(--fd);font-size:20px;font-weight:900;color:${lesson.color};min-width:60px">${item.symbol}</span>
+          <span style="font-size:11px;background:rgba(255,252,245,.08);padding:3px 8px;border-radius:8px;color:var(--gold);font-weight:700">${item.sound}</span>
+        </div>
+        <div style="font-size:13px;color:var(--txt);margin-bottom:4px">${item.desc}</div>
+        <div style="font-size:11.5px;color:var(--muted)">Ex : <em>${item.ex}</em></div>
+      </div>`;
+    });
+  } else {
+    lesson.items.forEach(item=>{
+      html+=`<div style="background:rgba(255,252,245,.05);border:1px solid var(--brd);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px">
+        <div style="flex:1">
+          <div style="font-size:18px;font-weight:700;color:var(--txt);margin-bottom:3px">${item.pt}</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:3px">🇫🇷 ${item.fr}</div>
+          <div style="font-size:11px;color:${lesson.color};font-weight:600">🔊 ${item.ph}</div>
+        </div>
+        <button onclick="speak('${item.pt.replace(/'/g,"\'")}')" style="width:38px;height:38px;border-radius:50%;background:${lesson.color}22;border:1px solid ${lesson.color}55;cursor:pointer;font-size:18px;flex-shrink:0">🔊</button>
+      </div>`;
+    });
+  }
+  
+  html+=`</div>`;
+  
+  if(!isSounds){
+    html+=`<button id="start-quiz-btn" class="btn btn-p btn-full" style="margin-bottom:16px">✅ J'ai appris ces mots — Faire le test !</button>`;
+  } else {
+    html+=`<button id="start-quiz-btn" class="btn btn-p btn-full" style="margin-bottom:16px">✅ Compris ! Terminer cette leçon</button>`;
+  }
+  
+  wrap.innerHTML=html;
+  wrap.querySelector("#back-btn").addEventListener("click",()=>{ wrap.innerHTML=""; showLessonList(wrap); });
+  wrap.querySelector("#start-quiz-btn").addEventListener("click",()=>{
+    if(isSounds){ setParcourProgress(lesson.id); wrap.innerHTML=""; showLessonComplete(wrap,lesson); }
+    else{ wrap.innerHTML=""; startQuiz(wrap,lesson); }
+  });
+}
+
+function speak(text){
+  if(!window.speechSynthesis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="pt-BR"; u.rate=0.85;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+
+function startQuiz(wrap,lesson){
+  // Build shuffled quiz from lesson items
+  const items=[...lesson.items].sort(()=>Math.random()-.5);
+  quizState={items,idx:0,score:0,lesson};
+  showQuizQuestion(wrap);
+}
+
+function showQuizQuestion(wrap){
+  const {items,idx,score,lesson}=quizState;
+  if(idx>=items.length){ setParcourProgress(lesson.id); showLessonComplete(wrap,lesson); return; }
+  
+  const q=items[idx];
+  const progress=Math.round((idx/items.length)*100);
+  
+  // Build 4 choices: correct + 3 random wrong
+  const others=lesson.items.filter(x=>x.pt!==q.pt).sort(()=>Math.random()-.5).slice(0,3);
+  const choices=[...others,q].sort(()=>Math.random()-.5);
+  
+  wrap.innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <div style="flex:1;height:4px;background:rgba(255,252,245,.07);border-radius:2px"><div style="width:${50+progress/2}%;height:100%;background:${lesson.color};border-radius:2px"></div></div>
+      <span style="font-size:11px;color:var(--muted);font-weight:700">${idx+1}/${items.length}</span>
+    </div>
+    <div style="text-align:center;margin-bottom:24px">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Quelle est la traduction de :</p>
+      <div style="font-family:var(--fd);font-size:36px;font-weight:900;color:var(--txt);margin-bottom:6px">${q.pt}</div>
+      <div style="font-size:12px;color:${lesson.color}">🔊 ${q.ph}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px" id="choices">
+      ${choices.map((c,i)=>`<button class="quiz-choice" data-correct="${c.pt===q.pt}" style="padding:14px 18px;border-radius:14px;border:1.5px solid var(--brd);background:rgba(255,252,245,.05);color:var(--txt);font-size:14px;font-weight:600;text-align:left;cursor:pointer;transition:all .2s">${c.fr}</button>`).join("")}
+    </div>
+    <p style="text-align:center;font-size:11px;color:var(--dim);margin-top:16px">Score : ${score}/${idx} ✓</p>
+  `;
+  
+  wrap.querySelectorAll(".quiz-choice").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const correct=btn.dataset.correct==="true";
+      wrap.querySelectorAll(".quiz-choice").forEach(b=>{
+        b.style.pointerEvents="none";
+        if(b.dataset.correct==="true") b.style.cssText+=`;border-color:#45D68A;background:rgba(69,214,138,.15);color:#45D68A`;
+        else if(b===btn&&!correct) b.style.cssText+=`;border-color:#FF5E2C;background:rgba(255,94,44,.1);color:#FF5E2C`;
+      });
+      if(correct) quizState.score++;
+      speak(q.pt);
+      setTimeout(()=>{ quizState.idx++; wrap.innerHTML=""; showQuizQuestion(wrap); },1200);
+    });
+  });
+}
+
+function showLessonComplete(wrap,lesson){
+  const total=lesson.items?lesson.items.length:0;
+  const {score}=quizState;
+  wrap.innerHTML=`
+    <div style="text-align:center;padding:32px 16px">
+      <div style="font-size:64px;margin-bottom:16px">${quizState.score===total&&total>0?"🏆":"🎉"}</div>
+      <h2 style="font-family:var(--fd);font-size:24px;font-weight:900;margin-bottom:8px">Leçon terminée !</h2>
+      ${total>0?`<p style="font-size:15px;color:var(--muted);margin-bottom:6px">Score : <strong style="color:${lesson.color}">${score}/${total}</strong></p>`:""}
+      <p style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6">${lesson.type==="sounds"?"Tu connais maintenant les sons du portugais brésilien !":score===total?"Parfait ! Tu maîtrises tous les mots de cette leçon.":score>=total*.7?"Bien joué ! Continue comme ça.":"Continue de t'entraîner, ça viendra !"}</p>
+      <button id="next-lesson-btn" class="btn btn-p btn-full" style="margin-bottom:12px">Leçon suivante →</button>
+      <button id="back-list-btn" class="btn btn-s btn-full">← Toutes les leçons</button>
+    </div>
+  `;
+  const prog=getParcourProgress();
+  const curIdx=PARCOURS_LESSONS.findIndex(l=>l.id===lesson.id);
+  const nextLesson=PARCOURS_LESSONS[curIdx+1];
+  
+  wrap.querySelector("#next-lesson-btn").addEventListener("click",()=>{
+    wrap.innerHTML="";
+    if(nextLesson) openLesson(wrap,nextLesson,curIdx+1);
+    else showLessonList(wrap);
+  });
+  wrap.querySelector("#back-list-btn").addEventListener("click",()=>{ wrap.innerHTML=""; showLessonList(wrap); });
+  if(!nextLesson) wrap.querySelector("#next-lesson-btn").textContent="🎓 Parcours terminé !";
+}
+
 </script>
 </body>
 </html>
