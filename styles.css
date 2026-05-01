@@ -162,20 +162,33 @@ h2 {
   position: sticky;
   top: 0;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
   gap: 6px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 8px 0;
   background: var(--bg);
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
+  flex: 0 0 auto;
+  min-width: 112px;
   height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
   color: var(--muted);
   font-weight: 750;
+  scroll-snap-align: start;
 }
 
 .tab.active {
@@ -555,7 +568,6 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .tabs,
   .tool-switcher {
     grid-template-columns: repeat(2, 1fr);
   }
