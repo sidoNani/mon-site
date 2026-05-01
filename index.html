@@ -45,6 +45,7 @@
           <button class="tab active" data-tab="learn" type="button">Parcours</button>
           <button class="tab" data-tab="alphabet" type="button">Alphabet</button>
           <button class="tab" data-tab="practice" type="button">Ecouter</button>
+          <button class="tab" data-tab="tools" type="button">Outils</button>
           <button class="tab" data-tab="review" type="button">Memoire</button>
         </nav>
 
@@ -70,6 +71,20 @@
             <p>Ecoute plusieurs fois, puis reponds.</p>
           </div>
           <div class="exercise-card" id="exerciseCard"></div>
+        </section>
+
+        <section id="tools" class="panel" aria-label="Outils">
+          <div class="section-heading">
+            <h2>Outils</h2>
+            <p>Recherche, dialogues, flashcards et grammaire.</p>
+          </div>
+          <div class="tool-switcher" role="tablist" aria-label="Outils disponibles">
+            <button class="tool-tab active" data-tool="search" type="button">Recherche</button>
+            <button class="tool-tab" data-tool="flashcards" type="button">Cartes</button>
+            <button class="tool-tab" data-tool="dialogs" type="button">Dialogues</button>
+            <button class="tool-tab" data-tool="grammar" type="button">Grammaire</button>
+          </div>
+          <div id="toolContent"></div>
         </section>
 
         <section id="review" class="panel" aria-label="Memoire">

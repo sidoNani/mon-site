@@ -34,6 +34,114 @@ const alphabet = [
   { upper: "Я", lower: "я", sound: "ya", example: "я", speak: "я" }
 ];
 
+const dialogues = [
+  {
+    title: "Se presenter",
+    level: "A1",
+    lines: [
+      { ru: "Привет! Как тебя зовут?", fr: "Salut ! Comment tu t'appelles ?" },
+      { ru: "Меня зовут Анна. А тебя?", fr: "Je m'appelle Anna. Et toi ?" },
+      { ru: "Меня зовут Иван. Очень приятно.", fr: "Je m'appelle Ivan. Enchante." }
+    ]
+  },
+  {
+    title: "Au cafe",
+    level: "A1-A2",
+    lines: [
+      { ru: "Здравствуйте. Можно чай?", fr: "Bonjour. Je peux avoir un the ?" },
+      { ru: "Да, конечно. Чёрный или зелёный?", fr: "Oui, bien sur. Noir ou vert ?" },
+      { ru: "Зелёный, пожалуйста. Сколько стоит?", fr: "Vert, s'il vous plait. Combien ca coute ?" }
+    ]
+  },
+  {
+    title: "Demander son chemin",
+    level: "A2",
+    lines: [
+      { ru: "Извините, где метро?", fr: "Excusez-moi, ou est le metro ?" },
+      { ru: "Идите прямо, потом направо.", fr: "Allez tout droit, puis a droite." },
+      { ru: "Спасибо большое!", fr: "Merci beaucoup !" }
+    ]
+  },
+  {
+    title: "Parler de sa journee",
+    level: "B1",
+    lines: [
+      { ru: "Сегодня я работал и потом читал книгу.", fr: "Aujourd'hui j'ai travaille puis j'ai lu un livre." },
+      { ru: "Что ты делал вечером?", fr: "Qu'est-ce que tu as fait le soir ?" },
+      { ru: "Я встретился с другом и мы говорили о планах.", fr: "J'ai vu un ami et nous avons parle de projets." }
+    ]
+  },
+  {
+    title: "Donner son avis",
+    level: "B2",
+    lines: [
+      { ru: "Я думаю, что это важная проблема.", fr: "Je pense que c'est un probleme important." },
+      { ru: "С одной стороны, это сложно. Однако решение возможно.", fr: "D'un cote, c'est difficile. Cependant une solution est possible." },
+      { ru: "Мне кажется, стоит учитывать контекст.", fr: "Il me semble qu'il faut prendre le contexte en compte." }
+    ]
+  },
+  {
+    title: "Debat nuance",
+    level: "C1",
+    lines: [
+      { ru: "С моей точки зрения, это спорный вопрос.", fr: "De mon point de vue, c'est une question controversee." },
+      { ru: "Нельзя отрицать, что ситуация изменилась.", fr: "On ne peut pas nier que la situation a change." },
+      { ru: "Тем не менее, стоит учитывать долгосрочные последствия.", fr: "Neanmoins, il faut prendre en compte les consequences a long terme." }
+    ]
+  }
+];
+
+const grammarSheets = [
+  {
+    title: "Accusatif",
+    level: "A2",
+    rule: "On l'utilise apres voir, vouloir, prendre, lire, manger. Le feminin en -а devient souvent -у.",
+    examples: ["я вижу маму", "я хочу воду", "я читаю книгу"]
+  },
+  {
+    title: "Genitif",
+    level: "A2-B1",
+    rule: "On l'utilise apres нет, pour les quantites et pour dire de quelque chose.",
+    examples: ["у меня нет книги", "много воды", "чашка чая"]
+  },
+  {
+    title: "Datif",
+    level: "B1",
+    rule: "Il repond souvent a la question a qui ? et sert aussi dans мне нравится.",
+    examples: ["я даю маме книгу", "мне нравится русский", "ему холодно"]
+  },
+  {
+    title: "Instrumental",
+    level: "B1",
+    rule: "Il sert pour avec qui, avec quoi, et apres certains verbes comme быть.",
+    examples: ["с другом", "чай с молоком", "он был врачом"]
+  },
+  {
+    title: "Locatif",
+    level: "B1",
+    rule: "Il apparait apres в, на, о quand on parle d'un lieu ou d'un sujet.",
+    examples: ["в школе", "на работе", "говорить о Москве"]
+  },
+  {
+    title: "Aspect verbal",
+    level: "B1-B2",
+    rule: "Imperfectif = processus ou repetition. Perfectif = resultat ou action complete.",
+    examples: ["я читал книгу", "я прочитал книгу", "я буду делать / я сделаю"]
+  },
+  {
+    title: "Verbes de mouvement",
+    level: "B1-B2",
+    rule: "идти/ехать = maintenant dans une direction. ходить/ездить = habitude ou aller-retour.",
+    examples: ["я иду домой", "я хожу в школу", "я еду в метро"]
+  },
+  {
+    title: "Subordonnees C1",
+    level: "C1",
+    rule: "Pour nuancer, utilise чтобы, несмотря на то что, в то время как, как только.",
+    examples: ["я учу, чтобы говорить", "несмотря на то что трудно, я продолжаю", "как только я приду"]
+  }
+];
+
 const lessons = [
   {
     id: "sounds",
@@ -640,15 +748,23 @@ const allExercises = lessons.flatMap((lesson) =>
 let state = loadState();
 let currentExercise = null;
 let activeLessonId = "sounds";
+let activeTool = "search";
+let flashcardIndex = 0;
+let searchQuery = "";
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) return JSON.parse(saved);
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    return { known: {}, difficult: {}, ...parsed };
+  }
   return {
     lastActive: "",
     completed: {},
     mistakes: [],
     srs: {},
+    known: {},
+    difficult: {},
     theme: "light"
   };
 }
@@ -680,6 +796,7 @@ function render() {
     : "calme";
   renderLessons();
   renderAlphabet();
+  renderTools();
   renderReview();
 }
 
@@ -722,6 +839,147 @@ function renderAlphabet() {
     .join("");
 }
 
+function getAllWords() {
+  return lessons.flatMap((lesson) =>
+    lesson.words.map((word, index) => ({
+      ...word,
+      id: `${lesson.id}-word-${index}`,
+      lessonId: lesson.id,
+      lessonTitle: lesson.title,
+      stage: lesson.stage
+    }))
+  );
+}
+
+function renderTools() {
+  const container = document.getElementById("toolContent");
+  if (!container) return;
+  document.querySelectorAll(".tool-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tool === activeTool));
+  if (activeTool === "search") renderSearch(container);
+  if (activeTool === "flashcards") renderFlashcards(container);
+  if (activeTool === "dialogs") renderDialogues(container);
+  if (activeTool === "grammar") renderGrammar(container);
+}
+
+function renderSearch(container) {
+  const query = normalize(searchQuery);
+  const words = getAllWords();
+  const results = query
+    ? words.filter((word) =>
+        normalize(`${word.ru} ${word.fr} ${word.example} ${word.lessonTitle}`).includes(query)
+      )
+    : words.slice(0, 12);
+  container.innerHTML = `
+    <input class="search-input" id="searchInput" value="${searchQuery}" placeholder="Cherche en francais ou en russe" autocomplete="off" />
+    <div class="tool-list">
+      ${results
+        .map(
+          (word, index) => `
+            <article class="tool-card">
+              <div class="word-line">
+                <div>
+                  <strong>${word.ru}</strong>
+                  <span>${word.fr}</span>
+                  <p class="example">${word.example} · ${word.lessonTitle}</p>
+                </div>
+                <button class="audio-button" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">▶</button>
+              </div>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+  document.getElementById("searchInput").addEventListener("input", (event) => {
+    searchQuery = event.target.value;
+    renderTools();
+    const input = document.getElementById("searchInput");
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  });
+}
+
+function renderFlashcards(container) {
+  const words = getAllWords();
+  const word = words[flashcardIndex % words.length];
+  const known = state.known[word.id];
+  const difficult = state.difficult[word.id];
+  container.innerHTML = `
+    <article class="tool-card flashcard">
+      <div>
+        <strong>${word.ru}</strong>
+        <span>${word.fr}</span>
+        <p class="example">${word.example}</p>
+        <p class="example">${word.lessonTitle}${known ? " · connu" : ""}${difficult ? " · a revoir" : ""}</p>
+        <button class="audio-button" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">▶</button>
+      </div>
+    </article>
+    <div class="flash-actions">
+      <button class="memory-button unknown" type="button" data-memory="unknown" data-word="${word.id}">Je ne connais pas</button>
+      <button class="memory-button known" type="button" data-memory="known" data-word="${word.id}">Je connais</button>
+    </div>
+    <button class="next-button" type="button" id="nextFlashcard">Carte suivante</button>
+  `;
+}
+
+function renderDialogues(container) {
+  container.innerHTML = `
+    <div class="tool-list">
+      ${dialogues
+        .map(
+          (dialogue) => `
+            <article class="dialogue-card">
+              <h3>${dialogue.title}</h3>
+              <span class="pill">${dialogue.level}</span>
+              ${dialogue.lines
+                .map(
+                  (line) => `
+                    <div class="dialogue-line">
+                      <div>
+                        <strong>${line.ru}</strong>
+                        <span>${line.fr}</span>
+                      </div>
+                      <button class="audio-button" type="button" data-speak="${line.ru}" aria-label="Ecouter">▶</button>
+                    </div>
+                  `
+                )
+                .join("")}
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderGrammar(container) {
+  container.innerHTML = `
+    <div class="grammar-grid">
+      ${grammarSheets
+        .map(
+          (sheet) => `
+            <article class="grammar-card">
+              <h3>${sheet.title}</h3>
+              <span class="pill">${sheet.level}</span>
+              <p class="soft-text">${sheet.rule}</p>
+              ${sheet.examples
+                .map(
+                  (example) => `
+                    <div class="dialogue-line">
+                      <strong>${example}</strong>
+                      <button class="audio-button" type="button" data-speak="${example}" aria-label="Ecouter ${example}">▶</button>
+                    </div>
+                  `
+                )
+                .join("")}
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderLessonWords(lessonId) {
   const lesson = lessons.find((item) => item.id === lessonId);
   const card = document.getElementById("exerciseCard");
@@ -735,7 +993,7 @@ function renderLessonWords(lessonId) {
     <div class="answers">
       ${lesson.words
         .map(
-          (word) => `
+          (word, index) => `
             <div class="word-line">
               <div>
                 <strong>${word.ru}</strong>
@@ -743,6 +1001,10 @@ function renderLessonWords(lessonId) {
                 <p class="example">${word.example}</p>
               </div>
               <button class="audio-button" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">▶</button>
+              <div class="memory-actions">
+                <button class="memory-button unknown" type="button" data-memory="unknown" data-word="${lesson.id}-word-${index}">Je ne connais pas</button>
+                <button class="memory-button known" type="button" data-memory="known" data-word="${lesson.id}-word-${index}">Je connais</button>
+              </div>
             </div>
           `
         )
@@ -901,6 +1163,20 @@ function showTab(id) {
   document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("active", panel.id === id));
 }
 
+function markMemory(wordId, status) {
+  if (status === "known") {
+    state.known[wordId] = true;
+    delete state.difficult[wordId];
+    showToast("Marque comme connu.");
+  } else {
+    state.difficult[wordId] = true;
+    delete state.known[wordId];
+    showToast("Ajoute aux points a reprendre.");
+  }
+  saveState();
+  render();
+}
+
 function showToast(message) {
   const toast = document.getElementById("toast");
   toast.textContent = message;
@@ -913,6 +1189,13 @@ document.addEventListener("click", (event) => {
   if (!target) return;
 
   if (target.dataset.tab) showTab(target.dataset.tab);
+  if (target.dataset.tool) {
+    activeTool = target.dataset.tool;
+    renderTools();
+  }
+  if (target.dataset.memory) {
+    markMemory(target.dataset.word, target.dataset.memory);
+  }
   if (target.dataset.lesson) {
     activeLessonId = target.dataset.lesson;
     showTab("practice");
@@ -925,6 +1208,10 @@ document.addEventListener("click", (event) => {
     startExercise(exercise, exercise.lessonId);
   }
   if (target.id === "nextExercise") nextExercise();
+  if (target.id === "nextFlashcard") {
+    flashcardIndex += 1;
+    renderTools();
+  }
   if (target.id === "validateText") validateText();
   if (target.id === "quickSession") {
     const nextLesson = lessons.find((lesson) => (state.completed[lesson.id] || 0) < 100) || lessons[0];
