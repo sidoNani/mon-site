@@ -1249,5 +1249,29 @@ document.addEventListener("gesturestart", (event) => {
   event.preventDefault();
 });
 
+let lastTouchX = 0;
+let lastTouchY = 0;
+
+document.addEventListener(
+  "touchstart",
+  (event) => {
+    if (!event.touches.length) return;
+    lastTouchX = event.touches[0].clientX;
+    lastTouchY = event.touches[0].clientY;
+  },
+  { passive: true }
+);
+
+document.addEventListener(
+  "touchmove",
+  (event) => {
+    if (!event.touches.length || event.target.closest(".tabs")) return;
+    const deltaX = Math.abs(event.touches[0].clientX - lastTouchX);
+    const deltaY = Math.abs(event.touches[0].clientY - lastTouchY);
+    if (deltaX > deltaY) event.preventDefault();
+  },
+  { passive: false }
+);
+
 render();
 renderLessonWords(activeLessonId);
