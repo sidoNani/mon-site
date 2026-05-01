@@ -1237,5 +1237,17 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+document.addEventListener(
+  "touchmove",
+  (event) => {
+    if (event.touches.length > 1) event.preventDefault();
+  },
+  { passive: false }
+);
+
+document.addEventListener("gesturestart", (event) => {
+  event.preventDefault();
+});
+
 render();
 renderLessonWords(activeLessonId);
