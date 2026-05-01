@@ -142,6 +142,44 @@ const grammarSheets = [
   }
 ];
 
+const immersionStories = [
+  {
+    title: "Утро Анны",
+    level: "A1",
+    image: "☕",
+    ru: "Анна дома. Сейчас утро. Она пьёт чай и читает книгу. Потом Анна идёт на работу.",
+    fr: "Anna est a la maison. C'est le matin. Elle boit du the et lit un livre. Ensuite Anna va au travail."
+  },
+  {
+    title: "В метро",
+    level: "A2",
+    image: "🚇",
+    ru: "Иван едет в метро. Он слушает русскую речь и понимает не всё, но каждый день понимает больше.",
+    fr: "Ivan prend le metro. Il ecoute du russe et ne comprend pas tout, mais chaque jour il comprend davantage."
+  },
+  {
+    title: "Планы на завтра",
+    level: "B1",
+    image: "📅",
+    ru: "Завтра мы встречаемся с другом. Сначала мы пойдём в кафе, а потом будем говорить о наших планах.",
+    fr: "Demain nous retrouvons un ami. D'abord nous irons au cafe, puis nous parlerons de nos projets."
+  },
+  {
+    title: "Спорный вопрос",
+    level: "B2-C1",
+    image: "💬",
+    ru: "С моей точки зрения, это спорный вопрос. Нельзя отрицать, что проблема сложная, однако решение возможно, если учитывать контекст.",
+    fr: "De mon point de vue, c'est une question controversee. On ne peut pas nier que le probleme est complexe, cependant une solution est possible si l'on prend le contexte en compte."
+  }
+];
+
+const speakingPrompts = [
+  { title: "Repete lentement", ru: "я хочу воду", fr: "je veux de l'eau" },
+  { title: "Repete naturellement", ru: "извините, где метро?", fr: "excusez-moi, ou est le metro ?" },
+  { title: "Shadowing", ru: "я думаю, что это важно", fr: "je pense que c'est important" },
+  { title: "C1 nuance", ru: "с моей точки зрения, стоит учитывать контекст", fr: "de mon point de vue, il faut prendre le contexte en compte" }
+];
+
 const lessons = [
   {
     id: "sounds",
@@ -748,15 +786,16 @@ const allExercises = lessons.flatMap((lesson) =>
 let state = loadState();
 let currentExercise = null;
 let activeLessonId = "sounds";
-let activeTool = "search";
+let activeTool = "repeat";
 let flashcardIndex = 0;
 let searchQuery = "";
+let vocabQuery = "";
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     const parsed = JSON.parse(saved);
-    return { known: {}, difficult: {}, ...parsed };
+    return { known: {}, difficult: {}, revealedStories: {}, revealedMeanings: {}, ...parsed };
   }
   return {
     lastActive: "",
@@ -765,6 +804,8 @@ function loadState() {
     srs: {},
     known: {},
     difficult: {},
+    revealedStories: {},
+    revealedMeanings: {},
     theme: "light"
   };
 }
@@ -792,11 +833,12 @@ function speak(text) {
 function render() {
   document.body.classList.toggle("dark", state.theme === "dark");
   document.getElementById("mistakeCount").textContent = state.mistakes.length
-    ? `${state.mistakes.length} a reprendre`
-    : "calme";
+    ? `${state.mistakes.length} due`
+    : "pret";
   renderLessons();
-  renderAlphabet();
+  renderVocabulary();
   renderTools();
+  renderGrammarPanel();
   renderReview();
 }
 
@@ -823,20 +865,38 @@ function renderLessons() {
     .join("");
 }
 
-function renderAlphabet() {
+function renderVocabulary() {
   const container = document.getElementById("alphabetGrid");
   if (!container) return;
-  container.innerHTML = alphabet
+  const input = document.getElementById("vocabSearchInput");
+  if (input && input.value !== vocabQuery) input.value = vocabQuery;
+  const query = normalize(vocabQuery);
+  const words = getAllWords();
+  const filtered = query
+    ? words.filter((word) => normalize(`${word.ru} ${word.fr} ${word.example} ${word.lessonTitle}`).includes(query))
+    : words.slice(0, 60);
+  container.classList.add("vocab-grid");
+  container.innerHTML = filtered
     .map(
-      (letter) => `
-        <button class="letter-card" type="button" data-speak="${letter.speak}" aria-label="Ecouter ${letter.upper}">
-          <strong>${letter.upper} ${letter.lower}</strong>
-          <span>${letter.sound}</span>
-          <small>${letter.example}</small>
+      (word) => `
+        <button class="letter-card vocab-card" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">
+          <strong>${word.ru}</strong>
+          <span>${word.example}</span>
+          <small>${word.fr}</small>
         </button>
       `
     )
     .join("");
+  if (input && !input.dataset.bound) {
+    input.dataset.bound = "true";
+    input.addEventListener("input", (event) => {
+      vocabQuery = event.target.value;
+      renderVocabulary();
+      const nextInput = document.getElementById("vocabSearchInput");
+      nextInput.focus();
+      nextInput.setSelectionRange(nextInput.value.length, nextInput.value.length);
+    });
+  }
 }
 
 function getAllWords() {
@@ -855,10 +915,32 @@ function renderTools() {
   const container = document.getElementById("toolContent");
   if (!container) return;
   document.querySelectorAll(".tool-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tool === activeTool));
-  if (activeTool === "search") renderSearch(container);
-  if (activeTool === "flashcards") renderFlashcards(container);
+  if (activeTool === "repeat") renderSpeaking(container, "repeat");
+  if (activeTool === "shadowing") renderSpeaking(container, "shadowing");
   if (activeTool === "dialogs") renderDialogues(container);
-  if (activeTool === "grammar") renderGrammar(container);
+}
+
+function renderSpeaking(container, mode) {
+  const prompts = mode === "shadowing" ? speakingPrompts.slice(1) : speakingPrompts;
+  container.innerHTML = `
+    <div class="tool-list">
+      ${prompts
+        .map(
+          (prompt) => `
+            <article class="tool-card">
+              <h3>${prompt.title}</h3>
+              <p class="question">${prompt.ru}</p>
+              <p class="soft-text">${prompt.fr}</p>
+              <div class="flash-actions">
+                <button class="audio-button" type="button" data-speak="${prompt.ru}" aria-label="Ecouter">▶</button>
+                <button class="memory-button known" type="button" data-speaking="${prompt.ru}">Je l'ai repete</button>
+              </div>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
 }
 
 function renderSearch(container) {
@@ -922,6 +1004,38 @@ function renderFlashcards(container) {
   `;
 }
 
+function renderSrsPanel() {
+  const card = document.getElementById("exerciseCard");
+  if (!card || document.getElementById("practice")?.classList.contains("active") === false) return;
+  const due = getDueReviews();
+  const words = getAllWords();
+  const difficultWords = Object.keys(state.difficult || {})
+    .map((id) => words.find((word) => word.id === id))
+    .filter(Boolean);
+  const pool = [...difficultWords, ...words].filter(Boolean);
+  const word = pool[flashcardIndex % pool.length];
+  card.innerHTML = `
+    <div class="exercise-top">
+      <span class="pill">SRS</span>
+      <span class="pill">${due.length ? `${due.length} exercices dus` : "revision libre"}</span>
+    </div>
+    <article class="tool-card flashcard">
+      <div>
+        <strong>${word.ru}</strong>
+        <span>${word.example}</span>
+        <p class="example">${word.fr}</p>
+        <button class="audio-button" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">▶</button>
+      </div>
+    </article>
+    <div class="flash-actions">
+      <button class="memory-button unknown" type="button" data-memory="unknown" data-word="${word.id}">Difficile</button>
+      <button class="memory-button known" type="button" data-memory="known" data-word="${word.id}">Facile</button>
+    </div>
+    <button class="next-button" type="button" id="nextFlashcard">Carte suivante</button>
+    ${due[0] ? `<button class="next-button" type="button" data-review="${due[0].id}">Exercice du</button>` : ""}
+  `;
+}
+
 function renderDialogues(container) {
   container.innerHTML = `
     <div class="tool-list">
@@ -980,6 +1094,12 @@ function renderGrammar(container) {
   `;
 }
 
+function renderGrammarPanel() {
+  const container = document.getElementById("grammarContent");
+  if (!container) return;
+  renderGrammar(container);
+}
+
 function renderLessonWords(lessonId) {
   const lesson = lessons.find((item) => item.id === lessonId);
   const card = document.getElementById("exerciseCard");
@@ -997,11 +1117,12 @@ function renderLessonWords(lessonId) {
             <div class="word-line">
               <div>
                 <strong>${word.ru}</strong>
-                <span>${word.fr}</span>
+                <span class="${state.revealedMeanings?.[`${lesson.id}-word-${index}`] ? "" : "hidden-meaning"}">${word.fr}</span>
                 <p class="example">${word.example}</p>
               </div>
               <button class="audio-button" type="button" data-speak="${word.speak}" aria-label="Ecouter ${word.ru}">▶</button>
               <div class="memory-actions">
+                <button class="memory-button" type="button" data-meaning="${lesson.id}-word-${index}">Sens</button>
                 <button class="memory-button unknown" type="button" data-memory="unknown" data-word="${lesson.id}-word-${index}">Je ne connais pas</button>
                 <button class="memory-button known" type="button" data-memory="known" data-word="${lesson.id}-word-${index}">Je connais</button>
               </div>
@@ -1138,20 +1259,21 @@ function getDueReviews() {
 
 function renderReview() {
   const container = document.getElementById("reviewList");
-  const due = getDueReviews();
-  if (!due.length) {
-    container.innerHTML = `<article class="review-item"><div><strong>Rien a forcer</strong><p class="example">Reviens aux sons ou continue la prochaine petite etape.</p></div></article>`;
-    return;
-  }
-  container.innerHTML = due
+  if (!container) return;
+  container.innerHTML = immersionStories
     .map(
-      (exercise) => `
-        <article class="review-item">
+      (story, index) => `
+        <article class="dialogue-card">
           <div>
-            <strong>${lessonTitle(exercise.lessonId)}</strong>
-            <p class="example">${exercise.question || exercise.prompt}</p>
+            <h3>${story.image} ${story.title}</h3>
+            <span class="pill">${story.level}</span>
+            <p class="question">${story.ru}</p>
+            <p class="soft-text ${state.revealedStories?.[index] ? "" : "hidden-meaning"}">${story.fr}</p>
           </div>
-          <button class="launch-button" type="button" data-review="${exercise.id}" aria-label="Reprendre">›</button>
+          <div class="flash-actions">
+            <button class="audio-button" type="button" data-speak="${story.ru}" aria-label="Ecouter ${story.title}">▶</button>
+            <button class="memory-button" type="button" data-story="${index}">Voir le sens</button>
+          </div>
         </article>
       `
     )
@@ -1189,9 +1311,23 @@ document.addEventListener("click", (event) => {
   if (!target) return;
 
   if (target.dataset.tab) showTab(target.dataset.tab);
+  if (target.dataset.tab === "practice") renderSrsPanel();
   if (target.dataset.tool) {
     activeTool = target.dataset.tool;
     renderTools();
+  }
+  if (target.dataset.story) {
+    state.revealedStories[target.dataset.story] = !state.revealedStories[target.dataset.story];
+    saveState();
+    renderReview();
+  }
+  if (target.dataset.meaning) {
+    state.revealedMeanings[target.dataset.meaning] = !state.revealedMeanings[target.dataset.meaning];
+    saveState();
+    renderLessonWords(activeLessonId);
+  }
+  if (target.dataset.speaking) {
+    showToast("Bien. Pas de penalite, juste de la repetition.");
   }
   if (target.dataset.memory) {
     markMemory(target.dataset.word, target.dataset.memory);
@@ -1210,7 +1346,8 @@ document.addEventListener("click", (event) => {
   if (target.id === "nextExercise") nextExercise();
   if (target.id === "nextFlashcard") {
     flashcardIndex += 1;
-    renderTools();
+    if (document.getElementById("practice")?.classList.contains("active")) renderSrsPanel();
+    else renderTools();
   }
   if (target.id === "validateText") validateText();
   if (target.id === "quickSession") {
@@ -1220,9 +1357,8 @@ document.addEventListener("click", (event) => {
     showTab("practice");
   }
   if (target.id === "reviewMistakes") {
-    const mistake = state.mistakes.map((id) => allExercises.find((exercise) => exercise.id === id)).find(Boolean);
-    if (mistake) startExercise(mistake, mistake.lessonId);
-    else showToast("Rien de special a reprendre.");
+    showTab("practice");
+    renderSrsPanel();
   }
   if (target.id === "themeToggle") {
     state.theme = state.theme === "dark" ? "light" : "dark";

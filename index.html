@@ -16,7 +16,7 @@
     <div class="app-shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Ecouter avant d'apprendre</p>
+          <p class="eyebrow">Acquisition naturelle</p>
           <h1>Russki</h1>
         </div>
         <button class="icon-button" id="themeToggle" type="button" aria-label="Changer le theme" title="Mode sombre">
@@ -26,73 +26,82 @@
 
       <main>
         <section class="today-card" aria-label="Methode">
-          <h2>Comme une langue maternelle</h2>
-          <p>Tu ecoutes, tu reconnais, tu repetes. Puis tu montes progressivement vers la lecture, la grammaire, l'argumentation et un niveau C1.</p>
+          <h2>Comprendre avant de produire</h2>
+          <p>Input comprehensible, repetition espacee, production progressive, puis grammaire apres exposition. Objectif : comprendre et utiliser le russe naturellement.</p>
         </section>
 
         <section class="quick-start">
           <button class="primary-action" id="quickSession" type="button">
-            <span>Continuer</span>
-            <small>la prochaine petite etape</small>
+            <span>Session input</span>
+            <small>10 min de russe comprehensible</small>
           </button>
           <button class="secondary-action" id="reviewMistakes" type="button">
-            <span>Reprendre</span>
+            <span>SRS</span>
             <small id="mistakeCount">calme</small>
           </button>
         </section>
 
         <nav class="tabs" aria-label="Sections">
-          <button class="tab active" data-tab="learn" type="button">Parcours</button>
-          <button class="tab" data-tab="alphabet" type="button">Alphabet</button>
-          <button class="tab" data-tab="practice" type="button">Ecouter</button>
-          <button class="tab" data-tab="tools" type="button">Outils</button>
-          <button class="tab" data-tab="review" type="button">Memoire</button>
+          <button class="tab active" data-tab="learn" type="button">Input</button>
+          <button class="tab" data-tab="alphabet" type="button">Vocab</button>
+          <button class="tab" data-tab="practice" type="button">SRS</button>
+          <button class="tab" data-tab="tools" type="button">Parler</button>
+          <button class="tab" data-tab="review" type="button">Immersion</button>
+          <button class="tab" data-tab="grammar" type="button">Grammaire</button>
         </nav>
 
-        <section id="learn" class="panel active" aria-label="Parcours">
+        <section id="learn" class="panel active" aria-label="Input">
           <div class="section-heading">
-            <h2>Ordre naturel</h2>
-            <p>Du son vers les mots, puis les phrases.</p>
+            <h2>Input Mode</h2>
+            <p>Audio + contexte, traduction seulement si besoin.</p>
           </div>
           <div class="lesson-list" id="lessonList"></div>
         </section>
 
-        <section id="alphabet" class="panel" aria-label="Alphabet">
+        <section id="alphabet" class="panel" aria-label="Vocabulaire">
           <div class="section-heading">
-            <h2>Alphabet</h2>
-            <p>Les lettres, leur son et un exemple simple.</p>
+            <h2>Vocabulaire utile</h2>
+            <p>Mots frequents appris dans des phrases.</p>
           </div>
+          <input class="search-input" id="vocabSearchInput" placeholder="Cherche un mot ou une phrase" autocomplete="off" />
           <div class="alphabet-grid" id="alphabetGrid"></div>
         </section>
 
-        <section id="practice" class="panel" aria-label="Ecoute">
+        <section id="practice" class="panel" aria-label="SRS">
           <div class="section-heading">
-            <h2>Moment court</h2>
-            <p>Ecoute plusieurs fois, puis reponds.</p>
+            <h2>Repetition espacee</h2>
+            <p>1 jour, 3 jours, 7 jours, 14 jours.</p>
           </div>
           <div class="exercise-card" id="exerciseCard"></div>
         </section>
 
-        <section id="tools" class="panel" aria-label="Outils">
+        <section id="tools" class="panel" aria-label="Parler">
           <div class="section-heading">
-            <h2>Outils</h2>
-            <p>Recherche, dialogues, flashcards et grammaire.</p>
+            <h2>Speaking Mode</h2>
+            <p>Repeter, shadowing, produire doucement.</p>
           </div>
           <div class="tool-switcher" role="tablist" aria-label="Outils disponibles">
-            <button class="tool-tab active" data-tool="search" type="button">Recherche</button>
-            <button class="tool-tab" data-tool="flashcards" type="button">Cartes</button>
+            <button class="tool-tab active" data-tool="repeat" type="button">Repeter</button>
+            <button class="tool-tab" data-tool="shadowing" type="button">Shadowing</button>
             <button class="tool-tab" data-tool="dialogs" type="button">Dialogues</button>
-            <button class="tool-tab" data-tool="grammar" type="button">Grammaire</button>
           </div>
           <div id="toolContent"></div>
         </section>
 
-        <section id="review" class="panel" aria-label="Memoire">
+        <section id="review" class="panel" aria-label="Immersion">
           <div class="section-heading">
-            <h2>A reprendre</h2>
-            <p>Ce qui n'est pas encore clair revient doucement.</p>
+            <h2>Immersion</h2>
+            <p>Mini-histoires graduees, traduction optionnelle.</p>
           </div>
           <div class="review-list" id="reviewList"></div>
+        </section>
+
+        <section id="grammar" class="panel" aria-label="Grammaire">
+          <div class="section-heading">
+            <h2>Grammaire tardive</h2>
+            <p>Regles apres exemples, pas avant.</p>
+          </div>
+          <div id="grammarContent"></div>
         </section>
       </main>
     </div>
