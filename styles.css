@@ -95,7 +95,8 @@ h2 {
 .today-card,
 .lesson-card,
 .exercise-card,
-.review-item {
+.review-item,
+.letter-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -159,7 +160,7 @@ h2 {
   top: 0;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 6px;
   padding: 8px 0;
   background: var(--bg);
@@ -203,9 +204,37 @@ h2 {
 }
 
 .lesson-list,
-.review-list {
+.review-list,
+.alphabet-grid {
   display: grid;
   gap: 10px;
+}
+
+.alphabet-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.letter-card {
+  min-height: 112px;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.letter-card strong {
+  display: block;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.letter-card span,
+.letter-card small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.letter-card small {
+  font-size: 0.78rem;
 }
 
 .lesson-card {
@@ -402,5 +431,9 @@ h2 {
   .section-heading p {
     margin-top: 4px;
     text-align: left;
+  }
+
+  .alphabet-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
