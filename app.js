@@ -247,6 +247,412 @@ const immersionStories = [
     image: "📖",
     ru: "Каждый день я учу новые русские слова. Утром я слушаю подкаст. Вечером я читаю простые тексты. Иногда я говорю сам с собой по-русски. Это трудно, но интересно.",
     fr: "Chaque jour j'apprends de nouveaux mots russes. Le matin j'écoute un podcast. Le soir je lis des textes simples. Parfois je parle russe tout seul. C'est difficile, mais intéressant."
+  },
+  {
+    title: "Кот Мурка",
+    level: "A1",
+    image: "🐱",
+    ru: "У нас есть кот. Его зовут Мурка. Мурка маленький и белый. Он спит на диване. Я люблю Мурку.",
+    fr: "Nous avons un chat. Il s'appelle Mourka. Mourka est petit et blanc. Il dort sur le canapé. J'aime Mourka."
+  },
+  {
+    title: "Моя комната",
+    level: "A1",
+    image: "🛏️",
+    ru: "Моя комната маленькая. Там есть кровать, стол и стул. На столе лампа и книги. Мне нравится моя комната.",
+    fr: "Ma chambre est petite. Il y a un lit, une table et une chaise. Sur la table il y a une lampe et des livres. J'aime ma chambre."
+  },
+  {
+    title: "Завтрак",
+    level: "A1",
+    image: "🍳",
+    ru: "Сейчас семь утра. Анна ест завтрак. Она ест хлеб и пьёт кофе. Завтрак готов. Можно идти на работу.",
+    fr: "Il est sept heures du matin. Anna prend le petit-déjeuner. Elle mange du pain et boit du café. Le petit-déjeuner est prêt. On peut aller au travail."
+  },
+  {
+    title: "В парке",
+    level: "A1",
+    image: "🌳",
+    ru: "Сегодня хорошая погода. Дети играют в парке. Мама сидит на скамейке. Собака бегает по траве. Хорошо в парке!",
+    fr: "Aujourd'hui il fait beau. Les enfants jouent dans le parc. La maman est assise sur un banc. Le chien court dans l'herbe. C'est bien dans le parc !"
+  },
+  {
+    title: "Это моё",
+    level: "A1",
+    image: "👆",
+    ru: "Это мой телефон. Это моя книга. Это наш дом. Тут моя кровать. Там твой стул.",
+    fr: "C'est mon téléphone. C'est mon livre. C'est notre maison. Ici c'est mon lit. Là c'est ta chaise."
+  },
+  {
+    title: "Иду пешком",
+    level: "A1",
+    image: "🚶",
+    ru: "Иван идёт домой. Он идёт пешком. Это далеко? Нет, недалеко. Десять минут. Иван любит ходить пешком.",
+    fr: "Ivan rentre à la maison. Il y va à pied. C'est loin ? Non, pas loin. Dix minutes. Ivan aime marcher."
+  },
+  {
+    title: "Мои любимые фрукты",
+    level: "A1",
+    image: "🍎",
+    ru: "Я люблю фрукты. Моё любимое — яблоко. Оно красное и вкусное. Я ем яблоко каждый день. А ты любишь фрукты?",
+    fr: "J'aime les fruits. Mon préféré c'est la pomme. Elle est rouge et délicieuse. Je mange une pomme chaque jour. Et toi, tu aimes les fruits ?"
+  },
+  {
+    title: "Привет, я Маша",
+    level: "A1",
+    image: "👋",
+    ru: "Привет! Я Маша. Мне двадцать лет. Я студентка. Я учусь в университете. Я из Москвы. А ты откуда?",
+    fr: "Bonjour ! Je m'appelle Macha. J'ai vingt ans. Je suis étudiante. J'étudie à l'université. Je viens de Moscou. Et toi, tu viens d'où ?"
+  },
+  {
+    title: "Сегодня воскресенье",
+    level: "A1",
+    image: "😴",
+    ru: "Сегодня воскресенье. Я не работаю. Я дома. Я читаю книгу и слушаю музыку. Это хороший день.",
+    fr: "Aujourd'hui c'est dimanche. Je ne travaille pas. Je suis à la maison. Je lis un livre et j'écoute de la musique. C'est une bonne journée."
+  },
+  {
+    title: "Мой город",
+    level: "A1",
+    image: "🏙️",
+    ru: "Я живу в Москве. Москва — большой город. Там много людей и машин. Я люблю свой город. Он красивый.",
+    fr: "Je vis à Moscou. Moscou est une grande ville. Il y a beaucoup de gens et de voitures. J'aime ma ville. Elle est belle."
+  },
+  {
+    title: "Цвета",
+    level: "A1",
+    image: "🎨",
+    ru: "Небо голубое. Трава зелёная. Снег белый. Роза красная. Лимон жёлтый. Я знаю все цвета!",
+    fr: "Le ciel est bleu. L'herbe est verte. La neige est blanche. La rose est rouge. Le citron est jaune. Je connais toutes les couleurs !"
+  },
+  {
+    title: "Холодно — одеваюсь",
+    level: "A1",
+    image: "🧥",
+    ru: "Сегодня холодно. Я надеваю тёплую куртку и шапку. На ногах — ботинки. Мне тепло. Хорошо!",
+    fr: "Aujourd'hui il fait froid. Je mets une veste chaude et un bonnet. Aux pieds — des boots. J'ai chaud. C'est bien !"
+  },
+  {
+    title: "В классе",
+    level: "A1",
+    image: "🏫",
+    ru: "Это класс. Здесь учатся дети. Учитель говорит по-русски. Дети слушают и повторяют. Урок интересный.",
+    fr: "C'est une classe. Les enfants y apprennent. Le professeur parle en russe. Les enfants écoutent et répètent. Le cours est intéressant."
+  },
+  {
+    title: "Маленькая кошка",
+    level: "A1",
+    image: "🐈",
+    ru: "На улице стоит маленькая кошка. Она белая с чёрными пятнами. Кошка смотрит на меня. Я даю ей молоко. Она пьёт и уходит.",
+    fr: "Dans la rue il y a un petit chat. Il est blanc avec des taches noires. Le chat me regarde. Je lui donne du lait. Il boit et s'en va."
+  },
+  {
+    title: "День рождения",
+    level: "A1-A2",
+    image: "🎂",
+    ru: "Сегодня день рождения Ивана. Ему двадцать пять лет. Друзья приходят с подарками. Они едят торт и пьют чай. — С днём рождения! — Спасибо большое!",
+    fr: "Aujourd'hui c'est l'anniversaire d'Ivan. Il a vingt-cinq ans. Les amis viennent avec des cadeaux. Ils mangent du gâteau et boivent du thé. — Joyeux anniversaire ! — Merci beaucoup !"
+  },
+  {
+    title: "Выходные",
+    level: "A1-A2",
+    image: "🛋️",
+    ru: "В субботу Анна не работает. Утром она убирает квартиру. Потом она идёт в магазин. Вечером она встречается с подругой. Они идут в кино.",
+    fr: "Le samedi Anna ne travaille pas. Le matin elle range son appartement. Ensuite elle va au magasin. Le soir elle retrouve une amie. Elles vont au cinéma."
+  },
+  {
+    title: "Готовим вместе",
+    level: "A1-A2",
+    image: "🍲",
+    ru: "Мама и дочь готовят обед. Они делают суп и салат. Мама режет овощи. Дочь мешает суп. — Попробуй! — Вкусно!",
+    fr: "Maman et sa fille préparent le déjeuner. Elles font de la soupe et une salade. La maman coupe les légumes. La fille remue la soupe. — Goûte ! — C'est bon !"
+  },
+  {
+    title: "Потерянный ключ",
+    level: "A1-A2",
+    image: "🔑",
+    ru: "Иван ищет ключи. Он не может найти их. Он смотрит на столе, в кармане, в сумке. Ничего. — Где мои ключи?! — Вот они, на полу.",
+    fr: "Ivan cherche ses clés. Il ne peut pas les trouver. Il regarde sur la table, dans sa poche, dans son sac. Rien. — Où sont mes clés ?! — Les voilà, par terre."
+  },
+  {
+    title: "Звонок маме",
+    level: "A1-A2",
+    image: "📞",
+    ru: "Анна звонит маме. — Привет, мама! Как ты? — Хорошо, спасибо. А ты? — Немного устала. Много дел. — Отдыхай, доченька. — Хорошо. Целую!",
+    fr: "Anna appelle sa maman. — Bonjour maman ! Comment tu vas ? — Bien, merci. Et toi ? — Un peu fatiguée. Beaucoup à faire. — Repose-toi, ma fille. — D'accord. Je t'embrasse !"
+  },
+  {
+    title: "Первый снег",
+    level: "A1-A2",
+    image: "❄️",
+    ru: "Сегодня первый снег. Всё белое и красивое. Дети рады. Они играют на улице. Лепят снеговика. Мороз, но весело!",
+    fr: "Aujourd'hui la première neige. Tout est blanc et beau. Les enfants sont contents. Ils jouent dehors. Ils font un bonhomme de neige. Il fait froid, mais c'est amusant !"
+  },
+  {
+    title: "В библиотеке",
+    level: "A1-A2",
+    image: "📚",
+    ru: "Саша часто ходит в библиотеку. Там тихо и приятно. Он берёт книгу и читает два часа. Потом возвращает её и берёт другую.",
+    fr: "Sacha va souvent à la bibliothèque. C'est calme et agréable là-bas. Il prend un livre et lit pendant deux heures. Ensuite il le rend et en prend un autre."
+  },
+  {
+    title: "Утро в городе",
+    level: "A1-A2",
+    image: "🌆",
+    ru: "Шесть утра. Город просыпается. Открываются магазины. Люди идут на работу. Автобусы переполнены. Новый день начинается.",
+    fr: "Six heures du matin. La ville se réveille. Les magasins ouvrent. Les gens vont au travail. Les bus sont bondés. Une nouvelle journée commence."
+  },
+  {
+    title: "Собака Барон",
+    level: "A1-A2",
+    image: "🐕",
+    ru: "У Маши есть собака. Её зовут Барон. Каждое утро Маша гуляет с Бароном в парке. Барон любит бегать и играть. Без Барона Маша скучает.",
+    fr: "Macha a un chien. Il s'appelle Baron. Chaque matin Macha promène Baron dans le parc. Baron aime courir et jouer. Sans Baron Macha s'ennuie."
+  },
+  {
+    title: "Три месяца русского",
+    level: "A1-A2",
+    image: "🗓️",
+    ru: "Я учу русский три месяца. Это трудно, но интересно. Каждый день я слушаю и повторяю. Мой учитель говорит: — Молодец! Ты делаешь успехи.",
+    fr: "J'apprends le russe depuis trois mois. C'est difficile mais intéressant. Chaque jour j'écoute et je répète. Mon professeur dit : — Bravo ! Tu fais des progrès."
+  },
+  {
+    title: "Письмо другу",
+    level: "A2",
+    image: "✉️",
+    ru: "Дорогой Саша! Как ты? Я сейчас в Москве. Погода хорошая. Я уже был в Кремле и на Красной площади. Очень красиво! Скучаю по тебе. Пиши. Иван.",
+    fr: "Cher Sacha ! Comment tu vas ? Je suis à Moscou en ce moment. Le temps est beau. J'ai déjà visité le Kremlin et la Place Rouge. C'est très beau ! Tu me manques. Écris-moi. Ivan."
+  },
+  {
+    title: "Спортзал",
+    level: "A2",
+    image: "💪",
+    ru: "Три раза в неделю Иван ходит в спортзал. Сначала он бегает на дорожке. Потом делает упражнения. После тренировки принимает душ. — Устал? — Да, но доволен!",
+    fr: "Trois fois par semaine Ivan va à la salle de sport. D'abord il court sur le tapis. Ensuite il fait des exercices. Après l'entraînement il prend une douche. — Tu es fatigué ? — Oui, mais content !"
+  },
+  {
+    title: "В ресторане",
+    level: "A2",
+    image: "🍽️",
+    ru: "Анна и Иван идут в ресторан. Официант приносит меню. — Что будете заказывать? — Я возьму борщ и котлеты. — А я — салат и рыбу. — Хорошо, сейчас принесу.",
+    fr: "Anna et Ivan vont au restaurant. Le serveur apporte le menu. — Que voulez-vous commander ? — Je prendrai du bortsch et des boulettes. — Et moi une salade et du poisson. — Bien, je l'apporte tout de suite."
+  },
+  {
+    title: "Осень в Москве",
+    level: "A2",
+    image: "🍂",
+    ru: "Осень в Москве очень красивая. Листья на деревьях жёлтые и красные. Воздух свежий и прохладный. Люди гуляют в парках. Анна любит осень больше всего.",
+    fr: "L'automne à Moscou est très beau. Les feuilles dans les arbres sont jaunes et rouges. L'air est frais et frais. Les gens se promènent dans les parcs. Anna aime l'automne plus que tout."
+  },
+  {
+    title: "Первый рабочий день",
+    level: "A2",
+    image: "💼",
+    ru: "Сегодня первый день Ивана на новой работе. Он немного нервничает. Коллеги встречают его тепло. Начальник объясняет задачи. К вечеру Иван чувствует себя лучше.",
+    fr: "Aujourd'hui c'est le premier jour d'Ivan dans son nouveau travail. Il est un peu nerveux. Les collègues l'accueillent chaleureusement. Le chef explique les tâches. En fin de journée Ivan se sent mieux."
+  },
+  {
+    title: "На пляже",
+    level: "A2",
+    image: "🏖️",
+    ru: "Летом Саша едет на море. Там тепло и солнечно. Он купается и загорает. Вечером ест шашлык с друзьями. Это лучший отпуск!",
+    fr: "En été Sacha part à la mer. Il fait chaud et ensoleillé là-bas. Il nage et bronze. Le soir il mange un barbecue avec des amis. C'est les meilleures vacances !"
+  },
+  {
+    title: "Готовлю борщ",
+    level: "A2",
+    image: "🥣",
+    ru: "Сегодня я готовлю борщ. Мне нужны свёкла, капуста, картошка и мясо. Сначала варю мясо. Потом добавляю овощи. Через час борщ готов. Очень вкусно!",
+    fr: "Aujourd'hui je prépare du bortsch. J'ai besoin de betterave, de chou, de pommes de terre et de viande. D'abord je fais cuire la viande. Ensuite j'ajoute les légumes. Au bout d'une heure le bortsch est prêt. Très bon !"
+  },
+  {
+    title: "Пробки",
+    level: "A2",
+    image: "🚗",
+    ru: "В Москве часто бывают пробки. Иван едет на работу на машине. Он стоит в пробке сорок минут. — Опять пробка! — Надо было ехать на метро.",
+    fr: "À Moscou il y a souvent des embouteillages. Ivan va au travail en voiture. Il reste dans les embouteillages quarante minutes. — Encore un embouteillage ! — Il aurait fallu prendre le métro."
+  },
+  {
+    title: "Новый телефон",
+    level: "A2",
+    image: "📱",
+    ru: "Анна хочет купить новый телефон. Она идёт в магазин. Продавец показывает модели. — Этот хороший, но дорогой. — А этот дешевле. — Беру его!",
+    fr: "Anna veut acheter un nouveau téléphone. Elle va dans un magasin. Le vendeur montre des modèles. — Celui-là est bien mais cher. — Et celui-là est moins cher. — Je le prends !"
+  },
+  {
+    title: "Маршрутка",
+    level: "A2",
+    image: "🚌",
+    ru: "Саша едет в центр на маршрутке. В маршрутке много людей. Жарко. Саша платит водителю. Остановка. — Вы выходите? — Нет, следующая.",
+    fr: "Sacha va au centre-ville en minibus. Dans le minibus il y a beaucoup de monde. Il fait chaud. Sacha paie le chauffeur. Arrêt. — Vous descendez ? — Non, au prochain arrêt."
+  },
+  {
+    title: "Завтра экзамен",
+    level: "A2",
+    image: "📝",
+    ru: "Завтра у Маши экзамен по русской литературе. Она читает весь вечер. В полночь наконец засыпает. Утром она встанет рано и повторит материал.",
+    fr: "Demain Macha a un examen de littérature russe. Elle lit toute la soirée. À minuit elle finit par s'endormir. Le matin elle se lèvera tôt et révisera le cours."
+  },
+  {
+    title: "Переезд",
+    level: "A2-B1",
+    image: "📦",
+    ru: "Иван переехал в новую квартиру. Это большое событие. Он перевёз вещи на машине. Соседи помогли. Теперь надо обустроиться. Много работы, но Иван доволен.",
+    fr: "Ivan a déménagé dans un nouvel appartement. C'est un grand événement. Il a transporté ses affaires en voiture. Les voisins ont aidé. Maintenant il faut s'installer. Beaucoup de travail, mais Ivan est content."
+  },
+  {
+    title: "На собеседовании",
+    level: "A2-B1",
+    image: "🤝",
+    ru: "Маша идёт на собеседование. — Расскажите о себе. — Я работала три года в маркетинге. — Почему хотите к нам? — Ваша компания известна. — Мы вам позвоним.",
+    fr: "Macha va à un entretien d'embauche. — Parlez-moi de vous. — J'ai travaillé trois ans dans le marketing. — Pourquoi voulez-vous travailler chez nous ? — Votre entreprise est connue. — Nous vous appellerons."
+  },
+  {
+    title: "Поездка в Европу",
+    level: "A2-B1",
+    image: "✈️",
+    ru: "В следующем месяце Анна едет во Францию. Это её первый раз в Европе. Она уже купила билеты и забронировала гостиницу. Анна очень волнуется и ждёт этой поездки.",
+    fr: "Le mois prochain Anna part en France. C'est la première fois qu'elle va en Europe. Elle a déjà acheté les billets et réservé l'hôtel. Anna est très excitée et attend ce voyage avec impatience."
+  },
+  {
+    title: "Плохой день",
+    level: "A2-B1",
+    image: "😟",
+    ru: "У Ивана сегодня всё идёт не так. Утром он опоздал на работу. Потом потерял телефон. Вечером поссорился с другом. Но завтра будет лучше.",
+    fr: "Tout va de travers pour Ivan aujourd'hui. Le matin il est arrivé en retard au travail. Ensuite il a perdu son téléphone. Le soir il s'est disputé avec un ami. Mais demain ce sera mieux."
+  },
+  {
+    title: "Новый год",
+    level: "A2-B1",
+    image: "🎄",
+    ru: "Новый год — самый любимый праздник в России. Все ставят ёлку и дарят подарки. 31 декабря вся семья собирается за столом. В полночь — шампанское. — С Новым годом!",
+    fr: "Le Nouvel An est la fête préférée en Russie. Tout le monde met un sapin et offre des cadeaux. Le 31 décembre toute la famille se réunit autour de la table. À minuit — champagne. — Bonne Année !"
+  },
+  {
+    title: "Настоящая дружба",
+    level: "A2-B1",
+    image: "👫",
+    ru: "Саша и Лена дружат с детства. Они знают друг друга двадцать лет. Когда Саше плохо, Лена всегда рядом. Они говорят обо всём: о работе, о любви, о мечтах.",
+    fr: "Sacha et Léna sont amis depuis l'enfance. Ils se connaissent depuis vingt ans. Quand Sacha va mal, Léna est toujours là. Ils parlent de tout : du travail, de l'amour, des rêves."
+  },
+  {
+    title: "Жизнь в деревне",
+    level: "A2-B1",
+    image: "🌾",
+    ru: "Бабушка Ивана живёт в деревне. Там тихо и чисто. Нет машин и шума. Утром поют птицы. Огород, яблони, кот на заборе. Иван любит приезжать туда летом.",
+    fr: "La grand-mère d'Ivan vit dans un village. C'est calme et propre là-bas. Pas de voitures ni de bruit. Le matin les oiseaux chantent. Un jardin potager, des pommiers, un chat sur la clôture. Ivan aime y aller en été."
+  },
+  {
+    title: "Курсы языка",
+    level: "A2-B1",
+    image: "🎓",
+    ru: "Маша записалась на курсы английского. Занятия три раза в неделю. Сначала было трудно, но постепенно становится легче. Маша уже может читать простые тексты и хочет поехать в Лондон.",
+    fr: "Macha s'est inscrite à des cours d'anglais. Les cours ont lieu trois fois par semaine. Au début c'était difficile mais progressivement ça devient plus facile. Macha peut déjà lire des textes simples et veut aller à Londres."
+  },
+  {
+    title: "Санкт-Петербург",
+    level: "B1",
+    image: "🏛️",
+    ru: "Санкт-Петербург — культурная столица России. Анна приехала на три дня. Она посетила Эрмитаж, погуляла по Невскому проспекту и видела развод мостов. Город произвёл на неё огромное впечатление.",
+    fr: "Saint-Pétersbourg est la capitale culturelle de la Russie. Anna y est venue pour trois jours. Elle a visité l'Ermitage, s'est promenée sur la perspective Nevski et a vu l'ouverture des ponts. La ville lui a fait une énorme impression."
+  },
+  {
+    title: "Русское чаепитие",
+    level: "B1",
+    image: "🫖",
+    ru: "Чай занимает особое место в русской культуре. Раньше пили из самовара, сейчас — из чайника. К чаю подают варенье и баранки. Чай пьют в любое время. Это время для разговора и отдыха.",
+    fr: "Le thé occupe une place particulière dans la culture russe. Autrefois on buvait du samovar, maintenant de la théière. Avec le thé on sert de la confiture et des bagels. On boit du thé à toute heure. C'est le moment pour discuter et se reposer."
+  },
+  {
+    title: "Выбор профессии",
+    level: "B1",
+    image: "🤔",
+    ru: "Маше двадцать лет. Она не знает, кем хочет стать. Ей нравится рисовать, но родители хотят, чтобы она стала врачом. Что важнее — деньги или счастье? Наверное, нужно найти то, что совмещает оба.",
+    fr: "Macha a vingt ans. Elle ne sait pas ce qu'elle veut devenir. Elle aime dessiner, mais ses parents veulent qu'elle devienne médecin. Qu'est-ce qui est plus important — l'argent ou le bonheur ? Probablement il faut trouver quelque chose qui combine les deux."
+  },
+  {
+    title: "Онлайн-покупки",
+    level: "B1",
+    image: "🛍️",
+    ru: "Всё больше людей покупают в интернете. Можно выбрать товар, сравнить цены и заказать домой. Иван тоже перешёл на онлайн-шопинг. Но иногда товар не такой, как на картинке.",
+    fr: "De plus en plus de gens achètent sur internet. On peut choisir un article, comparer les prix et se le faire livrer. Ivan aussi est passé au shopping en ligne. Mais parfois l'article n'est pas comme sur la photo."
+  },
+  {
+    title: "Спорт и здоровье",
+    level: "B1",
+    image: "🏃",
+    ru: "Врачи говорят, что спорт важен для здоровья. Иван бегает по утрам и ест правильно. Но у него нет времени на спортзал. — Двадцать минут в день достаточно, — говорит врач. — Главное — регулярность.",
+    fr: "Les médecins disent que le sport est important pour la santé. Ivan court le matin et mange sainement. Mais il n'a pas le temps pour la salle de sport. — Vingt minutes par jour suffisent, dit le médecin. — L'essentiel c'est la régularité."
+  },
+  {
+    title: "Город против деревни",
+    level: "B1-B2",
+    image: "🏘️",
+    ru: "Многие молодые уезжают из деревень в города. В городе больше работы и возможностей, но жизнь дороже и суетливее. Деревня даёт тишину и природу, но меньше перспектив. Где лучше жить — каждый решает сам.",
+    fr: "Beaucoup de jeunes quittent les villages pour les villes. En ville il y a plus de travail et d'opportunités, mais la vie y est plus chère et agitée. Le village offre le calme et la nature, mais moins de perspectives. Où vaut-il mieux vivre — chacun décide pour lui-même."
+  },
+  {
+    title: "Социальные сети",
+    level: "B1-B2",
+    image: "📲",
+    ru: "Социальные сети изменили нашу жизнь. Мы общаемся быстрее, но поверхностнее. Люди делятся моментами, ищут поддержки. Но есть и минусы: зависимость, сравнение себя с другими.",
+    fr: "Les réseaux sociaux ont changé notre vie. Nous communiquons plus vite mais plus superficiellement. Les gens partagent des moments, cherchent du soutien. Mais il y a aussi des inconvénients : la dépendance, se comparer aux autres."
+  },
+  {
+    title: "Забота об экологии",
+    level: "B1-B2",
+    image: "♻️",
+    ru: "Экология стала важной темой. Молодые люди сортируют мусор, отказываются от пластика, ездят на велосипеде. Правительства принимают законы. Но проблема глобальная, и нужно действовать быстрее.",
+    fr: "L'écologie est devenue un sujet important. Les jeunes trient les déchets, renoncent au plastique, vont à vélo. Les gouvernements adoptent des lois. Mais le problème est global et il faut agir plus vite."
+  },
+  {
+    title: "Что значит знать язык",
+    level: "B1-B2",
+    image: "🗣️",
+    ru: "Знать язык — это не просто слова и грамматика. Это понимать юмор, культуру, историю народа. Можно говорить правильно, но не понимать контекст. Настоящее владение языком приходит через общение и погружение.",
+    fr: "Savoir une langue ce n'est pas seulement les mots et la grammaire. C'est comprendre l'humour, la culture, l'histoire d'un peuple. On peut parler correctement sans comprendre le contexte. La vraie maîtrise vient par la communication et l'immersion."
+  },
+  {
+    title: "Стресс и работа",
+    level: "B1-B2",
+    image: "😮‍💨",
+    ru: "Современная жизнь полна стресса. Работа, дедлайны, ожидания. Психологи советуют делать паузы, заниматься спортом, говорить о проблемах. Но многие игнорируют эти советы. Здоровье дороже любой работы.",
+    fr: "La vie moderne est pleine de stress. Travail, délais, attentes. Les psychologues conseillent de faire des pauses, de faire du sport, de parler de ses problèmes. Mais beaucoup ignorent ces conseils. La santé vaut plus que n'importe quel travail."
+  },
+  {
+    title: "Роль образования",
+    level: "B2",
+    image: "🎓",
+    ru: "В современном мире образование меняется. Онлайн-курсы конкурируют с университетом. Работодатели смотрят на умения, а не только на диплом. Но университет даёт не только знания, но и социальные связи, необходимые в профессии.",
+    fr: "Dans le monde moderne l'éducation change. Les cours en ligne concurrencent l'université. Les employeurs regardent les compétences et pas seulement le diplôme. Mais l'université donne non seulement des connaissances mais aussi des liens sociaux essentiels."
+  },
+  {
+    title: "Глобализация и культура",
+    level: "B2",
+    image: "🌍",
+    ru: "Глобализация сближает народы, но некоторые боятся потерять национальную идентичность. Языки исчезают, традиции забываются. С другой стороны, обмен культурами обогащает всех. Важно сохранять баланс между открытостью и сохранением своей культуры.",
+    fr: "La mondialisation rapproche les peuples, mais certains craignent de perdre leur identité nationale. Les langues disparaissent, les traditions s'oublient. D'un autre côté les échanges culturels enrichissent tout le monde. Il est important de garder l'équilibre entre ouverture et préservation de sa culture."
+  },
+  {
+    title: "Технологии и человек",
+    level: "B2",
+    image: "🤖",
+    ru: "Искусственный интеллект меняет рынок труда. Одни профессии исчезают, другие появляются. Человек должен адаптироваться и сохранять то, что машины не могут заменить: творчество и эмпатию.",
+    fr: "L'intelligence artificielle transforme le marché du travail. Certains métiers disparaissent, d'autres apparaissent. L'être humain doit s'adapter et préserver ce que les machines ne peuvent pas remplacer : la créativité et l'empathie."
+  },
+  {
+    title: "Миграция и интеграция",
+    level: "B2",
+    image: "🌐",
+    ru: "Миграция — сложный вопрос. Люди покидают родину в поисках лучшей жизни. Принимающие страны сталкиваются с задачей интеграции. Нужно уважать культуру новой страны и сохранять свою. Это требует усилий с обеих сторон.",
+    fr: "La migration est une question complexe. Les gens quittent leur pays natal en quête d'une vie meilleure. Les pays d'accueil font face au défi de l'intégration. Il faut respecter la culture du nouveau pays et préserver la sienne. Cela demande des efforts des deux côtés."
+  },
+  {
+    title: "Что такое счастье",
+    level: "B2",
+    image: "✨",
+    ru: "Философы спорят о счастье тысячи лет. Деньги? Здоровье? Отношения? Исследования показывают: счастье — это не состояние, а процесс. Важны не достижения, а смысл и связи с людьми. Счастливы те, кто умеет ценить настоящее.",
+    fr: "Les philosophes débattent du bonheur depuis des millénaires. L'argent ? La santé ? Les relations ? Les recherches montrent que le bonheur n'est pas un état mais un processus. Ce qui compte c'est le sens et les liens avec les autres. Heureux sont ceux qui savent apprécier le présent."
   }
 ];
 
