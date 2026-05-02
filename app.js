@@ -1659,7 +1659,7 @@ function render() {
     ? `${state.mistakes.length} due`
     : "pret";
   renderLessons();
-  renderVocabPanel();
+  renderVocabulary();
   renderTools();
   renderGrammarPanel();
   renderReview();
@@ -2199,7 +2199,8 @@ document.addEventListener("click", (event) => {
   }
   if (target.dataset.tab) showTab(target.dataset.tab);
   if (target.dataset.tab === "practice") renderSrsPanel();
-  if (target.dataset.tab === "alphabet") renderVocabPanel();
+  if (target.dataset.tab === "alphabetpanel") renderAlphabetFull();
+  if (target.dataset.tab === "alphabet") renderVocabulary();
   if (target.dataset.tool) {
     activeTool = target.dataset.tool;
     renderTools();

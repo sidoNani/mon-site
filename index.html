@@ -43,6 +43,7 @@
 
         <nav class="tabs" aria-label="Sections">
           <button class="tab active" data-tab="learn" type="button">Input</button>
+          <button class="tab" data-tab="alphabetpanel" type="button">Alphabet</button>
           <button class="tab" data-tab="alphabet" type="button">Vocab</button>
           <button class="tab" data-tab="practice" type="button">SRS</button>
           <button class="tab" data-tab="tools" type="button">Parler</button>
@@ -58,20 +59,21 @@
           <div class="lesson-list" id="lessonList"></div>
         </section>
 
-        <section id="alphabet" class="panel" aria-label="Vocabulaire">
+        <section id="alphabetpanel" class="panel" aria-label="Alphabet">
           <div class="section-heading">
-            <h2>Alphabet & Vocab</h2>
-            <p>Phonétique complète, mots en contexte.</p>
-          </div>
-          <div class="tool-switcher">
-            <button class="tool-tab active" data-vocab-tab="alphabet" type="button">Alphabet</button>
-            <button class="tool-tab" data-vocab-tab="vocab" type="button">Vocabulaire</button>
+            <h2>Alphabet russe</h2>
+            <p>33 lettres, sons complets et variantes.</p>
           </div>
           <div id="alphabetSection"></div>
-          <div id="vocabSection" style="display:none">
-            <input class="search-input" id="vocabSearchInput" placeholder="Cherche un mot ou une phrase" autocomplete="off" />
-            <div class="alphabet-grid" id="alphabetGrid"></div>
+        </section>
+
+        <section id="alphabet" class="panel" aria-label="Vocabulaire">
+          <div class="section-heading">
+            <h2>Vocabulaire utile</h2>
+            <p>Mots fréquents appris dans des phrases.</p>
           </div>
+          <input class="search-input" id="vocabSearchInput" placeholder="Cherche un mot ou une phrase" autocomplete="off" />
+          <div class="alphabet-grid" id="alphabetGrid"></div>
         </section>
 
         <section id="practice" class="panel" aria-label="SRS">
