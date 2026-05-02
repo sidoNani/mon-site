@@ -60,11 +60,18 @@
 
         <section id="alphabet" class="panel" aria-label="Vocabulaire">
           <div class="section-heading">
-            <h2>Vocabulaire utile</h2>
-            <p>Mots frequents appris dans des phrases.</p>
+            <h2>Alphabet & Vocab</h2>
+            <p>Phonétique complète, mots en contexte.</p>
           </div>
-          <input class="search-input" id="vocabSearchInput" placeholder="Cherche un mot ou une phrase" autocomplete="off" />
-          <div class="alphabet-grid" id="alphabetGrid"></div>
+          <div class="tool-switcher">
+            <button class="tool-tab active" data-vocab-tab="alphabet" type="button">Alphabet</button>
+            <button class="tool-tab" data-vocab-tab="vocab" type="button">Vocabulaire</button>
+          </div>
+          <div id="alphabetSection"></div>
+          <div id="vocabSection" style="display:none">
+            <input class="search-input" id="vocabSearchInput" placeholder="Cherche un mot ou une phrase" autocomplete="off" />
+            <div class="alphabet-grid" id="alphabetGrid"></div>
+          </div>
         </section>
 
         <section id="practice" class="panel" aria-label="SRS">
