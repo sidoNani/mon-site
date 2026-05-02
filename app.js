@@ -170,6 +170,83 @@ const immersionStories = [
     image: "💬",
     ru: "С моей точки зрения, это спорный вопрос. Нельзя отрицать, что проблема сложная, однако решение возможно, если учитывать контекст.",
     fr: "De mon point de vue, c'est une question controversee. On ne peut pas nier que le probleme est complexe, cependant une solution est possible si l'on prend le contexte en compte."
+  },
+  {
+    title: "Семья Ивана",
+    level: "A1",
+    image: "👨‍👩‍👧‍👦",
+    ru: "Иван дома. С ним мама, папа и сестра. Они едят вместе. Бабушка готовит суп. Иван говорит: — Спасибо, бабушка!",
+    fr: "Ivan est à la maison. Sa mère, son père et sa sœur sont avec lui. Ils mangent ensemble. La grand-mère fait de la soupe. Ivan dit : — Merci grand-mère !"
+  },
+  {
+    title: "В магазине",
+    level: "A1",
+    image: "🛒",
+    ru: "Анна идёт в магазин. Она хочет купить хлеб и молоко. — Сколько стоит молоко? — Пятьдесят рублей. — Хорошо, возьму.",
+    fr: "Anna va au magasin. Elle veut acheter du pain et du lait. — Combien coûte le lait ? — Cinquante roubles. — Bien, je le prends."
+  },
+  {
+    title: "Погода сегодня",
+    level: "A1",
+    image: "🌧️",
+    ru: "Сегодня холодно. Идёт дождь. Анна надевает куртку и шапку. Она берёт зонт. На улице ветер. Дома тепло и хорошо.",
+    fr: "Aujourd'hui il fait froid. Il pleut. Anna met sa veste et son bonnet. Elle prend un parapluie. Dehors il y a du vent. À la maison il fait chaud et c'est bien."
+  },
+  {
+    title: "У врача",
+    level: "A1-A2",
+    image: "🏥",
+    ru: "Иван болен. У него болит горло и температура. Он идёт к врачу. Врач говорит: — Пейте лекарство три раза в день. Иван покупает лекарство в аптеке.",
+    fr: "Ivan est malade. Il a mal à la gorge et de la fièvre. Il va chez le médecin. Le médecin dit : — Prenez le médicament trois fois par jour. Ivan achète le médicament à la pharmacie."
+  },
+  {
+    title: "Новый друг",
+    level: "A1",
+    image: "🤝",
+    ru: "Привет! Меня зовут Саша. Я студент. Я учусь в Москве. Откуда ты? — Я из Франции. Я изучаю русский язык. — Здорово! Будем друзьями.",
+    fr: "Bonjour ! Je m'appelle Sacha. Je suis étudiant. J'étudie à Moscou. D'où es-tu ? — Je viens de France. J'apprends le russe. — Super ! Soyons amis."
+  },
+  {
+    title: "Дома вечером",
+    level: "A1",
+    image: "🏠",
+    ru: "Вечером Анна дома. Она ест суп и смотрит телевизор. Потом она читает книгу. В десять часов она ложится спать. Завтра опять работа.",
+    fr: "Le soir Anna est à la maison. Elle mange de la soupe et regarde la télévision. Ensuite elle lit un livre. À dix heures elle va se coucher. Demain c'est encore le travail."
+  },
+  {
+    title: "На рынке",
+    level: "A2",
+    image: "🥦",
+    ru: "Иван идёт на рынок. Там много фруктов и овощей. Он покупает яблоки, картошку и лук. — Дайте мне килограмм яблок. — Пожалуйста. С вас сто рублей.",
+    fr: "Ivan va au marché. Il y a beaucoup de fruits et légumes. Il achète des pommes, des pommes de terre et des oignons. — Donnez-moi un kilo de pommes. — Voilà. Ça vous fait cent roubles."
+  },
+  {
+    title: "Поездка на поезде",
+    level: "A2",
+    image: "🚆",
+    ru: "Завтра Анна едет в Петербург. Она покупает билет на поезд. Поезд отправляется в восемь утра. В дороге она слушает музыку и смотрит в окно.",
+    fr: "Demain Anna part à Saint-Pétersbourg. Elle achète un billet de train. Le train part à huit heures du matin. Pendant le trajet elle écoute de la musique et regarde par la fenêtre."
+  },
+  {
+    title: "Мой день",
+    level: "A2",
+    image: "🌅",
+    ru: "Я встаю в семь утра. Я пью кофе и ем яйца. Потом я иду на работу на автобусе. На работе я говорю с коллегами. Вечером я иду домой и отдыхаю.",
+    fr: "Je me lève à sept heures du matin. Je bois du café et mange des œufs. Ensuite je vais au travail en bus. Au travail je parle avec mes collègues. Le soir je rentre à la maison et me repose."
+  },
+  {
+    title: "В кафе с другом",
+    level: "A2",
+    image: "☕",
+    ru: "Иван встречает друга в кафе. Они заказывают кофе и пирожки. — Как дела? — Всё хорошо. Много работы. А у тебя? — Я устал. Хочу в отпуск. — Скоро лето!",
+    fr: "Ivan retrouve un ami dans un café. Ils commandent un café et des petits gâteaux. — Comment ça va ? — Tout va bien. Beaucoup de travail. Et toi ? — Je suis fatigué. Je veux des vacances. — L'été arrive bientôt !"
+  },
+  {
+    title: "Учить русский",
+    level: "A2",
+    image: "📖",
+    ru: "Каждый день я учу новые русские слова. Утром я слушаю подкаст. Вечером я читаю простые тексты. Иногда я говорю сам с собой по-русски. Это трудно, но интересно.",
+    fr: "Chaque jour j'apprends de nouveaux mots russes. Le matin j'écoute un podcast. Le soir je lis des textes simples. Parfois je parle russe tout seul. C'est difficile, mais intéressant."
   }
 ];
 
@@ -773,6 +850,751 @@ const lessons = [
       { type: "qcm", question: "Quelle lettre commence чай ?", answers: ["Ч", "Х", "Ц"], correct: 0 },
       { type: "repeat", prompt: "Ecoute puis dis : дом", audio: "дом", answer: "дом" }
     ]
+  },
+  {
+    id: "family",
+    title: "31. La famille",
+    stage: "A1",
+    focus: "Nommer les personnes de ta famille.",
+    icon: "С",
+    words: [
+      { ru: "мама", fr: "mère", speak: "мама", example: "моя мама дома" },
+      { ru: "папа", fr: "père", speak: "папа", example: "папа работает" },
+      { ru: "брат", fr: "frère", speak: "брат", example: "мой брат тут" },
+      { ru: "сестра", fr: "sœur", speak: "сестра", example: "моя сестра читает" },
+      { ru: "бабушка", fr: "grand-mère", speak: "бабушка", example: "бабушка готовит" },
+      { ru: "дедушка", fr: "grand-père", speak: "дедушка", example: "дедушка отдыхает" },
+      { ru: "сын", fr: "fils", speak: "сын", example: "мой сын маленький" },
+      { ru: "дочь", fr: "fille", speak: "дочь", example: "моя дочь учится" },
+      { ru: "муж", fr: "mari", speak: "муж", example: "мой муж работает" },
+      { ru: "жена", fr: "épouse", speak: "жена", example: "моя жена врач" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire бабушка ?", answers: ["grand-mère", "sœur", "fille"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Qui entends-tu ?", audio: "брат", answers: ["сестра", "брат", "сын"], correct: 1 },
+      { type: "qcm", question: "Comment dit-on mari ?", answers: ["муж", "сын", "дедушка"], correct: 0 },
+      { type: "fill", question: "Complete : моя ___ дома (mère)", answer: "мама" }
+    ]
+  },
+  {
+    id: "body",
+    title: "32. Le corps",
+    stage: "A1",
+    focus: "Nommer les parties du corps.",
+    icon: "Т",
+    words: [
+      { ru: "голова", fr: "tête", speak: "голова", example: "у меня болит голова" },
+      { ru: "рука", fr: "main / bras", speak: "рука", example: "моя рука тут" },
+      { ru: "нога", fr: "pied / jambe", speak: "нога", example: "болит нога" },
+      { ru: "глаз", fr: "œil (глаза = yeux)", speak: "глаз", example: "у меня голубые глаза" },
+      { ru: "нос", fr: "nez", speak: "нос", example: "у меня болит нос" },
+      { ru: "рот", fr: "bouche", speak: "рот", example: "открой рот" },
+      { ru: "ухо", fr: "oreille", speak: "ухо", example: "болит ухо" },
+      { ru: "спина", fr: "dos", speak: "спина", example: "болит спина" },
+      { ru: "живот", fr: "ventre", speak: "живот", example: "болит живот" },
+      { ru: "сердце", fr: "cœur", speak: "сердце", example: "моё сердце" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire голова ?", answers: ["tête", "main", "dos"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quelle partie du corps ?", audio: "нога", answers: ["рука", "нога", "нос"], correct: 1 },
+      { type: "fill", question: "Complete : у меня болит ___ (tête)", answer: "голова" },
+      { type: "qcm", question: "Comment dit-on oreille ?", answers: ["ухо", "рот", "спина"], correct: 0 }
+    ]
+  },
+  {
+    id: "food",
+    title: "33. La nourriture",
+    stage: "A1",
+    focus: "Nommer ce que tu manges et bois.",
+    icon: "Е",
+    words: [
+      { ru: "еда", fr: "nourriture / repas", speak: "еда", example: "хочу еду" },
+      { ru: "молоко", fr: "lait", speak: "молоко", example: "я пью молоко" },
+      { ru: "мясо", fr: "viande", speak: "мясо", example: "я ем мясо" },
+      { ru: "рыба", fr: "poisson", speak: "рыба", example: "я люблю рыбу" },
+      { ru: "яйцо", fr: "œuf", speak: "яйцо", example: "одно яйцо" },
+      { ru: "суп", fr: "soupe", speak: "суп", example: "горячий суп" },
+      { ru: "рис", fr: "riz", speak: "рис", example: "я ем рис" },
+      { ru: "картошка", fr: "pomme de terre", speak: "картошка", example: "жареная картошка" },
+      { ru: "яблоко", fr: "pomme", speak: "яблоко", example: "красное яблоко" },
+      { ru: "кофе", fr: "café", speak: "кофе", example: "чёрный кофе" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire рыба ?", answers: ["poisson", "viande", "lait"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Qu'est-ce que c'est ?", audio: "яблоко", answers: ["рис", "яблоко", "яйцо"], correct: 1 },
+      { type: "qcm", question: "Comment dit-on soupe ?", answers: ["суп", "еда", "мясо"], correct: 0 },
+      { type: "fill", question: "Complete : я пью ___ (lait)", answer: "молоко" }
+    ]
+  },
+  {
+    id: "emotions",
+    title: "34. Les émotions",
+    stage: "A1-A2",
+    focus: "Exprimer ce que tu ressens.",
+    icon: "Р",
+    words: [
+      { ru: "я рад", fr: "je suis content (masc.)", speak: "я рад", example: "я рад тебя видеть" },
+      { ru: "я рада", fr: "je suis contente (fém.)", speak: "я рада", example: "я так рада!" },
+      { ru: "грустно", fr: "c'est triste / je suis triste", speak: "грустно", example: "мне грустно" },
+      { ru: "устал", fr: "fatigué (masc.)", speak: "устал", example: "я очень устал" },
+      { ru: "устала", fr: "fatiguée (fém.)", speak: "устала", example: "я устала" },
+      { ru: "боюсь", fr: "j'ai peur", speak: "боюсь", example: "я боюсь" },
+      { ru: "злой", fr: "en colère", speak: "злой", example: "я не злой" },
+      { ru: "удивлён", fr: "surpris (masc.)", speak: "удивлён", example: "я удивлён" },
+      { ru: "скучно", fr: "c'est ennuyeux", speak: "скучно", example: "мне скучно" },
+      { ru: "хорошо", fr: "bien / ça va", speak: "хорошо", example: "мне хорошо" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Comment dire je suis content ?", answers: ["я рад", "я злой", "мне скучно"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quelle émotion ?", audio: "грустно", answers: ["хорошо", "злой", "грустно"], correct: 2 },
+      { type: "fill", question: "Complete : я ___ (fatigué, masc.)", answer: "устал" },
+      { type: "qcm", question: "Que veut dire боюсь ?", answers: ["j'ai peur", "je suis triste", "je suis surpris"], correct: 0 }
+    ]
+  },
+  {
+    id: "weather",
+    title: "35. La météo",
+    stage: "A1-A2",
+    focus: "Parler du temps qu'il fait.",
+    icon: "П",
+    words: [
+      { ru: "погода", fr: "météo / temps", speak: "погода", example: "какая погода?" },
+      { ru: "солнце", fr: "soleil", speak: "солнце", example: "светит солнце" },
+      { ru: "дождь", fr: "pluie", speak: "дождь", example: "идёт дождь" },
+      { ru: "снег", fr: "neige", speak: "снег", example: "идёт снег" },
+      { ru: "ветер", fr: "vent", speak: "ветер", example: "сильный ветер" },
+      { ru: "тепло", fr: "il fait chaud / c'est chaud", speak: "тепло", example: "сегодня тепло" },
+      { ru: "облако", fr: "nuage", speak: "облако", example: "много облаков" },
+      { ru: "лето", fr: "été", speak: "лето", example: "я люблю лето" },
+      { ru: "зима", fr: "hiver", speak: "зима", example: "зима холодная" },
+      { ru: "весна", fr: "printemps", speak: "весна", example: "красивая весна" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire дождь ?", answers: ["pluie", "neige", "vent"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel temps fait-il ?", audio: "снег", answers: ["дождь", "снег", "ветер"], correct: 1 },
+      { type: "fill", question: "Complete : сегодня ___ (il fait chaud)", answer: "тепло" },
+      { type: "qcm", question: "Comment dire hiver ?", answers: ["зима", "лето", "весна"], correct: 0 }
+    ]
+  },
+  {
+    id: "house",
+    title: "36. La maison",
+    stage: "A1-A2",
+    focus: "Nommer les pièces et objets chez toi.",
+    icon: "К",
+    words: [
+      { ru: "квартира", fr: "appartement", speak: "квартира", example: "моя квартира маленькая" },
+      { ru: "комната", fr: "pièce / chambre", speak: "комната", example: "в этой комнате" },
+      { ru: "кухня", fr: "cuisine", speak: "кухня", example: "я на кухне" },
+      { ru: "ванная", fr: "salle de bain", speak: "ванная", example: "ванная там" },
+      { ru: "спальня", fr: "chambre à coucher", speak: "спальня", example: "я сплю в спальне" },
+      { ru: "кровать", fr: "lit", speak: "кровать", example: "я лежу на кровати" },
+      { ru: "диван", fr: "canapé", speak: "диван", example: "он сидит на диване" },
+      { ru: "окно", fr: "fenêtre", speak: "окно", example: "смотрю в окно" },
+      { ru: "холодильник", fr: "réfrigérateur", speak: "холодильник", example: "в холодильнике молоко" },
+      { ru: "лампа", fr: "lampe", speak: "лампа", example: "включи лампу" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire кухня ?", answers: ["cuisine", "salle de bain", "chambre"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quelle pièce ?", audio: "спальня", answers: ["кухня", "ванная", "спальня"], correct: 2 },
+      { type: "fill", question: "Complete : моя ___ маленькая (appartement)", answer: "квартира" },
+      { type: "qcm", question: "Comment dire lit ?", answers: ["кровать", "диван", "комната"], correct: 0 }
+    ]
+  },
+  {
+    id: "transport",
+    title: "37. Les transports",
+    stage: "A1-A2",
+    focus: "Se déplacer et comprendre les trajets.",
+    icon: "А",
+    words: [
+      { ru: "машина", fr: "voiture", speak: "машина", example: "я еду на машине" },
+      { ru: "автобус", fr: "bus", speak: "автобус", example: "я еду на автобусе" },
+      { ru: "поезд", fr: "train", speak: "поезд", example: "поезд в Москву" },
+      { ru: "самолёт", fr: "avion", speak: "самолёт", example: "я лечу на самолёте" },
+      { ru: "такси", fr: "taxi", speak: "такси", example: "вызови такси" },
+      { ru: "велосипед", fr: "vélo", speak: "велосипед", example: "еду на велосипеде" },
+      { ru: "остановка", fr: "arrêt de bus", speak: "остановка", example: "где остановка?" },
+      { ru: "билет", fr: "billet / ticket", speak: "билет", example: "один билет, пожалуйста" },
+      { ru: "вокзал", fr: "gare", speak: "вокзал", example: "где вокзал?" },
+      { ru: "аэропорт", fr: "aéroport", speak: "аэропорт", example: "я в аэропорту" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire поезд ?", answers: ["train", "avion", "bus"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel transport ?", audio: "самолёт", answers: ["автобус", "машина", "самолёт"], correct: 2 },
+      { type: "fill", question: "Complete : один ___, пожалуйста (billet)", answer: "билет" },
+      { type: "qcm", question: "Comment dire gare ?", answers: ["вокзал", "аэропорт", "остановка"], correct: 0 }
+    ]
+  },
+  {
+    id: "health",
+    title: "38. La santé",
+    stage: "A1-A2",
+    focus: "Dire où tu as mal et aller chez le médecin.",
+    icon: "В",
+    words: [
+      { ru: "болит", fr: "ça fait mal", speak: "болит", example: "у меня болит голова" },
+      { ru: "больной", fr: "malade", speak: "больной", example: "я больной" },
+      { ru: "врач", fr: "médecin", speak: "врач", example: "мне нужен врач" },
+      { ru: "аптека", fr: "pharmacie", speak: "аптека", example: "где аптека?" },
+      { ru: "лекарство", fr: "médicament", speak: "лекарство", example: "дайте лекарство" },
+      { ru: "температура", fr: "fièvre / température", speak: "температура", example: "у меня температура" },
+      { ru: "горло", fr: "gorge", speak: "горло", example: "болит горло" },
+      { ru: "кашель", fr: "toux", speak: "кашель", example: "у меня кашель" },
+      { ru: "скорая", fr: "ambulance", speak: "скорая", example: "вызовите скорую" },
+      { ru: "мне плохо", fr: "je ne me sens pas bien", speak: "мне плохо", example: "мне очень плохо" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire врач ?", answers: ["médecin", "pharmacie", "médicament"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. De quoi s'agit-il ?", audio: "аптека", answers: ["врач", "аптека", "скорая"], correct: 1 },
+      { type: "fill", question: "Complete : у меня болит ___ (gorge)", answer: "горло" },
+      { type: "qcm", question: "Comment dire j'ai de la fièvre ?", answers: ["у меня температура", "мне плохо", "болит горло"], correct: 0 }
+    ]
+  },
+  {
+    id: "clothing",
+    title: "39. Les vêtements",
+    stage: "A1-A2",
+    focus: "Décrire ce que tu portes.",
+    icon: "О",
+    words: [
+      { ru: "рубашка", fr: "chemise", speak: "рубашка", example: "белая рубашка" },
+      { ru: "брюки", fr: "pantalon", speak: "брюки", example: "чёрные брюки" },
+      { ru: "платье", fr: "robe", speak: "платье", example: "красное платье" },
+      { ru: "куртка", fr: "veste / manteau", speak: "куртка", example: "тёплая куртка" },
+      { ru: "обувь", fr: "chaussures", speak: "обувь", example: "новая обувь" },
+      { ru: "шапка", fr: "bonnet / chapeau", speak: "шапка", example: "тёплая шапка" },
+      { ru: "носки", fr: "chaussettes", speak: "носки", example: "белые носки" },
+      { ru: "надевать", fr: "mettre / enfiler", speak: "надевать", example: "я надеваю куртку" },
+      { ru: "снимать", fr: "enlever", speak: "снимать", example: "я снимаю куртку" },
+      { ru: "размер", fr: "taille / pointure", speak: "размер", example: "какой у вас размер?" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire куртка ?", answers: ["veste", "robe", "pantalon"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel vêtement ?", audio: "платье", answers: ["рубашка", "платье", "брюки"], correct: 1 },
+      { type: "fill", question: "Complete : белая ___ (chemise)", answer: "рубашка" },
+      { type: "qcm", question: "Comment dire chaussures ?", answers: ["обувь", "шапка", "носки"], correct: 0 }
+    ]
+  },
+  {
+    id: "professions",
+    title: "40. Les professions",
+    stage: "A1-A2",
+    focus: "Parler des métiers.",
+    icon: "П",
+    words: [
+      { ru: "студент", fr: "étudiant(e)", speak: "студент", example: "я студент" },
+      { ru: "учитель", fr: "enseignant(e)", speak: "учитель", example: "она учитель" },
+      { ru: "повар", fr: "cuisinier / chef", speak: "повар", example: "хороший повар" },
+      { ru: "продавец", fr: "vendeur / vendeuse", speak: "продавец", example: "продавец в магазине" },
+      { ru: "инженер", fr: "ingénieur", speak: "инженер", example: "он инженер" },
+      { ru: "журналист", fr: "journaliste", speak: "журналист", example: "она журналист" },
+      { ru: "программист", fr: "développeur / programmeur", speak: "программист", example: "я программист" },
+      { ru: "работать", fr: "travailler", speak: "работать", example: "я работаю в офисе" },
+      { ru: "учиться", fr: "étudier / apprendre", speak: "учиться", example: "я учусь в университете" },
+      { ru: "офис", fr: "bureau / open space", speak: "офис", example: "я работаю в офисе" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire учитель ?", answers: ["enseignant", "médecin", "cuisinier"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quelle profession ?", audio: "повар", answers: ["студент", "повар", "врач"], correct: 1 },
+      { type: "fill", question: "Complete : я ___ в офисе (travailler, je...)", answer: "работаю" },
+      { type: "qcm", question: "Comment dire développeur ?", answers: ["программист", "инженер", "журналист"], correct: 0 }
+    ]
+  },
+  {
+    id: "nature",
+    title: "41. La nature",
+    stage: "A1-A2",
+    focus: "Parler du monde naturel autour de toi.",
+    icon: "Л",
+    words: [
+      { ru: "дерево", fr: "arbre", speak: "дерево", example: "высокое дерево" },
+      { ru: "цветок", fr: "fleur", speak: "цветок", example: "красивый цветок" },
+      { ru: "море", fr: "mer", speak: "море", example: "я у моря" },
+      { ru: "река", fr: "rivière / fleuve", speak: "река", example: "большая река" },
+      { ru: "гора", fr: "montagne", speak: "гора", example: "высокая гора" },
+      { ru: "лес", fr: "forêt", speak: "лес", example: "мы в лесу" },
+      { ru: "кошка", fr: "chat", speak: "кошка", example: "моя кошка" },
+      { ru: "собака", fr: "chien", speak: "собака", example: "большая собака" },
+      { ru: "птица", fr: "oiseau", speak: "птица", example: "красивая птица" },
+      { ru: "небо", fr: "ciel", speak: "небо", example: "голубое небо" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire море ?", answers: ["mer", "montagne", "forêt"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Qu'est-ce que c'est ?", audio: "собака", answers: ["кошка", "птица", "собака"], correct: 2 },
+      { type: "fill", question: "Complete : мы в ___ (forêt, locatif)", answer: "лесу" },
+      { type: "qcm", question: "Comment dire fleur ?", answers: ["цветок", "дерево", "река"], correct: 0 }
+    ]
+  },
+  {
+    id: "shopping",
+    title: "42. Faire les courses",
+    stage: "A1-A2",
+    focus: "Acheter, payer, demander le prix.",
+    icon: "М",
+    words: [
+      { ru: "купить", fr: "acheter", speak: "купить", example: "я хочу купить хлеб" },
+      { ru: "дорого", fr: "c'est cher", speak: "дорого", example: "это дорого" },
+      { ru: "дёшево", fr: "pas cher / bon marché", speak: "дёшево", example: "это дёшево" },
+      { ru: "касса", fr: "caisse", speak: "касса", example: "где касса?" },
+      { ru: "чек", fr: "reçu / ticket de caisse", speak: "чек", example: "дайте чек" },
+      { ru: "платить", fr: "payer", speak: "платить", example: "я плачу картой" },
+      { ru: "карта", fr: "carte bancaire", speak: "карта", example: "можно картой?" },
+      { ru: "рубль", fr: "rouble", speak: "рубль", example: "сто рублей" },
+      { ru: "скидка", fr: "réduction / solde", speak: "скидка", example: "есть скидка?" },
+      { ru: "овощи", fr: "légumes", speak: "овощи", example: "свежие овощи" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire купить ?", answers: ["acheter", "payer", "vendre"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel mot ?", audio: "дорого", answers: ["дёшево", "дорого", "скидка"], correct: 1 },
+      { type: "fill", question: "Complete : я плачу ___ (par carte)", answer: "картой" },
+      { type: "qcm", question: "Comment dire caisse ?", answers: ["касса", "чек", "рубль"], correct: 0 }
+    ]
+  },
+  {
+    id: "calendar",
+    title: "43. Jours et mois",
+    stage: "A1",
+    focus: "Comprendre les dates et planifier.",
+    icon: "К",
+    words: [
+      { ru: "понедельник", fr: "lundi", speak: "понедельник", example: "в понедельник" },
+      { ru: "среда", fr: "mercredi", speak: "среда", example: "в среду" },
+      { ru: "пятница", fr: "vendredi", speak: "пятница", example: "в пятницу" },
+      { ru: "суббота", fr: "samedi", speak: "суббота", example: "в субботу" },
+      { ru: "воскресенье", fr: "dimanche", speak: "воскресенье", example: "в воскресенье" },
+      { ru: "неделя", fr: "semaine", speak: "неделя", example: "эта неделя" },
+      { ru: "месяц", fr: "mois", speak: "месяц", example: "этот месяц" },
+      { ru: "январь", fr: "janvier", speak: "январь", example: "в январе" },
+      { ru: "июль", fr: "juillet", speak: "июль", example: "в июле" },
+      { ru: "год", fr: "année / an", speak: "год", example: "этот год" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire пятница ?", answers: ["vendredi", "samedi", "dimanche"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel jour ?", audio: "суббота", answers: ["пятница", "суббота", "понедельник"], correct: 1 },
+      { type: "fill", question: "Complete : в ___ (en janvier)", answer: "январе" },
+      { type: "qcm", question: "Comment dire semaine ?", answers: ["неделя", "месяц", "год"], correct: 0 }
+    ]
+  },
+  {
+    id: "verbs-essential",
+    title: "44. Verbes essentiels",
+    stage: "A2",
+    focus: "Les verbes les plus utiles au quotidien.",
+    icon: "Г",
+    words: [
+      { ru: "знать", fr: "savoir / connaître", speak: "знать", example: "я знаю" },
+      { ru: "мочь", fr: "pouvoir", speak: "мочь", example: "я могу" },
+      { ru: "говорить", fr: "parler / dire", speak: "говорить", example: "я говорю по-русски" },
+      { ru: "слышать", fr: "entendre", speak: "слышать", example: "я слышу тебя" },
+      { ru: "думать", fr: "penser", speak: "думать", example: "я думаю" },
+      { ru: "любить", fr: "aimer", speak: "любить", example: "я люблю русский" },
+      { ru: "помнить", fr: "se souvenir", speak: "помнить", example: "я помню" },
+      { ru: "начинать", fr: "commencer", speak: "начинать", example: "я начинаю учиться" },
+      { ru: "забывать", fr: "oublier", speak: "забывать", example: "я забываю слова" },
+      { ru: "находить", fr: "trouver", speak: "находить", example: "я нахожу решение" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire понимать ?", answers: ["comprendre", "entendre", "penser"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel verbe ?", audio: "любить", answers: ["знать", "любить", "мочь"], correct: 1 },
+      { type: "fill", question: "Complete : я ___ по-русски (parler, je...)", answer: "говорю" },
+      { type: "qcm", question: "Comment dire pouvoir ?", answers: ["мочь", "знать", "думать"], correct: 0 }
+    ]
+  },
+  {
+    id: "adjectives-core",
+    title: "45. Adjectifs essentiels",
+    stage: "A2",
+    focus: "Décrire les personnes et les choses.",
+    icon: "Б",
+    words: [
+      { ru: "большой", fr: "grand / gros", speak: "большой", example: "большой дом" },
+      { ru: "маленький", fr: "petit", speak: "маленький", example: "маленький ребёнок" },
+      { ru: "хороший", fr: "bon / bien", speak: "хороший", example: "хороший день" },
+      { ru: "плохой", fr: "mauvais", speak: "плохой", example: "плохая погода" },
+      { ru: "красивый", fr: "beau / joli", speak: "красивый", example: "красивый город" },
+      { ru: "новый", fr: "nouveau / neuf", speak: "новый", example: "новый телефон" },
+      { ru: "старый", fr: "vieux / ancien", speak: "старый", example: "старый дом" },
+      { ru: "быстрый", fr: "rapide", speak: "быстрый", example: "быстрый поезд" },
+      { ru: "медленный", fr: "lent", speak: "медленный", example: "медленный интернет" },
+      { ru: "интересный", fr: "intéressant", speak: "интересный", example: "интересная книга" }
+    ],
+    exercises: [
+      { type: "qcm", question: "Que veut dire большой ?", answers: ["grand", "petit", "vieux"], correct: 0 },
+      { type: "listen", prompt: "Ecoute. Quel adjectif ?", audio: "красивый", answers: ["новый", "красивый", "плохой"], correct: 1 },
+      { type: "fill", question: "Complete : ___ телефон (nouveau)", answer: "новый" },
+      { type: "qcm", question: "Comment dire intéressant ?", answers: ["интересный", "быстрый", "старый"], correct: 0 }
+    ]
+  }
+];
+
+const alphabetGroups = [
+  {
+    id: "voyelles",
+    title: "🔴 Voyelles",
+    subtitle: "10 lettres. Leur son change selon l'accent — règle fondamentale du russe.",
+    letters: [
+      {
+        upper: "А", lower: "а", name: "а", ipa: "/a/",
+        fr: "Comme le 'a' dans 'patte'.",
+        variants: [
+          { label: "Accentué", sound: "а → /a/ clair", ex: "мáма" },
+          { label: "Non accentué", sound: "а → /ə/ bref", ex: "вода" }
+        ],
+        examples: ["мама", "папа", "страна"],
+        tip: "Toujours clair quand accentué. Bref et réduit sinon."
+      },
+      {
+        upper: "Е", lower: "е", name: "е", ipa: "/je/ ou /ɛ/",
+        fr: "Début de mot ou après voyelle : 'yé'. Après consonne : 'é' (et mouille la consonne).",
+        variants: [
+          { label: "Début / après voyelle", sound: "е → /je/", ex: "ем" },
+          { label: "Après consonne", sound: "е → /ɛ/ + mouillage", ex: "нет" },
+          { label: "Non accentué", sound: "е → /ji/ réduit", ex: "река" }
+        ],
+        examples: ["нет", "дерево", "ем"],
+        tip: "Mouille TOUJOURS la consonne qui précède. Нет → 'ньет'."
+      },
+      {
+        upper: "Ё", lower: "ё", name: "ё", ipa: "/jo/",
+        fr: "Comme 'yò'. TOUJOURS accentué — jamais réduit.",
+        variants: [
+          { label: "Toujours accentué", sound: "ё → /jo/", ex: "всё" }
+        ],
+        examples: ["ёж", "всё", "ещё"],
+        tip: "Les deux points = accent obligatoire. Jamais de réduction possible."
+      },
+      {
+        upper: "И", lower: "и", name: "и", ipa: "/i/",
+        fr: "Comme le 'i' dans 'vie'. Mouille la consonne précédente.",
+        variants: [
+          { label: "Standard", sound: "и → /i/", ex: "иметь" },
+          { label: "Après Ж/Ш/Ц (toujours durs)", sound: "и → /ɨ/ (son de Ы)", ex: "жить" }
+        ],
+        examples: ["идти", "жить", "иметь"],
+        tip: "Après Ж, Ш, Ц : écrit И mais prononcé Ы ! Жить → 'жыть'."
+      },
+      {
+        upper: "О", lower: "о", name: "о", ipa: "/o/ ou /ʌ/",
+        fr: "Accentué : 'ô'. Non accentué : sonne comme 'a' ! Règle d'or du russe.",
+        variants: [
+          { label: "Accentué", sound: "о → /o/", ex: "дóм" },
+          { label: "1re syllabe avant accent", sound: "о → /ʌ/ (comme a)", ex: "Москва" },
+          { label: "Autres positions", sound: "о → /ə/ très bref", ex: "хорошо" }
+        ],
+        examples: ["дом", "он", "Москва"],
+        tip: "Москва se prononce 'Масква'. О non accentué → A. Règle fondamentale !"
+      },
+      {
+        upper: "У", lower: "у", name: "у", ipa: "/u/",
+        fr: "Comme 'ou' dans 'loup'. Toujours stable, jamais réduit.",
+        variants: [
+          { label: "Toujours stable", sound: "у → /u/", ex: "утро" }
+        ],
+        examples: ["утро", "рука", "улица"],
+        tip: "La voyelle la plus facile ! Toujours 'ou', accentué ou non."
+      },
+      {
+        upper: "Ы", lower: "ы", name: "ы", ipa: "/ɨ/",
+        fr: "Son unique : 'i' dur avec la langue en arrière. Jamais en début de mot.",
+        variants: [
+          { label: "Standard", sound: "ы → /ɨ/", ex: "ты" },
+          { label: "Non accentué", sound: "ы → /ɨ/ réduit", ex: "рыба" }
+        ],
+        examples: ["ты", "мы", "рыба"],
+        tip: "Dis 'i' en repoussant la langue vers le fond de la bouche. Unique au russe !"
+      },
+      {
+        upper: "Э", lower: "э", name: "э", ipa: "/ɛ/",
+        fr: "Comme 'è' ouvert dans 'être'. Souvent en début de mot.",
+        variants: [
+          { label: "Standard", sound: "э → /ɛ/ sans mouillage", ex: "это" }
+        ],
+        examples: ["это", "эхо", "экран"],
+        tip: "Différence avec Е : Э ne mouille PAS la consonne. Это vs нет."
+      },
+      {
+        upper: "Ю", lower: "ю", name: "ю", ipa: "/ju/",
+        fr: "Comme 'you' (anglais). Début de mot → 'you'. Après consonne → mouille + 'ou'.",
+        variants: [
+          { label: "Début / après voyelle", sound: "ю → /ju/", ex: "юг" },
+          { label: "Après consonne", sound: "ю → /u/ mouillé", ex: "люблю" }
+        ],
+        examples: ["юг", "люблю", "июль"],
+        tip: "Mouille la consonne précédente, comme Е et Я."
+      },
+      {
+        upper: "Я", lower: "я", name: "я", ipa: "/ja/",
+        fr: "Comme 'ya' dans 'yaourt'. Aussi le mot JE en russe.",
+        variants: [
+          { label: "Début / après voyelle", sound: "я → /ja/", ex: "я" },
+          { label: "Après consonne", sound: "я → /a/ mouillé", ex: "пять" },
+          { label: "Non accentué", sound: "я → /ji/ réduit", ex: "семья" }
+        ],
+        examples: ["я", "пять", "дядя"],
+        tip: "Я = 'je' en russe. Commence et finit par ce son. Mouille toujours."
+      }
+    ]
+  },
+  {
+    id: "familieres",
+    title: "🟢 Consonnes familières",
+    subtitle: "Proches du français/latin. Attention : toutes se mouillent devant И/Е/Ё/Ю/Я/Ь. Et les consonnes sonores s'assourdissent en fin de mot.",
+    letters: [
+      {
+        upper: "Б", lower: "б", name: "бэ", ipa: "/b/",
+        fr: "Comme 'b' dans 'bon'.",
+        variants: [
+          { label: "Standard", sound: "б → /b/", ex: "брат" },
+          { label: "Fin de mot (assourdissement)", sound: "б → /p/", ex: "хлеб" }
+        ],
+        examples: ["брат", "хлеб", "большой"],
+        tip: "Хлеб (pain) se prononce 'хлеп'. Règle : consonne sonore finale → sourde."
+      },
+      {
+        upper: "В", lower: "в", name: "вэ", ipa: "/v/",
+        fr: "Comme 'v' dans 'vie'.",
+        variants: [
+          { label: "Standard", sound: "в → /v/", ex: "вода" },
+          { label: "Fin de mot", sound: "в → /f/", ex: "кровь" }
+        ],
+        examples: ["вода", "врач", "вечер"],
+        tip: "Кровь (sang) se prononce 'крофь'. В → Ф en fin de mot."
+      },
+      {
+        upper: "Г", lower: "г", name: "гэ", ipa: "/g/",
+        fr: "Comme 'g' dans 'gare'.",
+        variants: [
+          { label: "Standard", sound: "г → /g/", ex: "год" },
+          { label: "Fin de mot", sound: "г → /k/", ex: "друг" },
+          { label: "Dans -ого/-его (génitif adj.)", sound: "г → /v/", ex: "моего" }
+        ],
+        examples: ["год", "город", "друг"],
+        tip: "Моего (de moi) = 'маево'. Le Г du génitif adjectival se prononce В !"
+      },
+      {
+        upper: "Д", lower: "д", name: "дэ", ipa: "/d/",
+        fr: "Comme 'd' dans 'dans'.",
+        variants: [
+          { label: "Standard", sound: "д → /d/", ex: "дом" },
+          { label: "Fin de mot", sound: "д → /t/", ex: "год" }
+        ],
+        examples: ["дом", "день", "год"],
+        tip: "Год (année) se prononce 'гот'. Д → Т en fin de mot."
+      },
+      {
+        upper: "З", lower: "з", name: "зэ", ipa: "/z/",
+        fr: "Comme 'z' dans 'zéro'.",
+        variants: [
+          { label: "Standard", sound: "з → /z/", ex: "зима" },
+          { label: "Fin de mot", sound: "з → /s/", ex: "мороз" }
+        ],
+        examples: ["зима", "здесь", "мороз"],
+        tip: "Мороз (gel) se prononce 'морос'. З → С en fin de mot."
+      },
+      {
+        upper: "К", lower: "к", name: "ка", ipa: "/k/",
+        fr: "Comme 'k' dans 'kilo'. Stable.",
+        variants: [
+          { label: "Dur (standard)", sound: "к → /k/", ex: "как" },
+          { label: "Mou (devant И/Е/Ь)", sound: "к → /kj/ mouillé", ex: "кино" }
+        ],
+        examples: ["как", "кто", "кино"],
+        tip: "Toujours /k/, juste mouillé devant les voyelles douces. Facile !"
+      },
+      {
+        upper: "Л", lower: "л", name: "эль", ipa: "/l/ ou /lj/",
+        fr: "Deux sons : Л dur (l arrière, comme en anglais 'ball') et Л mou (l avant, comme en français).",
+        variants: [
+          { label: "Dur (devant А/О/У/Ы ou final)", sound: "л → /ɫ/ vélarisé", ex: "лампа" },
+          { label: "Mou (devant И/Е/Ё/Ю/Я/Ь)", sound: "л → /lj/ mouillé", ex: "люди" }
+        ],
+        examples: ["лампа", "люди", "стол"],
+        tip: "Стол (table) : Л final est DUR. Люди (gens) : Л est MOU. Entraîne l'oreille !"
+      },
+      {
+        upper: "М", lower: "м", name: "эм", ipa: "/m/",
+        fr: "Comme 'm' dans 'maman'.",
+        variants: [
+          { label: "Dur / mou selon contexte", sound: "м → /m/ ou /mj/", ex: "мама / мир" }
+        ],
+        examples: ["мама", "мир", "место"],
+        tip: "Identique au français. Se mouille devant Е/И/Ь : мир → 'мьир'."
+      },
+      {
+        upper: "Н", lower: "н", name: "эн", ipa: "/n/",
+        fr: "Comme 'n' dans 'non'.",
+        variants: [
+          { label: "Dur", sound: "н → /n/", ex: "нос" },
+          { label: "Mou (devant Е/И/Ь)", sound: "н → /nj/", ex: "нет" }
+        ],
+        examples: ["нос", "нет", "ночь"],
+        tip: "Нет (non) → 'ньет' : Н se mouille devant Е."
+      },
+      {
+        upper: "П", lower: "п", name: "пэ", ipa: "/p/",
+        fr: "Comme 'p' dans 'papa'. Non aspiré (pas de souffle).",
+        variants: [
+          { label: "Standard", sound: "п → /p/", ex: "папа" }
+        ],
+        examples: ["папа", "привет", "пять"],
+        tip: "Non aspiré contrairement à l'anglais 'p'. Met la main devant la bouche pour tester."
+      },
+      {
+        upper: "Р", lower: "р", name: "эр", ipa: "/r/ roulé",
+        fr: "R roulé alvéolaire, comme en espagnol ou en italien. La pointe de la langue vibre.",
+        variants: [
+          { label: "Dur", sound: "р → /r/ roulé", ex: "рука" },
+          { label: "Mou (devant И/Е/Ь)", sound: "р → /rj/ roulé mouillé", ex: "рис" }
+        ],
+        examples: ["рука", "рыба", "рис"],
+        tip: "Fais vibrer la POINTE de la langue derrière les dents. Jamais le R français du fond de la gorge !"
+      },
+      {
+        upper: "С", lower: "с", name: "эс", ipa: "/s/",
+        fr: "Comme 's' dans 'sol' (jamais 'z' entre voyelles, contrairement au français).",
+        variants: [
+          { label: "Standard", sound: "с → /s/", ex: "сын" },
+          { label: "Devant consonne sonore (assimilation)", sound: "с → /z/", ex: "с другом" }
+        ],
+        examples: ["сын", "сейчас", "спасибо"],
+        tip: "С другом → 'з другом'. Assimilation de voisement devant consonne sonore."
+      },
+      {
+        upper: "Т", lower: "т", name: "тэ", ipa: "/t/",
+        fr: "Comme 't' dans 'table'. Non aspiré.",
+        variants: [
+          { label: "Standard", sound: "т → /t/", ex: "тут" },
+          { label: "Dans -ться/-тся (verbes réfléchis)", sound: "тьс/тс → /ts/", ex: "учиться" }
+        ],
+        examples: ["тут", "там", "учиться"],
+        tip: "Учиться se prononce 'учицца' ! -ться → /ts/ est une règle de prononciation clé."
+      },
+      {
+        upper: "Ф", lower: "ф", name: "эф", ipa: "/f/",
+        fr: "Comme 'f' dans 'fond'. Souvent dans les mots d'emprunt.",
+        variants: [
+          { label: "Standard", sound: "ф → /f/", ex: "фото" }
+        ],
+        examples: ["фото", "факт", "кофе"],
+        tip: "Simple et stable. Surtout dans les mots d'origine étrangère."
+      }
+    ]
+  },
+  {
+    id: "speciales",
+    title: "🟡 Sons spéciaux russes",
+    subtitle: "Ces sons n'existent pas en français. Priorité absolue d'apprentissage !",
+    letters: [
+      {
+        upper: "Ж", lower: "ж", name: "жэ", ipa: "/ʐ/",
+        fr: "Comme 'j' (jeu) mais dur, langue reculée. JAMAIS mouillé — toujours dur.",
+        variants: [
+          { label: "Standard — toujours dur", sound: "ж → /ʐ/ dur", ex: "жить" },
+          { label: "Fin de mot", sound: "ж → /ʂ/ (ch dur)", ex: "муж" }
+        ],
+        examples: ["жизнь", "жара", "муж"],
+        tip: "Жизнь = 'жЫзнь' à l'oreille : même devant И, Ж reste dur !"
+      },
+      {
+        upper: "Ц", lower: "ц", name: "цэ", ipa: "/ts/",
+        fr: "Comme 'ts' dans 'tsé-tsé' ou 'pizza' en italien. Toujours dur.",
+        variants: [
+          { label: "Toujours dur", sound: "ц → /ts/", ex: "центр" }
+        ],
+        examples: ["центр", "цена", "цирк"],
+        tip: "Цирк (cirque) → 'цЫрк' à l'oreille. Ц est toujours dur, même devant И."
+      },
+      {
+        upper: "Ч", lower: "ч", name: "чэ", ipa: "/tɕ/",
+        fr: "Comme 'tch' (tchin-tchin). Toujours mou — jamais dur.",
+        variants: [
+          { label: "Toujours mou", sound: "ч → /tɕ/ mouillé", ex: "чай" },
+          { label: "Dans что / конечно (oral courant)", sound: "ч → /ʂ/", ex: "что → 'што'" }
+        ],
+        examples: ["чай", "ночь", "часть"],
+        tip: "ЧТО se prononce 'ШТО' ! Et конечно → 'конешно'. Exceptions orales importantes."
+      },
+      {
+        upper: "Ш", lower: "ш", name: "ша", ipa: "/ʂ/",
+        fr: "Comme 'ch' mais dur, langue reculée et arrondie. JAMAIS mouillé.",
+        variants: [
+          { label: "Toujours dur", sound: "ш → /ʂ/ dur", ex: "школа" }
+        ],
+        examples: ["школа", "шум", "хорошо"],
+        tip: "Ш = ch dur. Щ = ch mouillé long. Les deux lettres sœurs — ne pas les confondre !"
+      },
+      {
+        upper: "Щ", lower: "щ", name: "ща", ipa: "/ɕː/",
+        fr: "Comme un 'ch' français très long, langue en avant et levée. Toujours mou.",
+        variants: [
+          { label: "Toujours mou et long", sound: "щ → /ɕː/", ex: "ещё" }
+        ],
+        examples: ["щи", "ещё", "вещь"],
+        tip: "Prononce un 'ch' français longtemps en avançant la langue. Ш est le frère dur de Щ."
+      },
+      {
+        upper: "Х", lower: "х", name: "ха", ipa: "/x/",
+        fr: "Comme le 'j' espagnol (jota) ou le 'ch' allemand de 'Bach'. Frottement du voile du palais.",
+        variants: [
+          { label: "Dur", sound: "х → /x/", ex: "хлеб" },
+          { label: "Mou (devant И/Е)", sound: "х → /xj/ mouillé", ex: "химия" }
+        ],
+        examples: ["хлеб", "хорошо", "химия"],
+        tip: "Pas le H anglais ! Un frottement rauque gorge-palais. Pense à ronfler doucement."
+      }
+    ]
+  },
+  {
+    id: "semi",
+    title: "🔵 Semi-voyelle",
+    subtitle: "Une seule lettre. Toujours après une voyelle, jamais en position initiale seule.",
+    letters: [
+      {
+        upper: "Й", lower: "й", name: "и краткое", ipa: "/j/",
+        fr: "Comme 'y' dans 'yeux' ou 'voyage'. Très bref, glisse vers la voyelle précédente.",
+        variants: [
+          { label: "Après voyelle", sound: "й → /j/ bref", ex: "мой" }
+        ],
+        examples: ["мой", "чай", "новый"],
+        tip: "Мой = 'mo+y' très bref. Jamais prononcé seul — toujours appuyé sur la voyelle avant."
+      }
+    ]
+  },
+  {
+    id: "signes",
+    title: "⚪ Signes & Ы",
+    subtitle: "Pas de son propre, mais transforment la consonne précédente. Essentiels pour le sens !",
+    letters: [
+      {
+        upper: "Ъ", lower: "ъ", name: "твёрдый знак", ipa: "— (séparateur dur)",
+        fr: "Signe dur : sépare la consonne de la voyelle suivante. La consonne reste dure. Rare.",
+        variants: [
+          { label: "Séparateur dur (après préfixe)", sound: "Ъ + е/я/ю/ё → consonne dure + /je/ja/ju/jo/", ex: "объект" }
+        ],
+        examples: ["объект", "съезд", "подъезд"],
+        tip: "Rare — surtout dans les mots avec préfixe. Empêche le mouillage de la consonne."
+      },
+      {
+        upper: "Ь", lower: "ь", name: "мягкий знак", ipa: "— (mouillage)",
+        fr: "Signe mou : mouille (palatalise) la consonne qui précède. Change souvent le sens du mot !",
+        variants: [
+          { label: "Palatalisation", sound: "consonne + Ь → consonne mouillée", ex: "мать vs мат" },
+          { label: "Séparateur (devant е/я/ю/ё)", sound: "Ь → glide /j/ + voyelle", ex: "семья" }
+        ],
+        examples: ["день", "мать", "семья"],
+        tip: "Мать (mère) ≠ мат (juron). Ь change le sens ! Essentiel à maîtriser."
+      },
+      {
+        upper: "Ы", lower: "ы", name: "ы", ipa: "/ɨ/",
+        fr: "Voyelle du fond. 'i' dur avec la langue en arrière. Jamais en début de mot. Son sans équivalent.",
+        variants: [
+          { label: "Standard", sound: "ы → /ɨ/", ex: "ты" }
+        ],
+        examples: ["ты", "мы", "рыба"],
+        tip: "Dis 'i' en reculant la langue au maximum. Comme un 'euh-i' tendu. Unique en russe !"
+      }
+    ]
   }
 ];
 
@@ -790,6 +1612,7 @@ let activeTool = "repeat";
 let flashcardIndex = 0;
 let searchQuery = "";
 let vocabQuery = "";
+let activeVocabTab = "alphabet";
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -836,7 +1659,7 @@ function render() {
     ? `${state.mistakes.length} due`
     : "pret";
   renderLessons();
-  renderVocabulary();
+  renderVocabPanel();
   renderTools();
   renderGrammarPanel();
   renderReview();
@@ -863,6 +1686,66 @@ function renderLessons() {
       `;
     })
     .join("");
+}
+
+function renderVocabPanel() {
+  const alphabetSection = document.getElementById("alphabetSection");
+  const vocabSection = document.getElementById("vocabSection");
+  document.querySelectorAll("[data-vocab-tab]").forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.vocabTab === activeVocabTab)
+  );
+  if (alphabetSection) alphabetSection.style.display = activeVocabTab === "alphabet" ? "block" : "none";
+  if (vocabSection) vocabSection.style.display = activeVocabTab === "vocab" ? "block" : "none";
+  if (activeVocabTab === "alphabet") renderAlphabetFull();
+  else renderVocabulary();
+}
+
+function renderAlphabetFull() {
+  const container = document.getElementById("alphabetSection");
+  if (!container) return;
+  container.innerHTML = alphabetGroups.map(group => `
+    <div class="alphabet-group">
+      <div class="alphabet-group-header">
+        <h3>${group.title}</h3>
+        <p>${group.subtitle}</p>
+      </div>
+      <div class="letter-detail-list">
+        ${group.letters.map(letter => `
+          <article class="letter-detail-card">
+            <div class="letter-detail-top">
+              <div class="letter-glyph">
+                <span class="letter-upper">${letter.upper}</span>
+                <span class="letter-lower">${letter.lower}</span>
+              </div>
+              <div class="letter-info">
+                <strong>${letter.name}</strong>
+                <span class="pill ipa-pill">${letter.ipa}</span>
+              </div>
+              <button class="audio-button" type="button" data-speak="${letter.upper}" aria-label="Ecouter ${letter.upper}">▶</button>
+            </div>
+            <p class="letter-desc">${letter.fr}</p>
+            ${letter.variants.length ? `
+              <div class="variant-list">
+                ${letter.variants.map(v => `
+                  <div class="sound-variant">
+                    <span class="variant-label">${v.label}</span>
+                    <span class="variant-sound">${v.sound}</span>
+                    <button class="audio-button mini-audio" type="button" data-speak="${v.ex}" aria-label="Ecouter ${v.ex}">▶ ${v.ex}</button>
+                  </div>
+                `).join("")}
+              </div>
+            ` : ""}
+            <div class="letter-examples">
+              ${letter.examples.map(ex => `
+                <button class="pill example-pill" type="button" data-speak="${ex}">${ex}</button>
+              `).join("")}
+            </div>
+            <p class="letter-tip">💡 ${letter.tip}</p>
+          </article>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
 }
 
 function renderVocabulary() {
@@ -1310,8 +2193,13 @@ document.addEventListener("click", (event) => {
   const target = event.target.closest("button");
   if (!target) return;
 
+  if (target.dataset.vocabTab) {
+    activeVocabTab = target.dataset.vocabTab;
+    renderVocabPanel();
+  }
   if (target.dataset.tab) showTab(target.dataset.tab);
   if (target.dataset.tab === "practice") renderSrsPanel();
+  if (target.dataset.tab === "alphabet") renderVocabPanel();
   if (target.dataset.tool) {
     activeTool = target.dataset.tool;
     renderTools();
