@@ -284,8 +284,11 @@ textarea {
 
 .letter-card {
   min-height: 112px;
+  min-width: 0;
   padding: 12px 8px;
   text-align: center;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .letter-card strong {
@@ -356,6 +359,12 @@ textarea {
 
 .vocab-card {
   min-height: 132px;
+}
+
+.vocab-card strong {
+  font-size: 1.05rem;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .search-input {
